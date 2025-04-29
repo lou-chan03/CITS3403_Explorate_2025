@@ -6,11 +6,10 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    background-image: url('https://cdn.discordapp.com/attachments/1353213824932646942/1366280351143428158/green-bg.png?ex=68105f3b&is=680f0dbb&hm=e1e252d88eb868c53175381a63f103e51105922bb2ae7e535b84e672aaa10fd7&');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
-    color: #DFD8B6;
+    background-color: #1B543E;
     overflow-y: auto;
 }
 .navbar {
@@ -29,7 +28,6 @@ body {
 }
 .navbar img {
     height: 150px;
-    
     width: auto; 
 }
 .hamburger {
@@ -59,199 +57,77 @@ body {
     z-index: 1000;
     height: 50px;
 }
-.main-content {
+.section {
     flex: 1;
     text-align: center;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    padding-top: 100px; /* Give space below the fixed navbar */
     padding-bottom: 50px; /* Space for the footer */
-    margin-top: 80px; 
+    margin: 100px 30px 50px;
+    background-color:#DFD8B6;
+    border-radius: 15px;
 }
-.main-content h1 {
+.section h2 {
+    color:#1B543E;
     font-size: 60px;
     margin-bottom: 40px;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
     padding-bottom:50px ;
 }
-.main-content button {
-    font-family: 'Itim', sans-serif;
-    background-color: #0FBDE9;
-    color: #DFD8B6;
-    padding: 20px 40px;
-    border: none;
+.sub-section {
+    width: 70%;
+    height: 50%;
+    background-color: #FFFBE9;
     border-radius: 15px;
-    font-size: 50px;
+    margin-top: 380 px;
+    margin-bottom: 60px;
+}
+.option-container{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 40px;
+    margin-top: 50px;
+    min-height: 100vh;
+}
+.option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+}
+
+.option img{
+    width: 320px;
+    height: auto;
+}
+
+.option h3 {
+    font-size: 48px;
+    color: #1B543E;
+    margin: 10px;
+}
+
+.btn {
+    background-color: #0FBDE9;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 7px;
     cursor: pointer;
 }
-@media screen and (max-width: 768px) {
-    .main-content button {
-        font-size: 40px; /* Reduce font size */
-        
-    }
-}
-.main-content button:hover {
+
+.btn:hover {
     background-color: #45a049;
+    color: white;
 }
+
 .footer {
     text-align: center;
     color: #DFD8B6;
     padding: 10px 0;
-    
     margin-top: auto;
 }
-
-
-
-
-.content-box {
-    background-color: #DFD8B6;
-    margin: 225px 60px 20px;
-    padding: 30px;
-    border-radius: 30px;
-    text-align: center;
-    overflow: hidden;
-    
-}
-
-.question {
-    font-size: 32px;
-    margin-bottom: 30px;
-    color: #1a5336;
-}
-
-.buttons-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: 10px; /* Reduced gap between buttons */
-    float: left;
-    width: 30%;
-    height: 330px;
-    padding-left: 40px;
-}
-
-.climate-button {
-    background-color: #1a5336;
-    color: #DFD8B6;
-    font-family: 'Itim', sans-serif;
-    border: none;
-    padding: 15px;
-    font-size: 24px;
-    border-radius: 15px;
-    cursor: pointer;
-    width: 100%;
-    height: 90px; /* Increased button height */
-}
-
-.climate-image {
-    max-width: 50%;
-    
-    height: 330px;
-    background-color: #e5ffd6;
-    display: inline-block;
-    object-fit: contain;
-}
-
-.progress-container {
-    margin: 20px 30px 30px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.progress-bar {
-    flex-grow: 1;
-    height: 30px;
-    background-color: #e8e0c5;
-    border: 2px solid #64a987;
-    border-radius: 15px;
-    margin: 0 20px;
-    position: relative;
-}
-
-.progress-fill {
-    width: 20%;
-    height: 100%;
-    background-color: #25abd1;
-    border-radius: 15px 0 0 15px;
-}
-
-.next-button {
-    background-color: #25abd1;
-    color: white;
-    border: none;
-    padding: 15px 40px;
-    font-size: 24px;
-    border-radius: 15px;
-    cursor: pointer;
-}
-
-
-
-
-
-
-.container_button {
-    display: flex;
-    justify-content: flex-end; /* Aligns the button to the right */
-    padding: 20px; /* Adds padding around the container */
-    /* Optional: container background */
-}
-
-.container_yaaa {
-    display: flex;
-    justify-content: center; /* Aligns the button to the right */
-    padding: 20px; /* Adds padding around the container */
-    /* Optional: container background */
-}    
-
-.device-frame {
-    display: flex;
-    background-color: #e9dfc1;
-    border-radius: 40px;
-    padding: 40px 40px;
-    width: 65%;
-    margin: 225px 60px 60px;
-    justify-content: center;
-}
-
-.adventure-form {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: #1a5336;
-    
-    border-radius: 20px;
-    width: 100%;
-    text-align: center;
-}
-
-.form-group {
-    margin-bottom: 25px;
-}
-
-.form-label {
-    display: block;
-    font-size: 1.7rem;
-    padding-right: 40px; 
-    margin-bottom: 15px;
-    text-align: left;
-}
-
-.form-input {
-    width: 100%;
-    max-width: 400px;
-    padding: 15px;
-    font-size: 1.5rem;
-    background-color: #e9dfc1;
-    border: none;
-    border-radius: 10px;
-    color: #333;
-    text-align: center;
-    margin: 0 auto;
-}
-
