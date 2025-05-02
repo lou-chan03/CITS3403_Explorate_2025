@@ -371,3 +371,26 @@ body {
 .custom-blue {
 background-color: #25abd1; /* Your custom blue color */
 }
+
+#prev-button {
+    background-color: #25abd1;
+    color: white;
+    border: none;
+    padding: 1% 5%;
+    font-size: 24px;
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+#prev-button:hover {
+    background-color: #64a987;
+}
+#next-button:hover {
+    background-color: #64a987;
+}
+.climate-button:hover {
+    background-color: #64a987;
+}
+.climate-button.pressed {
+    background-color: #25abd1; /* New color for pressed state */
+}
