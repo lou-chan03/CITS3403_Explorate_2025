@@ -6,7 +6,7 @@
         <title>Your Ideal Adventure</title> 
         <script src="https://cdn.tailwindcss.com"></script>
         <link href="https://fonts.googleapis.com/css2?family=Itim&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     </head>
     <header class="header">
         <a href="index.html" class="hamburger">&#9776;</a>
@@ -84,9 +84,9 @@
           </div>
         </div>
         <div class="container_button">
-            <button id="nextButton" class="next-button">Next</button>
+            <button id="nextButton" class="next-button" data-yes-url="{{ url_for('email_share') }}" data-no-url="{{ url_for('questions') }}">Next</button>
         </div>
-        <script src="script.js"></script>
+        <script src="/static/js/script.js"></script>
     </body>
     <footer>
         <div class="footer">

@@ -42,7 +42,7 @@ window.addEventListener("DOMContentLoaded", () => {
     const noButton = document.getElementById("noButton");
     const nextButton = document.getElementById("nextButton");
     
-    let userChoice = "NO"; // Stores user choice ("Yes" or "No")
+    let userChoice = "No"; // Stores user choice ("Yes" or "No")
     const counts = {
       adults: 1,
       children: 0,
@@ -99,9 +99,11 @@ window.addEventListener("DOMContentLoaded", () => {
       if (userChoice === "") {
         alert("Please make a choice (Yes or No).");
       } else if (userChoice === "Yes") {
-        window.location.href = "Email_Share.html"; // Replace with "Yes" page URL
+        const yesUrl = nextButton.getAttribute("data-yes-url");
+        window.location.href = yesUrl; // Replace with "Yes" page URL
       } else {
-        window.location.href = "Data_Ent_Q1.html"; // Replace with "No" page URL
+        const noUrl = nextButton.getAttribute("data-no-url");
+        window.location.href = noUrl; // Replace with "No" page URL
       }
     });
   
