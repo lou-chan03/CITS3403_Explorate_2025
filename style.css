@@ -142,7 +142,7 @@ body {
 .form-content form {
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 10px;
 }
 
 .form-content input {
@@ -155,6 +155,11 @@ body {
     font-family: 'Inter', sans-serif;
     color: #1B543E;
     font-size: 0.9rem;
+}
+
+.form-content label {
+  padding: 8px;
+  color: #1B543E
 }
 
 .form-content a:hover {
