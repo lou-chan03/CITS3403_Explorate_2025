@@ -1,0 +1,191 @@
+html, body {
+  background-color: #1B543E; /* light pink */
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+body, h1, p ,a {
+margin: 0;
+padding: 0;
+font-family: 'Inter', sans-serif;
+text-decoration: none;
+color: #fff;
+}
+
+body {
+    background-image: url('assets/green-bg.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #1B543E;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo {
+    width: 120px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.navbar {
+    position: absolute;
+    right: 50px;
+    display: flex;
+    gap: 1px;
+}
+
+
+.navbar a {
+    background: #0FBDE9;
+    padding: 8px 15px;
+    border-radius: 7px;
+    transition: background 0.3s, color 0.3s;
+    margin-left: 50px;
+    font-family: 'Inter', sans-serif;
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.1rem;
+}
+
+.navbar a:hover {
+    background-color: #73A640;
+}
+
+.hero {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 50px;
+}
+
+.hero h1 {
+    font-size: 2rem;
+    margin-bottom: 50px;
+}
+
+.hero p {
+    font-size: 1.5rem;
+    margin-bottom: 30px
+}
+
+.button {
+    padding: 15px 30px;
+    background-color: #0FBDE9;
+    border-radius: 10px;
+    font-size: 1.2rem;
+    transition: background-color 0.3s;
+    box-shadow: 0px 8px 16px 0 rgba(0, 0, 0, 0.5), 0 6px 20 px 0 rgba(0,0,0,0.5);
+}
+
+.button:hover {
+    background-color: #73A640;
+}
+
+.footer {
+    text-align: center;
+    padding: 10px;
+    font-size: 0.9rem;
+}
+
+/* Rectangle Container */
+/* Rectangle Container */
+.form-container {
+  width: 400px;
+  margin: 50px auto; /* center horizontally */
+  background: #DFD8B6;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  text-align: center;
+}
+
+/* Toggle Buttons */
+.form-box {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.form-box button {
+  background: none;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: #1B543E;
+  font-weight: bold;
+}
+
+.form-box button.active {
+  border-bottom: 2px solid #1B543E; /* underline active tab */
+}
+
+/* Form Styling */
+.form-content form {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.form-content input {
+  padding: 10px;
+  border: 1px solid #DFD8B6;
+  border-radius: 5px;
+}
+.form-content a {
+    padding: 8px 15px;
+    font-family: 'Inter', sans-serif;
+    color: #1B543E;
+    font-size: 0.9rem;
+}
+
+.form-content a:hover {
+  text-decoration: underline;
+}
+
+.form-content button {
+  padding: 10px;
+  background-color: #0FBDE9;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+.form-content button:hover {
+  background-color: #73A640;
+}
+
+/* Hidden Class */
+.hidden {
+  display: none;
+}
+
+
+.hamburger {
+  font-size: 40px; /* size of the hamburger */
+  color: #DFD8B6;    /* or any color you want */
+  text-decoration: none;
+  margin-right: 10px; /* space between hamburger and logo */
+  margin-left: 0px;  /* push it a bit from the edge */
+}
+  
