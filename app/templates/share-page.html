@@ -5,7 +5,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>AU Travel Finder - Share Page</title>
-        <link rel="stylesheet" href="styles-share.css">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/styles-share.css') }}">
     </head>
 
     <header>
@@ -15,7 +15,7 @@
                 <div></div>
             <div></div>
             </div>
-            <img src="https://cdn.discordapp.com/attachments/1353213824932646942/1366129471769411728/explorer.png?ex=680fd2b7&is=680e8137&hm=8e5d40ecf7f77bf09e66515c9d35580682640da9c3eebca62589a4ecbb4d46c5&" alt="Logo">
+            <img src="{{ url_for('static', filename='images/explorer.PNG') }}" alt="Logo">
             <div></div>
         </div>
     </header>
@@ -27,17 +27,17 @@
                 <div class="option-container">
                     <div class = "option">
                         <h3>Rate</h3>
-                        <img src="C:\University\2025 sem 1\CITS3403\Project\SharePage-icons\IMG_9606.png" alt="Rate">
+                        <img src="{{ url_for('static', filename='images/IMG_9606.PNG') }}" alt="Rate">
                         <button class="btn">Go Now!</button>
                     </div>
                     <div class = "option">
                         <h3>Share</h3>
-                        <img src="C:\University\2025 sem 1\CITS3403\Project\SharePage-icons\IMG_9605.png" alt="Share">
+                        <img src="{{ url_for('static', filename='images/IMG_9605.PNG') }}" alt="Share">
                         <button class="btn">Go Now!</button>
                     </div>
                     <div class = "option">
                         <h3>Other Trips</h3>
-                        <img src="C:\University\2025 sem 1\CITS3403\Project\SharePage-icons\IMG_9604.png" alt="Other Trips">
+                        <img src="{{ url_for('static', filename='images/IMG_9604.PNG') }}" alt="Other Trips">
                         <button class="btn">Go Now!</button>
                     </div>
                 </div>
