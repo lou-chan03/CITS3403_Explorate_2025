@@ -13,3 +13,17 @@ def questions():
 @app.route('/email_share')
 def email_share():
     return render_template('email_share.html')
+
+# share page routes
+@app.route('/share_page')
+def share_page():
+    return render_template('share-page.html')
+@app.route('/share_blog')
+def share_blog():
+    return render_template('share-blog.html')
+@app.route('/rate_page')
+def rate_page():
+    return render_template('rate-page.html')
+@app.route('/other_trips')
+def other_trips():
+    return render_template('other-trips.html')
