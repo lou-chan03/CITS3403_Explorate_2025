@@ -4,7 +4,7 @@
 
 html, body {
     background-color: #1B543E; /* light pink */
-    background-image: url('https://cdn.discordapp.com/attachments/1353213824932646942/1366280351143428158/green-bg.png?ex=68105f3b&is=680f0dbb&hm=e1e252d88eb868c53175381a63f103e51105922bb2ae7e535b84e672aaa10fd7&');
+    background-image: url('../images/green-bg.png');
     background-size: cover;
     background-attachment: fixed;
     background-position: center;
@@ -23,7 +23,7 @@ text-decoration: none;
 }
 
 body {
-    background-image: url('https://cdn.discordapp.com/attachments/1353213824932646942/1366280351143428158/green-bg.png?ex=68105f3b&is=680f0dbb&hm=e1e252d88eb868c53175381a63f103e51105922bb2ae7e535b84e672aaa10fd7&');
+    background-image: url('../images/green-bg.png');
     background-size: cover;
     background-attachment: fixed;
     background-position: center;
