@@ -5,14 +5,22 @@ from app.models import Adventure, UserSelection
 # Define the Blueprint
 main = Blueprint('main', __name__)
 
-# Define routes using the Blueprint
+
+
 @main.route('/')
 def home():
-    return render_template('Data_Entry.html')  # Replace 'index.html' with your main HTML file name
+    # Render a Jinja template
+    return render_template('base.html')
+
+# Define routes using the Blueprint
+# @main.route('/')
+# def home():
+#     return render_template('Data_Entry.html')  # Replace 'index.html' with your main HTML file name
 
 @main.route('/adventure')
 def adventure():
     return render_template('Adv_name.html')  # Assumes the file is in the `templates/` directory
+
 
 
 # @main.route('/questions', methods=['POST', 'GET'])

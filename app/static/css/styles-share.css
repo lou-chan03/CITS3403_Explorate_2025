@@ -4,47 +4,7 @@
     outline: 1px solid red !important; /* For debugging purposes, remove in production */
 }
 
-body {
-    margin: 0;
-    font-family: 'Itim', sans-serif;
-    display: flex;
-    flex-direction: column;
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    background-color: #1B543E;
-}
-.navbar {
-    background-color: #1B543E;
-    color: #DFD8B6;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-    position: fixed; /* Fixes the navbar at the top */
-    top: 0; /* Ensures it's at the top of the page */
-    left: 0;
-    right: 0;
-    z-index: 1000;
-    height: 80px;
-}
-.navbar img {
-    height: 150px;
-    width: auto; 
-}
-.hamburger {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 25px;
-    height: 20px;
-    cursor: pointer;
-}
-.hamburger div {
-    width: 100%;
-    height: 3px;
-    background-color: #DFD8B6;
-}
+
 .title-bar {
     background-color: #DFD8B6;
     color: #1B543E;

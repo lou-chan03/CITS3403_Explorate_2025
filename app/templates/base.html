@@ -4,21 +4,14 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/styles-share.css') }}"> <!-- for the share pages, when css is all standardised will remove this line-->
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/styles-share.css') }}"> 
         <title>{% block title %}Explorate{% endblock %}</title>
     </head>
 
     <!--the hamburger and logo are overlapping each other..??? I don't think my navbar stuff is updated pls update...-->
-    <header>
-        <nav class ="navbar">
-            <div class="hamburger">
-                <div></div>
-                <div></div>
-                <div></div>
-                <img src="{{ url_for('static', filename='images/explorer.png') }}" alt="Logo">
-            </div>
-            <!-- Add navbar links for each page -->
-        </nav>
+    <header class="header">
+        <a class="hamburger">&#9776;</a>
+        <img src="{{ url_for('static', filename='images/explorer.png') }}" alt="Logo" class="logo">
     </header>
 
     <body>
