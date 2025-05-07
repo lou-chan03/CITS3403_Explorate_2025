@@ -7,15 +7,15 @@ main = Blueprint('main', __name__)
 
 
 
-@main.route('/')
-def home():
-    # Render a Jinja template
-    return render_template('base.html')
-
-# Define routes using the Blueprint
 # @main.route('/')
 # def home():
-#     return render_template('Data_Entry.html')  # Replace 'index.html' with your main HTML file name
+#     # Render a Jinja template
+#     return render_template('base.html')
+
+# Define routes using the Blueprint
+@main.route('/')
+def home():
+    return render_template('Data_Entry.html')  # Replace 'index.html' with your main HTML file name
 
 @main.route('/adventure')
 def adventure():
@@ -134,7 +134,7 @@ def questions():
 
 @main.route('/email_share')
 def email_share():
-    return render_template('email_share.html')
+    return render_template('share-page.html')
 
 # Share page routes
 @main.route('/share_page')
