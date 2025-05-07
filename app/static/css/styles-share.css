@@ -1,16 +1,18 @@
 @import url(" https://fonts.googleapis.com/css2?family=Itim&display=swap");
 
+*{
+    outline: 1px solid red !important;
+}
+
 body {
     margin: 0;
     font-family: 'Itim', sans-serif;
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
     background-color: #1B543E;
-    overflow-y: auto;
 }
 .navbar {
     background-color: #1B543E;
@@ -64,24 +66,19 @@ body {
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    padding-bottom: 50px; /* Space for the footer */
-    margin: 100px 30px 50px;
+    margin: 100px 50px 0px;
     background-color:#DFD8B6;
     border-radius: 15px;
+    height: auto;
 }
 .section h2 {
     color:#1B543E;
-    font-size: 60px;
-    margin-bottom: 40px;
-    padding-bottom:50px ;
+    font-size:36px;
 }
 .sub-section {
-    width: 70%;
-    height: 50%;
     background-color: #FFFBE9;
     border-radius: 15px;
-    margin-top: 380 px;
-    margin-bottom: 60px;
+    margin-bottom: 60px; /* space between section and */
 }
 .option-container{
     display: flex;
@@ -89,7 +86,6 @@ body {
     align-items: flex-start;
     flex-wrap: wrap;
     gap: 40px;
-    margin-top: 50px;
     min-height: 100vh;
 }
 .option {
@@ -101,14 +97,13 @@ body {
 }
 
 .option img{
-    width: 320px;
+    width: 250px;
     height: auto;
 }
 
 .option h3 {
-    font-size: 48px;
+    font-size: 30px;
     color: #1B543E;
-    margin: 10px;
 }
 
 .btn {
@@ -123,6 +118,38 @@ body {
 .btn:hover {
     background-color: #45a049;
     color: white;
+}
+
+/* Design for star rating */
+.star-container {
+    max-width: 33rem;
+    margin: 0 1rem;
+    padding: 1rem;
+    width: 100%;
+}
+
+.star{
+    cursor: pointer;
+}
+
+.starone {
+    color: rgb(255, 0, 0);
+}
+
+.startwo{
+    color: rgb(255, 106, 0); 
+}
+
+.starthree{
+    color: rgb(251, 106, 120); 
+}
+
+.starfour{
+    color: rgb(255, 255, 0); 
+}
+
+.starfive{
+    color: rgb(24, 159, 14); 
 }
 
 .footer {
