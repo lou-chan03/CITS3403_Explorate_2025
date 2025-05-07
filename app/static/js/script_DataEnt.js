@@ -103,6 +103,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 choice: userChoice,
                 adventure_name: adventureName
             };
+            const yesUrl = nextButton.dataset.yesUrl;
+            const noUrl = nextButton.dataset.noUrl;
             console.log("hello12345")
             // Send the trip data to the backend using a POST request
             // fetch("/save_trip", {
@@ -122,7 +124,8 @@ document.addEventListener("DOMContentLoaded", () => {
             //         console.log(nextButton.dataset);
 
             //         if (userChoice === "Yes") {
-            //             window.location.href = yesUrl; // Redirect to "email_share" page
+            //             window.location.href = 
+            // Url; // Redirect to "email_share" page
             //         } else {
             //             window.location.href = noUrl; // Redirect to "questions" page
             //         }
@@ -174,14 +177,24 @@ document.addEventListener("DOMContentLoaded", () => {
                     }
                 })
                 .then((html) => {
-                    document.open();
-                    document.write(html);
-                    document.close();
-                })
-                .catch((error) => {
-                    console.error("Error:", error);
-                    alert("Something went wrong while saving your trip.");
-                });
+                  document.open();
+                  document.write(html);
+                  document.close();
+  
+                  // Redirect based on the user's choice
+                  console.log("Redirecting based on user choice...");
+                  if (userChoice === "Yes" && yesUrl) {
+                      window.location.href = yesUrl;
+                  } else if (userChoice === "No" && noUrl) {
+                      window.location.href = noUrl;
+                  } else {
+                      console.warn("No valid redirection URL provided.");
+                  }
+              })
+              .catch((error) => {
+                  console.error("Error:", error);
+                  alert("Something went wrong while saving your trip.");
+              });
         });
     }
 
