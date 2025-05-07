@@ -15,7 +15,7 @@
             <div></div>
             <div></div>
             </div>
-            <img src="SharePage-icons\explorer.png" alt="Logo">
+            <img src="{{ url_for('static', filename='images/explorer.PNG') }}" alt="Logo">
             <div></div>
         </div>
     </header>
@@ -28,7 +28,15 @@
                 <div class="rate-container">
                     <div class = "rate">
                         <h4>Overall</h4>
-                        <img src="SharePage-icons\Capture.PNG" alt="star rating"> <!--will be replaced with actual star rating code-->
+                        <div class="card">
+                            <span class="star" onclick="gfg(1)">★</span>
+                            <span class="star" onclick="gfg(2)">★</span>
+                            <span class="star" onclick="gfg(3)">★</span>
+                            <span class="star" onclick="gfg(4)">★</span>
+                            <span class="star" onclick="gfg(5)">★</span>
+                            <h3 id="output">Rating is: 0/5</h3>
+                        </div>
+                        <script src="/static/js/script.js"></script>
                     </div>
                     <div class = "rate">
                         <h4>Location</h4>

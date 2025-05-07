@@ -1,26 +1,6 @@
-<!--This'll be the share page-->
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>AU Travel Finder - Share Page</title>
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/styles-share.css') }}">
-    </head>
-
-    <header>
-        <div class = "navbar">
-            <div class = "hamburger">
-                <div></div>
-                <div></div>
-            <div></div>
-            </div>
-            <img src="{{ url_for('static', filename='images/explorer.PNG') }}" alt="Logo">
-            <div></div>
-        </div>
-    </header>
-
-    <body>
+{% extends "base.html"%}
+{% block title%}Share Page{% endblock%}
+{% block content%}
         <div class = "section">
             <h2>Now that you've found your trip...<br>let other adventurers know!</h2>
             <div class = "sub-section">
@@ -28,25 +8,21 @@
                     <div class = "option">
                         <h3>Rate</h3>
                         <img src="{{ url_for('static', filename='images/IMG_9606.PNG') }}" alt="Rate">
-                        <button class="btn">Go Now!</button>
+                        <a href="{{ url_for('rate_page') }}" class="btn">Go Now!</a>
                     </div>
                     <div class = "option">
                         <h3>Share</h3>
                         <img src="{{ url_for('static', filename='images/IMG_9605.PNG') }}" alt="Share">
-                        <button class="btn">Go Now!</button>
+                        <a href="{{ url_for('share_blog') }}" class="btn">Go Now!</a>
                     </div>
                     <div class = "option">
                         <h3>Other Trips</h3>
                         <img src="{{ url_for('static', filename='images/IMG_9604.PNG') }}" alt="Other Trips">
-                        <button class="btn">Go Now!</button>
+                        <a href="{{ url_for('other_trips') }}" class="btn">Go Now!</a>
                     </div>
                 </div>
             </div>
         </div>
-
-        <div class="footer">
-            &copy; 2025 Explorate
-        </div>
-    </body>
+{% endblock %}
 </html>
     
