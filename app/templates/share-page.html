@@ -1,26 +1,6 @@
-<!--This'll be the share page-->
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Explorate - Share Page</title>
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/styles-share.css') }}">
-    </head>
-
-    <header>
-        <div class = "navbar">
-            <div class = "hamburger">
-                <div></div>
-                <div></div>
-            <div></div>
-            </div>
-            <img src="{{ url_for('static', filename='images/explorer.PNG') }}" alt="Logo">
-            <div></div>
-        </div>
-    </header>
-
-    <body>
+{% extends "base.html"%}
+{% block title%}Share Page{% endblock%}
+{% block content%}
         <div class = "section">
             <h2>Now that you've found your trip...<br>let other adventurers know!</h2>
             <div class = "sub-section">
@@ -43,10 +23,6 @@
                 </div>
             </div>
         </div>
-
-        <div class="footer">
-            &copy; 2025 Explorate
-        </div>
-    </body>
+{% endblock %}
 </html>
     

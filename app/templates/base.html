@@ -3,22 +3,33 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>{% block title %}Explorate{% endblock %}</title>
         <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/styles-share.css') }}"> <!-- for the share pages, when css is all standardised will remove this line-->
+        <title>{% block title %}Explorate{% endblock %}</title>
     </head>
-    <body>
-        <header class="header">
-            <a href="{{ url_for('index') }}" class="hamburger">&#9776;</a>
-            <img src="{{ url_for('static', filename='images/explorer-logo.png') }}" alt="Logo" class="logo">
-            <nav class="navbar">
-                <a href="{{ url_for('login') }}">Login</a>
-                <a href="{{ url_for('signup') }}">Sign Up</a>
-            </nav>
-        </header>
 
+    <!--the hamburger and logo are overlapping each other..??? I don't think my navbar stuff is updated pls update...-->
+    <header>
+        <nav class ="navbar">
+            <div class="hamburger">
+                <div></div>
+                <div></div>
+                <div></div>
+                <img src="{{ url_for('static', filename='images/explorer.png') }}" alt="Logo">
+            </div>
+            <!-- Add navbar links for each page -->
+        </nav>
+    </header>
+
+    <body>
+        <main>
         {% block content %}{% endblock %}
+        </main>
 
         <footer class="footer">
             <p>© 2025 Explorate</p>
         </footer>
+        <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    {% block scripts %}{% endblock %}
     </body>
+</html>
