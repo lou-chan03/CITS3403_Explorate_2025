@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, jsonify
+from flask import Blueprint, render_template, request, jsonify, url_for
 from app import db
 from app.models import Adventure, UserSelection
 
@@ -7,20 +7,19 @@ main = Blueprint('main', __name__)
 
 
 
-# @main.route('/')
-# def home():
-#     # Render a Jinja template
-#     return render_template('base.html')
-
-# Define routes using the Blueprint
 @main.route('/')
 def home():
+    # Render a Jinja template
+    return render_template('base.html')
+
+# Define routes using the Blueprint
+@main.route('/FindAdv')
+def FindAdv():
     return render_template('Data_Entry.html')  # Replace 'index.html' with your main HTML file name
 
 @main.route('/adventure')
 def adventure():
     return render_template('Adv_name.html')  # Assumes the file is in the `templates/` directory
-
 
 
 # @main.route('/questions', methods=['POST', 'GET'])
@@ -234,4 +233,3 @@ def save_selections():
     db.session.commit()
 
     return jsonify({'message': 'Data saved successfully'})
-

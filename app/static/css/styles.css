@@ -394,3 +394,61 @@ background-color: #25abd1; /* Your custom blue color */
 .climate-button.pressed {
     background-color: #25abd1; /* New color for pressed state */
 }
+
+
+
+/* Hamburger and its sidebar styling */
+/* Sidebar styling */
+#sidebar {
+    position: fixed;
+    top: 100px; /* Below the header bar */
+    left: -250px;
+    height: 100%; /* Full height minus header bar */
+    width: 250px;
+    background-color: #DFD8B6;
+    color: #1B543E;
+    transition: left 0.3s ease;
+    z-index: 1040;
+    overflow-y: auto; /* Scrollable content if needed */
+    padding: 1rem 0;
+}
+
+#sidebar.active {
+    left: 0;
+}
+
+#sidebar a {
+    color: #1B543E;
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    text-decoration: none;
+
+}
+
+#sidebar a .sidebar-icon {
+    width: 24px; /* Adjust icon size */
+    height: 24px;
+    margin-right: 10px; /* Space between icon and text */
+}
+#sidebar a i {
+    margin-right: 10px;
+}
+#sidebarToggle{
+    background-color: #1B543E;
+}
+
+#sidebar a:hover {
+    background-color: #0FBDE9;
+    color: white;
+}
+
+/* Main content styling */
+#main_part {
+    all: unset;
+    transition: margin-left 0.3s ease;
+}
+
+#main_part.active {
+    margin-left: 250px;
+}

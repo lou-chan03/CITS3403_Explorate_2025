@@ -1,29 +1,16 @@
-<!DOCTYPE html>
-
-<html lang="en">
-    <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Explorate</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-    </head>
-    <header class="header">
-        <a href="index.html" class="hamburger">&#9776;</a>
-        <img src="{{ url_for('static', filename='images/explorer.png') }}" alt="Logo" class="logo">
-    </header>
-    <body>
-        <section class="main-content">
-            <h1>Your Ideal Adventure Awaits You!!!</h1>
-            <button onclick="redirect()">Find Adventure</button>
-        </section>
-        <script>
-            function redirect() {
-                window.location.href = "{{ url_for('main.adventure') }}"; // Replace with the file name of the target HTML
-            }
-        </script>
-    </body>
-    <div class="footer">
-        &copy; 2025 Explorate
-    </div>
-
-</html>
+{% extends "base.html"%}
+{% block title%}DataEntry{% endblock%}
+{% block content%}
+    
+<section class="main-content">
+    <h1>Your Ideal Adventure Awaits You!!!</h1>
+    <button onclick="redirect()">Find Adventure</button>
+</section>
+{% endblock%}
+{% block scripts %}
+<script>
+    function redirect() {
+        window.location.href = "{{ url_for('main.adventure') }}"; // Replace with the file name of the target HTML
+    }
+</script>
+{% endblock%}
