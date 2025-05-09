@@ -1,25 +1,6 @@
-
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title></title>Rate Page</title>
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/styles-share.css') }}">
-    </head>
-
-    <header>
-        <div class = "navbar">
-            <div class = "hamburger">
-            <div></div>
-            <div></div>
-            <div></div>
-            </div>
-            <img src="SharePage-icons\explorer.png" alt="Logo">
-            <div></div>
-        </div>
-    </header>
-
+{% extends "base.html"%}
+{% block title%}Rate Page{% endblock%}
+{% block content%}
     <body>
         <div class = "section">
             <h2>Share with the world!</h2>
@@ -35,3 +16,4 @@
             <div class="btn">Post Now!</div>
         </div>
     </body>
+{% endblock %}
