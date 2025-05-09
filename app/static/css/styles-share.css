@@ -36,9 +36,10 @@
     font-size:36px;
 }
 .sub-section {
+    width: 70%;
     background-color: #FFFBE9;
     border-radius: 15px;
-    margin-bottom: 60px; /* space between section and */
+    margin-bottom: 60px; /* space between section and subsection*/
 }
 .option-container{
     display: flex;
@@ -82,9 +83,10 @@
 
 /* Design for star rating */
 .star-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
     max-width: 33rem;
-    margin: 0 1rem;
-    padding: 1rem;
     width: 100%;
 }
 
