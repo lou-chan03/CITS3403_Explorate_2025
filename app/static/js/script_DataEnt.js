@@ -183,7 +183,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 // Redirect based on the user's choice
                 console.log("Redirecting based on user choice...");
-                if (userChoice === "Yes" && yesUrl) {
+                if (userChoice === "YES" && yesUrl) {
                     window.location.href = yesUrl;
                 } else if (userChoice === "No" && noUrl) {
                     window.location.href = noUrl;

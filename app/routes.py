@@ -128,7 +128,7 @@ def questions():
         )
     
     # Handle GET request
-    return render_template('Data_Ent_Q1.html', adventure_name="Default Adventure Name")
+    return render_template('Data_Ent_Q1.html', adventure_name="Adventure1")
 
 
 @main.route('/email_share')
