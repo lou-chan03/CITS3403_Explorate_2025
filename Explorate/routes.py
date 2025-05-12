@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, jsonify, url_for
-from app import db
-from app.models import Adventure, UserSelection
+#from app import db
+from Explorate.models import db,Adventure, UserSelection, User
 
 # Define the Blueprint
 main = Blueprint('main', __name__)
