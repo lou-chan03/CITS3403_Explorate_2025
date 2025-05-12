@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}My Website{% endblock %}</title>
+    <!-- Bootstrap CSS -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/styles-share.css') }}"> 
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link href="https://fonts.googleapis.com/css2?family=Itim&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap Icons -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Header Bar -->
+    <div class="header">
+        <button id="hamburger" class="hamburger">&#9776;</button>
+        <img src="{{ url_for('static', filename='images/explorer.png') }}" alt="Logo" class="logo">
+       
+    </div>
+
+    <!-- Sidebar -->
+    <div id="sidebar">
+        <a href="#"><img src="{{ url_for('static', filename='images/profile.png') }}" alt="Profile" class="sidebar-icon"> Profile</a>
+        <a href="{{ url_for('main.FindAdv') }}"><img src="{{ url_for('static', filename='images/Itineray.png') }}" alt="Find_Itinerary" class="sidebar-icon"> Find Itinerary</a>
+        <a href="#"><img src="{{ url_for('static', filename='images/trips.png') }}" alt="My_Trips" class="sidebar-icon"> My Trips</a>
+        <a href="#"><img src="{{ url_for('static', filename='images/Insights.png') }}" alt="Insights" class="sidebar-icon"> Insights</a>
+        <a href="#"><img src="{{ url_for('static', filename='images/x-22.png') }}" alt="Log_out" class="sidebar-icon"> Log out</a>
+        <a href="#"><i class="bi bi-envelope"></i> Settings</a>
+    </div>
+
+    {% block content %}
+    <!-- Main Content -->
+    <div id="main_part">
+       
+        <!-- The bobdy of the pages -->
+        
+    </div>
+    {% endblock %}
+
+    <!-- Bootstrap JS -->
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js">
+    </script>
+    <script>
+        // Toggle Sidebar
+        const sidebar = document.getElementById("sidebar");
+        const main_part = document.getElementById("main_part");
+        const toggleButton = document.getElementById("hamburger");
+
+        toggleButton.addEventListener("click", () => {
+            sidebar.classList.toggle("active");
+            main_part.classList.toggle("active");
+        });
+    </script>
+    {% block scripts %}
+    {% endblock %}
+</body>
+<div class="footer">
+    &copy; 2025 Explorate
+</div>
+</html>
