@@ -1,0 +1,16 @@
+{% extends "base.html"%}
+{% block title%}DataEntry{% endblock%}
+{% block content%}
+    
+<section class="main-content">
+    <h1>Your Ideal Adventure Awaits You!!!</h1>
+    <button onclick="redirect()">Find Adventure</button>
+</section>
+{% endblock%}
+{% block scripts %}
+<script>
+    function redirect() {
+        window.location.href = "{{ url_for('main.adventure') }}"; // Replace with the file name of the target HTML
+    }
+</script>
+{% endblock%}
