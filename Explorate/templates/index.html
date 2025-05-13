@@ -1,32 +1,10 @@
-<!DOCTYPE html>
+{% extends "base.html"%}
+{% block title%}DataEntry{% endblock%}
+{% block content%}
+<div id="results-container"></div>
+{% endblock%}
+{% block scripts %}
 
-<html lang="en">
-    <head>
-    <meta charset="UTF-8"
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Explorate</title>
-    <link rel="stylesheet" href="style.css">
-    </head>
-    <body>
-        
-        <header class="header">
-            <a href="index.html" class="hamburger">&#9776;</a>
-            <img src="assets/explorer-logo.png" alt="Logo" class="logo">
-            <nav class="navbar">
-                <a href="auth.html?form=login">Login</a>
-                <a href="auth.html?form=signup">Sign Up</a>
-            </nav>
+<script src="{{ url_for('static', filename='js/ideal.js') }}"></script>
 
-            
-        </header>
-
-        <section class="hero">
-            <h1>Exciting adventures, just a click away!</h1>
-            <a href="auth.html" class="button">Get started</a>
-        </section>
-        <footer class="footer">
-        <p>© 2025 Explorate</p>
-        </footer>
-    </body>
-
-</html>
+{% endblock%}
