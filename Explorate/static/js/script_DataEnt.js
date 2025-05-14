@@ -60,39 +60,12 @@ document.addEventListener("DOMContentLoaded", () => {
     closePopup();
   });
   console.log("hello123")
-  // Handle "Next" button click
   
-  // nextButton.addEventListener("click", () => {
-  //     if (userChoice === "") {
-  //       alert("Please make a choice (Yes or No).");
-  //       return;
-  //     }
-  //     const total = counts.adults + counts.children + counts.pets; // Calculate the total
-  //     const baseURL = userChoice === "Yes" ? "{{ url_for('email_share') }}" : "{{ url_for('questions') }}";
-  //     const url = `${baseURL}?total=${total}`;
-  //     window.location.href = url; // Redirect with the total passed as a query parameter
-  //   });
-  // if (nextButton) {
-  //     nextButton.addEventListener("click", () => {
-  //         const userChoice = "No"; // Replace with logic to get user choice
-  //         const yesUrl = nextButton.dataset.yesUrl;
-  //         const noUrl = nextButton.dataset.noUrl;
-
-  //         if (userChoice === "Yes") {
-  //             window.location.href = yesUrl; // Redirect to "email_share" page
-  //         } else {
-  //             window.location.href = noUrl; // Redirect to "questions" page
-  //         }
-  //     });
-  // }
   console.log(nextButton);
   if (nextButton) {
       console.log("hello1234")
       nextButton.addEventListener("click", () => {
-          // if (userChoice === "No") {
-          //   alert("Please make a choice (Yes or No).");
-          //   return;
-          // }
+          
           console.log("hello")
           const adventureName = adventureNameInput.value;
           // Prepare the data to be sent to the server
@@ -105,63 +78,8 @@ document.addEventListener("DOMContentLoaded", () => {
           };
           const yesUrl = nextButton.dataset.yesUrl;
           const noUrl = nextButton.dataset.noUrl;
-          console.log("hello12345")
-          // Send the trip data to the backend using a POST request
-          // fetch("/save_trip", {
-          //     method: "POST",
-          //     headers: {
-          //         "Content-Type": "application/json"
-          //     },
-          //     body: JSON.stringify(tripData)
-          // })
-          // .then(response => response.json())
-          // .then(data => {
-          //     if (data.success) {
-          //         // Redirect based on the user's choice
-          //         const yesUrl = nextButton.dataset.yesUrl;
-          //         const noUrl = nextButton.dataset.noUrl;
-          //         console.log("hi");
-          //         console.log(nextButton.dataset);
-
-          //         if (userChoice === "Yes") {
-          //             window.location.href = 
-          // Url; // Redirect to "email_share" page
-          //         } else {
-          //             window.location.href = noUrl; // Redirect to "questions" page
-          //         }
-          //     } else {
-          //         alert("Error saving trip details.");
-          //     }
-          // })
-          // .catch(error => {
-          //     console.error("Error:", error);
-          //     alert("Something went wrong while saving your trip.");
-          // });
-
-          // fetch("/questions", {
-          //     method: "POST",
-          //     headers: {
-          //         "Content-Type": "application/json",
-          //     },
-          //     body: JSON.stringify(tripData),
-          // })
-          //     .then((response) => {
-          //         if (response.ok) {
-          //             return response.text();
-          //         } else {
-          //             throw new Error("Failed to save trip details.");
-          //         }
-          //     })
-          //     .then((html) => {
-          //         document.open();
-          //         document.write(html);
-          //         document.close();
-          //     })
-          //     .catch((error) => {
-          //         console.error("Error:", error);
-          //         alert("Something went wrong while saving your trip.");
-          //     });
-
+         
+        
           fetch("/questions", {
               method: "POST",
               headers: {

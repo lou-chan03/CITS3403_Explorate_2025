@@ -70,7 +70,7 @@
   </div>
 </div>
 <div class="container_button">
-    <button id="nextButton" class="next-button" data-yes-url="{{ url_for('main.email_share') }}" data-no-url="{{ url_for('main.questions') }}">Next</button>
+    <button id="nextButton" class="next-button" data-yes-url=window.location.href = questionsUrl;  data-no-url=window.location.href = questionsUrl; >Next</button>
 </div>
 {% endblock%}
 {% block scripts %}

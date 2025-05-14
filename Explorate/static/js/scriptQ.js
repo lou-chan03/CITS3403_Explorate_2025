@@ -96,40 +96,61 @@ document.addEventListener("DOMContentLoaded", () => {
     // 
     
     function finishButtonHandler() {
-        // Ensure all questions have been answered before proceeding
-        if (userSelections.length < questions.length || userSelections.some(selection => !selection)) {
-            alert("Please answer all questions before proceeding.");
-            return;
-        }
-    
-        // Retrieve adventure_id from the hidden input field
-        var adventure_id = document.getElementById('adventure-id').value;
-        console.log("Adventure ID:", adventure_id); // Verify it's being retrieved
-    
-        // Send the selected options to the backend
-        fetch('/save_selections', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ selections: userSelections, adventure_id: adventure_id }) // Send the adventure_id along
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            return response.json();
-        })
-        .then(data => {
-            if (data.message === 'Data saved successfully') {
-                window.location.href = "/success"; // Redirect or perform any other action
-            } else {
-                alert('Error saving data.');
-            }
-        })
-        .catch(error => console.error("Error:", error));
+    // Ensure all questions have been answered before proceeding
+    if (userSelections.length < questions.length || userSelections.some(selection => !selection)) {
+        alert("Please answer all questions before proceeding.");
+        return;
     }
-    
+
+    // Retrieve adventure_id from the hidden input field
+    var adventure_id = document.getElementById('adventure-id').value;
+    console.log("Adventure ID:", adventure_id); // Verify it's being retrieved
+
+    // Check if the loading indicator exists
+    const loadingIndicator = document.getElementById('loading-indicator');
+    if (loadingIndicator) {
+        loadingIndicator.style.display = 'block'; // Show loading indicator
+    } else {
+        console.warn("Loading indicator element is missing from the DOM.");
+    }
+
+    // Send the selected options to the backend
+    fetch('/save_selections', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ selections: userSelections, adventure_id: adventure_id }) // Send the adventure_id along
+    })
+    .then(response => {
+        if (loadingIndicator) {
+            loadingIndicator.style.display = 'none'; // Hide loading indicator
+        }
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+    })
+    .then(data => {
+        if (data.message === 'Data saved successfully') {
+            sessionStorage.setItem("recommendationResult", JSON.stringify(data));
+            alert('Selections saved successfully! Redirecting...');
+
+            window.location.href = "/index"; // Redirect or perform any other action
+        } else {
+            alert(`Error saving data: ${data.message || 'Unknown error.'}`);
+        }
+    })
+    .catch(error => {
+        if (loadingIndicator) {
+            loadingIndicator.style.display = 'none'; // Hide loading indicator
+        }
+        console.error("Error:", error);
+        alert('An error occurred while saving your data. Please try again.');
+    });
+}
+
+
     
 
     // Previous button handler

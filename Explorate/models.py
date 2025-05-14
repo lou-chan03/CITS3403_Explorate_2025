@@ -43,3 +43,13 @@ class UserSelection(db.Model):
 
     def __repr__(self):
         return f'<UserSelection {self.id} - Session: {self.session_id}>'
+
+
+class Recommendations(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    session_id = db.Column(db.String(36), unique=True, nullable=False)
+    selected_state = db.Column(db.String(50), nullable=False)
+    recommendation_1 = db.Column(db.String(200))
+    recommendation_2 = db.Column(db.String(200))
+    recommendation_3 = db.Column(db.String(200))
+    recommendation_4 = db.Column(db.String(200))
