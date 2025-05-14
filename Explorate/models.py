@@ -53,3 +53,16 @@ class Recommendations(db.Model):
     recommendation_2 = db.Column(db.String(200))
     recommendation_3 = db.Column(db.String(200))
     recommendation_4 = db.Column(db.String(200))
+
+class Ratings(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    #user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    #adventure_id = db.Column(db.Integer, db.ForeignKey('adventure.id'), nullable=False) 
+    
+    location_rating = db.Column(db.Integer, nullable=False)
+    food_rating = db.Column(db.Integer, nullable=False)
+    attractions_rating = db.Column(db.Integer, nullable=False)
+    accommodation_rating = db.Column(db.Integer, nullable=False)
+    
+    #user = db.relationship('User', back_populates='ratings')
+    #adventures = db.relationship('Adventure', back_populates='ratings')
