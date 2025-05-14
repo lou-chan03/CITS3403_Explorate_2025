@@ -1,13 +1,17 @@
 
 from flask_sqlalchemy import SQLAlchemy
+from flask_login import UserMixin
 db = SQLAlchemy()
 
 
-class User(db.Model):
+class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     Username = db.Column(db.String(150), unique=True, nullable=False)
     email = db.Column(db.String(150), unique=True, nullable=False)
     password = db.Column(db.String(200), nullable=False)
+    country = db.Column(db.String(100), nullable=False)
+    dateofbirth = db.Column(db.String(10), nullable=False)
+    adventure = db.relationship('Adventure')
 
     def __repr__(self):
         return f'<User {self.Username}>'
@@ -20,8 +24,10 @@ class Adventure(db.Model):
     children = db.Column(db.Integer, nullable=False)
     pets = db.Column(db.Integer, nullable=False)
     choice = db.Column(db.String(10), nullable=False)  # "Yes" or "No"
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
-    def __init__(self, adventure_name, adults, children, pets, choice):
+    def __init__(self, adventure_name, adults, children, pets, choice,user_id):
+        self.user_id = user_id
         self.adventure_name = adventure_name
         self.adults = adults
         self.children = children
