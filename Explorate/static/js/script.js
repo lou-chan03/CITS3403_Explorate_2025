@@ -35,4 +35,13 @@ window.addEventListener("DOMContentLoaded", () => {
     }
   });
   
-  
+  document.addEventListener("DOMContentLoaded", function () {
+        const flashMessages = document.getElementById("flash-messages");
+        if (flashMessages) {
+            setTimeout(() => {
+                flashMessages.style.transition = "opacity 0.5s";
+                flashMessages.style.opacity = "0";
+                setTimeout(() => flashMessages.remove(), 500); // Ensure complete removal from DOM
+            }, 5000); // Adjust timing as needed (5000ms = 5 seconds)
+        }
+    });

@@ -24,7 +24,12 @@
     <div class="header">
         <button id="hamburger" class="hamburger">&#9776;</button>
         <img src="{{ url_for('static', filename='images/explorer.png') }}" alt="Logo" class="logo">
-       
+        {% if show_nav %}
+        <nav class="navbar">
+            <a href="{{ url_for('auth.login') }}">Login</a>
+            <a href="{{ url_for('auth.sign_up') }}">Sign Up</a>
+        </nav>
+        {% endif %}
     </div>
 
     <!-- Sidebar -->
@@ -33,17 +38,22 @@
         <a href="{{ url_for('main.FindAdv') }}"><img src="{{ url_for('static', filename='images/Itineray.png') }}" alt="Find_Itinerary" class="sidebar-icon"> Find Itinerary</a>
         <a href="#"><img src="{{ url_for('static', filename='images/trips.png') }}" alt="My_Trips" class="sidebar-icon"> My Trips</a>
         <a href="#"><img src="{{ url_for('static', filename='images/Insights.png') }}" alt="Insights" class="sidebar-icon"> Insights</a>
-        <a href="#"><img src="{{ url_for('static', filename='images/x-22.png') }}" alt="Log_out" class="sidebar-icon"> Log out</a>
+        <a href="{{ url_for('auth.logout') }}"><img src="{{ url_for('static', filename='images/x-22.png') }}" alt="Log_out" class="sidebar-icon"> Log out</a>
         <a href="#"><i class="bi bi-envelope"></i> Settings</a>
     </div>
 
     {% block content %}
     <!-- Main Content -->
-    <div id="main_part">
+    
+
+    <section class="main-content">
+        <h1>Your Ideal Adventure Awaits You!!!</h1>
+        <button onclick="redirect()">Find Adventure</button>
+    </section>
        
         <!-- The bobdy of the pages -->
         
-    </div>
+    
     {% endblock %}
 
     <!-- Bootstrap JS -->
@@ -60,6 +70,10 @@
             sidebar.classList.toggle("active");
             main_part.classList.toggle("active");
         });
+        function redirect() {
+        window.location.href = "{{ url_for('auth.login') }}"; // Replace with the file name of the target HTML
+    }
+        
     </script>
     {% block scripts %}
     {% endblock %}
