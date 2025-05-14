@@ -1,4 +1,26 @@
+.navbar {
+    position: absolute;
+    right: 50px;
+    display: flex;
+    gap: 1px;
+}
 
+
+.navbar a {
+    background: #0FBDE9;
+    padding: 8px 15px;
+    border-radius: 7px;
+    transition: background 0.3s, color 0.3s;
+    margin-left: 50px;
+    font-family: 'Inter', sans-serif;
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.1rem;
+}
+
+.navbar a:hover {
+    background-color: #73A640;
+}
 
 /* Rectangle Container */
 /* Rectangle Container */
