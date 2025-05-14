@@ -3,6 +3,7 @@ from collections import Counter
 #from app import db
 from Explorate.models import db,Adventure, UserSelection, User, Recommendations
 import random
+from flask_login import current_user
 import uuid
 
 # Define the Blueprint
@@ -106,13 +107,17 @@ def questions():
         pets = data.get('pets', 0)
         choice = data.get('choice', 'No')
 
+        # Use the currently logged-in user's ID
+        user_id = current_user.id
+
         # Save data to the Adventure table
         new_trip = Adventure(
             adventure_name=adventure_name,
             adults=adults,
             children=children,
             pets=pets,
-            choice=choice
+            choice=choice,
+            user_id=user_id
         )
         db.session.add(new_trip)
         db.session.commit()
@@ -138,9 +143,9 @@ def questions():
     return render_template('Data_Ent_Q1.html', adventure_name="Adventure1")
 
 
-@main.route('/email_share')
-def email_share():
-    return render_template('share-page.html')
+@main.route('/auth')
+def auth():
+    return render_template('auth.html')
 
 # Share page routes
 @main.route('/share_page')
