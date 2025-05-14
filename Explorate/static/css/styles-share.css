@@ -86,32 +86,11 @@
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    max-width: 33rem;
     width: 100%;
 }
 
 .star{
     cursor: pointer;
-}
-
-.starone {
-    color: rgb(255, 0, 0);
-}
-
-.startwo{
-    color: rgb(255, 106, 0); 
-}
-
-.starthree{
-    color: rgb(251, 106, 120); 
-}
-
-.starfour{
-    color: rgb(255, 255, 0); 
-}
-
-.starfive{
-    color: rgb(24, 159, 14); 
 }
 
 .footer {

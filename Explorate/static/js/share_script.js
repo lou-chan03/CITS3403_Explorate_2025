@@ -29,10 +29,32 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (output) {
                     output.innerText = `Rating is: ${selectedRating}/5`;
                 }
+                updateOverallRating();
             });
         });
     });
 });
+
+// Function to update the overall rating based on selected ratings
+function updateOverallRating() {
+    const requiredIds = ['1', '2', '3', '4']; // Correspond to Location, Food, Attractions, Accommodation
+    let sum = 0;
+    let count = 0;
+
+    requiredIds.forEach(id => {
+        if (ratings[id]) {
+            sum += ratings[id];
+            count++;
+        }
+    });
+
+    const avg = count > 0 ? (sum / count).toFixed(1) : 0;
+    const overallOutput = document.getElementById('overall-rating');
+    if (overallOutput) {
+        overallOutput.innerText = `Overall Rating: ${avg}/5`;
+    }
+}
+
 
 // Utility function to highlight stars up to selected rating
 function highlightStars(rating, stars) {
@@ -45,3 +67,4 @@ function highlightStars(rating, stars) {
 window.getRatings = function() {
     return ratings;
 }
+
