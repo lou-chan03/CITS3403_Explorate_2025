@@ -74,6 +74,7 @@ class Ratings(db.Model):
     food_rating = db.Column(db.Integer, nullable=False)
     attractions_rating = db.Column(db.Integer, nullable=False)
     accommodation_rating = db.Column(db.Integer, nullable=False)
+    overall_rating = db.Column(db.Integer, nullable=False)
     
     #user = db.relationship('User', back_populates='ratings')
     #adventures = db.relationship('Adventure', back_populates='ratings')

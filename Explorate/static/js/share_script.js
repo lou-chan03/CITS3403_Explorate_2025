@@ -56,6 +56,7 @@ function updateOverallRating() {
     const overallOutput = document.getElementById('overall-rating');
     if (overallOutput) {
         overallOutput.innerText = `Overall Rating: ${avg}/5`;
+        ratings['overall'] = avg; // Store overall rating
     }
 }
 
@@ -71,7 +72,8 @@ function submitRatings(){
         location_rating: ratings['1'] || 0,
         food_rating: ratings['2'] || 0,
         attractions_rating: ratings['3'] || 0,
-        accommodation_rating: ratings['4'] || 0
+        accommodation_rating: ratings['4'] || 0,
+        overall_rating: ratings['overall'] || 0
     };
 
     fetch('/submit_rating', {

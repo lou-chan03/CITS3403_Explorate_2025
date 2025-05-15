@@ -182,6 +182,7 @@ def submit_rating():
     food_rating = data['food_rating']
     attractions_rating = data['attractions_rating']
     accommodation_rating = data['accommodation_rating']
+    overall_rating = data['overall_rating']
     
     # add logic to store data in database
     rating = Ratings(
@@ -190,7 +191,8 @@ def submit_rating():
         location_rating=location_rating,
         food_rating=food_rating,
         attractions_rating=attractions_rating,
-        accommodation_rating=accommodation_rating
+        accommodation_rating=accommodation_rating,
+        overall_rating=overall_rating
     )
     
     db.session.add(rating)
