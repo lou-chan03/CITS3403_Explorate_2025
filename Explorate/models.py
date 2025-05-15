@@ -64,3 +64,16 @@ class Recommendations(db.Model):
 
     def __repr__(self):
         return f'<Recommendations {self.id} - Session: {self.session_id}>'
+
+class Ratings(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    #user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    #adventure_id = db.Column(db.Integer, db.ForeignKey('adventure.id'), nullable=False) 
+    
+    location_rating = db.Column(db.Integer, nullable=False)
+    food_rating = db.Column(db.Integer, nullable=False)
+    attractions_rating = db.Column(db.Integer, nullable=False)
+    accommodation_rating = db.Column(db.Integer, nullable=False)
+    
+    #user = db.relationship('User', back_populates='ratings')
+    #adventures = db.relationship('Adventure', back_populates='ratings')

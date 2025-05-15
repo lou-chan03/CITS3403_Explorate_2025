@@ -29,9 +29,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (output) {
                     output.innerText = `Rating is: ${selectedRating}/5`;
                 }
-                updateOverallRating();
             });
         });
+    });
+    // submit ratings when user clicks submit button
+    document.querySelector('#submit-rating-btn').addEventListener('click', function(){
+        submitRatings();
+        updateOverallRating();
     });
 });
 
@@ -55,6 +59,40 @@ function updateOverallRating() {
     }
 }
 
+// Function to submit ratings to server
+function submitRatings(){
+    //const adventureId = document.getElementById('adventure-id').value;
+    //const userID = document.getElementById('user-id').value;
+
+    // Prepare the rating data to send to the server
+    const ratingData = {
+        //user_id: userID,
+        //adventure_id: adventureId,
+        location_rating: ratings['1'] || 0,
+        food_rating: ratings['2'] || 0,
+        attractions_rating: ratings['3'] || 0,
+        accommodation_rating: ratings['4'] || 0
+    };
+
+    fetch('/submit_rating', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(ratingData)
+    })
+    .then(response => {
+        if (response.ok) {
+            alert("Ratings submitted!");
+        } else {
+            alert("Failed to submit ratings.");
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert("Error submitting ratings.");
+    });
+}
 
 // Utility function to highlight stars up to selected rating
 function highlightStars(rating, stars) {
