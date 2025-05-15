@@ -1,10 +1,5 @@
 @import url(" https://fonts.googleapis.com/css2?family=Itim&display=swap");
 
-*{
-    outline: 1px solid red !important; /* For debugging purposes, remove in production */
-}
-
-
 .title-bar {
     background-color: #DFD8B6;
     color: #1B543E;
