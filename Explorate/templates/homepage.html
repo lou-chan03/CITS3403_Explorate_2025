@@ -1,0 +1,20 @@
+{% extends "base.html"%}
+{% block title%}DataEntry{% endblock%}
+{% block content%}
+<header class="header">
+    <nav class="navbar">
+        <a href="auth.html?form=login">Login</a>
+        <a href="auth.html?form=signup">Sign Up</a>
+    </nav>
+</header>
+<section class="hero">
+    <h1>Exciting adventures, just a click away!</h1>
+</section>
+{% endblock%}
+{% block scripts %}
+<script>
+    function redirect() {
+        window.location.href = "{{ url_for('main.adventure') }}"; // Replace with the file name of the target HTML
+    }
+</script>
+{% endblock%}

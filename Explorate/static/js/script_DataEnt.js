@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Handle "Yes" button click
   yesButton.addEventListener("click", () => {
-    userChoice = "Yes";
+    userChoice = "YES";
     yesButton.classList.add("bg-green-500");
     noButton.classList.remove("bg-green-500");
     closePopup();

@@ -3,6 +3,7 @@ from collections import Counter
 #from app import db
 from Explorate.models import db,Adventure, UserSelection, User, Recommendations, Ratings
 import random
+from flask_login import current_user, login_required, logout_user
 import uuid
 
 # Define the Blueprint
@@ -13,18 +14,27 @@ main = Blueprint('main', __name__)
 @main.route('/')
 def home():
     # Render a Jinja template
-    return render_template('base.html')
+    return render_template('base.html', show_nav=True)
+
+@main.route('/auth')
+def auth():
+    return render_template('auth.html')
 
 # Define routes using the Blueprint
 @main.route('/FindAdv')
+@login_required
 def FindAdv():
     return render_template('Data_Entry.html')  # Replace 'index.html' with your main HTML file name
 
+
 @main.route('/adventure')
+@login_required
 def adventure():
     return render_template('Adv_name.html')  # Assumes the file is in the `templates/` directory
 
+
 @main.route('/index')
+@login_required
 def index():
     return render_template('index.html')  # Assumes the file is in the `templates/` directory
 
@@ -95,7 +105,9 @@ def index():
 #     # Handle GET request
 #     return render_template('Data_Ent_Q1.html', adventure_name="Default Adventure Name")
 
+
 @main.route('/questions', methods=['POST', 'GET'])
+@login_required
 def questions():
     if request.method == 'POST':
         # Parse JSON data from the request
@@ -106,13 +118,17 @@ def questions():
         pets = data.get('pets', 0)
         choice = data.get('choice', 'No')
 
+        # Use the currently logged-in user's ID
+        user_id = current_user.id
+
         # Save data to the Adventure table
         new_trip = Adventure(
             adventure_name=adventure_name,
             adults=adults,
             children=children,
             pets=pets,
-            choice=choice
+            choice=choice,
+            user_id=user_id
         )
         db.session.add(new_trip)
         db.session.commit()
@@ -138,20 +154,21 @@ def questions():
     return render_template('Data_Ent_Q1.html', adventure_name="Adventure1")
 
 
-@main.route('/email_share')
-def email_share():
-    return render_template('share-page.html')
+
 
 # Share page routes
 @main.route('/share_page')
+@login_required
 def share_page():
     return render_template('share-page.html')
 
 @main.route('/share_blog')
+@login_required
 def share_blog():
     return render_template('share-blog.html')
 
 @main.route('/rate_page')
+@login_required
 def rate_page():
     return render_template('rate-page.html')
 
@@ -182,6 +199,7 @@ def submit_rating():
     return jsonify({'message': 'Rating submitted successfully'}),200
 
 @main.route('/other_trips')
+@login_required
 def other_trips():
     return render_template('other-trips.html')
 
@@ -354,6 +372,7 @@ location_data = {
 
 
 @main.route('/save_selections', methods=['POST'])
+@login_required
 def save_selections():
     try:
         data = request.json
@@ -766,6 +785,7 @@ def save_selections():
 
 
 @main.route('/recommend', methods=['POST'])
+@login_required
 def recommend():
     # Get session_id from the request
     session_id = request.json.get("session_id")
