@@ -55,7 +55,7 @@
                 <input type="hidden" id="recommendation-id" value="{{ recommendation_id }}">
 
 
-                <button class="btn" id="submit-rating-btn">Submit Ratings</button>
+                <button class="btn" id="submit-rating-btn" data-share-url="{{ url_for('main.share_page') }}">Submit Ratings</button>
                 <h3 id="overall-rating">Overall Rating: 0/5</h3>
             </div>
         </div>

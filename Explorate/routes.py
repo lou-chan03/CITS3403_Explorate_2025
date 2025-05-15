@@ -39,71 +39,6 @@ def index():
     return render_template('index.html')  # Assumes the file is in the `templates/` directory
 
 
-# @main.route('/questions', methods=['POST', 'GET'])
-# def questions():
-#     if request.method == 'POST':
-#         # Parse JSON data from the request
-#         data = request.get_json()
-#         adventure_name = data.get('adventure_name', 'Default Adventure Name')
-#         adults = data.get('adults', 0)
-#         children = data.get('children', 0)
-#         pets = data.get('pets', 0)
-#         choice = data.get('choice', 'No')
-
-#         # Log or process the data as needed
-#         print(f"Received data: {data}")
-
-#         # Render the next page dynamically
-#         return render_template(
-#             'Data_Ent_Q1.html',
-#             adventure_name=adventure_name,
-#             adults=adults,
-#             children=children,
-#             pets=pets,
-#             choice=choice
-#         )
-    
-#     # Handle GET request
-#     return render_template('Data_Ent_Q1.html', adventure_name="Default Adventure Name")
-
-
-#@main.route('/questions', methods=['POST', 'GET'])
-# def questions():
-#     if request.method == 'POST':
-#         # Parse JSON data from the request
-#         data = request.get_json()
-#         adventure_name = data.get('adventure_name', 'Default Adventure Name')
-#         adults = data.get('adults', 0)
-#         children = data.get('children', 0)
-#         pets = data.get('pets', 0)
-#         choice = data.get('choice', 'No')
-
-#         # Save data to the database
-#         new_trip = TripDetails(
-#             adventure_name=adventure_name,
-#             adults=adults,
-#             children=children,
-#             pets=pets,
-#             choice=choice
-#         )
-#         db.session.add(new_trip)
-#         db.session.commit()
-
-#         # Log the operation
-#         print(f"Data saved to database: {data}")
-
-#         # Render the next page dynamically
-#         return render_template(
-#             'Data_Ent_Q1.html',
-#             adventure_name=adventure_name,
-#             adults=adults,
-#             children=children,
-#             pets=pets,
-#             choice=choice
-#         )
-    
-#     # Handle GET request
-#     return render_template('Data_Ent_Q1.html', adventure_name="Default Adventure Name")
 
 
 @main.route('/questions', methods=['POST', 'GET'])
@@ -120,6 +55,8 @@ def questions():
 
         # Use the currently logged-in user's ID
         user_id = current_user.id
+        print(f"Current user ID: {user_id}")
+        session['user_id'] = user_id
 
         # Save data to the Adventure table
         new_trip = Adventure(
@@ -135,9 +72,11 @@ def questions():
 
         # Get the generated adventure_id from the newly added adventure
         adventure_id = new_trip.id
+        user_id = new_trip.user_id
 
         # Log the operation
         print(f"Adventure saved with ID: {adventure_id}")
+        print(f"Adventure saved with ID: {user_id}")
 
         # Render the next page dynamically
         return render_template(
@@ -147,7 +86,8 @@ def questions():
             children=children,
             pets=pets,
             choice=choice,
-            adventure_id=adventure_id  # Pass the adventure_id to the template for later use
+            adventure_id=adventure_id,  # Pass the adventure_id to the template for later use
+            user_id=user_id 
         )
     
     # Handle GET request
@@ -215,26 +155,6 @@ def submit_rating():
 def other_trips():
     return render_template('other-trips.html')
 
-# @main.route('/save_selections', methods=['POST'])
-# def save_selections():
-#     data = request.json
-#     selections = data.get('selections', [])
-#     adventure_id = data.get('adventure_id')  # Assuming adventure_id is passed in the request
-
-#     # Create a new UserSelection row
-#     selection = UserSelection(
-#         session_id="user123",  # Replace with a dynamically generated session ID if needed
-#         answer_1=selections[0] if len(selections) > 0 else None,
-#         answer_2=selections[1] if len(selections) > 1 else None,
-#         answer_3=selections[2] if len(selections) > 2 else None,
-#         answer_4=selections[3] if len(selections) > 3 else None,
-#         answer_5=selections[4] if len(selections) > 4 else None,
-#         adventure_id=adventure_id  # Link to Adventure
-#     )
-#     db.session.add(selection)
-#     db.session.commit()
-
-#     return jsonify({'message': 'Data saved successfully'})
 
 
 
@@ -283,6 +203,9 @@ def save_selections():
 
         selections = data.get('selections', [])
         adventure_id = data.get('adventure_id')
+        user_id = data.get('user_id')
+        print(f"Userrrrr ID: {user_id}")
+        
 
         if not selections or len(selections) < 5:
             return jsonify({"error": "At least 5 inputs are required."}), 400
@@ -306,6 +229,8 @@ def save_selections():
             answer_5=selections[4],
             adventure_id=adventure_id
         )
+        session['user_id'] = user_id
+        print(f"User ID: {user_id}")
         db.session.add(selection)
         db.session.commit()  # Save user selections first
         print("User selection saved successfully.")
@@ -468,6 +393,7 @@ def save_selections():
         db.session.commit()  # Save recommendations
         session['recommendation_id'] = recommendation_entry.id
         print("Recommendations saved successfully.")
+        print(print(session.get('user_id')))
 
         print("Final recommendation payload:", {
         "selected_state": selected_state,
@@ -738,3 +664,42 @@ def recommend():
         "session_id": session_id,
         # "recommendation_id": recommendation_entry.id
     })
+
+
+
+
+@main.route('/api/adventures', methods=['POST'])
+@login_required
+def get_adventures():
+    user_id = session.get('user_id')
+    print(f"User ID from session: {user_id}")
+    if not user_id:
+        return jsonify({'error': 'UserID is required'}), 400
+
+    # Your existing SQLAlchemy query here, unchanged
+    results = db.session.query(
+        Adventure.adventure_name,
+        Recommendations.recommendation_1,
+        Recommendations.recommendation_2,
+        Recommendations.recommendation_3,
+        Recommendations.recommendation_4
+    ).join(UserSelection, Adventure.id == UserSelection.adventure_id) \
+     .join(Recommendations, UserSelection.session_id == Recommendations.session_id) \
+     .filter(Adventure.user_id == user_id).all()
+
+    response = [
+        {
+            'adventure_name': row.adventure_name,
+            'recommendation_1': row.recommendation_1,
+            'recommendation_2': row.recommendation_2,
+            'recommendation_3': row.recommendation_3,
+            'recommendation_4': row.recommendation_4
+        } for row in results
+    ]
+    return jsonify(response)
+
+
+@main.route('/MyTrips')
+@login_required
+def MyTrips():
+    return render_template('MyTrips.html')

@@ -104,6 +104,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Retrieve adventure_id from the hidden input field
     var adventure_id = document.getElementById('adventure-id').value;
+    var user_id = document.getElementById('user-id').value;
     console.log("Adventure ID:", adventure_id); // Verify it's being retrieved
 
     // Check if the loading indicator exists
@@ -120,7 +121,7 @@ document.addEventListener("DOMContentLoaded", () => {
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ selections: userSelections, adventure_id: adventure_id }) // Send the adventure_id along
+        body: JSON.stringify({ selections: userSelections, adventure_id: adventure_id ,user_id:user_id}) // Send the adventure_id along
     })
     .then(response => {
         if (loadingIndicator) {

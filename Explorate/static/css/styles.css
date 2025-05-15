@@ -453,3 +453,20 @@ background-color: #25abd1; /* Your custom blue color */
 #main_part.active {
     margin-left: 250px;
 }
+
+
+#share-button {
+    background-color: #0FBDE9;
+    color: #DFD8B6;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+  }
+
+  #share-button :hover {
+    background-color: #45a049;
+}

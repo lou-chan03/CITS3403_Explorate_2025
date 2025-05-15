@@ -1,4 +1,5 @@
 const ratings = {};
+
 document.addEventListener('DOMContentLoaded', () => {
     const ratingBlocks = document.querySelectorAll('.rate');
 
@@ -72,6 +73,8 @@ function updateOverallRating() {
 function submitRatings() {
     const recommendationInput = document.getElementById('recommendation-id');
     const useridinput = document.getElementById('user-id');
+    const submitButton = document.querySelector('#submit-rating-btn');
+    const redirectUrl = submitButton.getAttribute('data-share-url');
     console.log("useridinput", useridinput);
     if (!recommendationInput) {
         console.error('Error: Recommendation ID input not found in the DOM.');
@@ -104,6 +107,8 @@ function submitRatings() {
         .then((response) => {
             if (response.ok) {
                 alert('Ratings submitted successfully!');
+                
+                window.location.href =  redirectUrl;
             } else {
                 alert('Failed to submit ratings.');
             }
