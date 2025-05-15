@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request, jsonify, url_for
 from collections import Counter
 #from app import db
-from Explorate.models import db,Adventure, UserSelection, User, Recommendations
+from Explorate.models import db,Adventure, UserSelection, User, Recommendations, Ratings
 import random
 from flask_login import current_user, login_required, logout_user
 import uuid
@@ -171,6 +171,34 @@ def share_blog():
 @login_required
 def rate_page():
     return render_template('rate-page.html')
+
+# new route to handle submission of ratings
+@main.route('/submit_rating', methods=['POST'])
+def submit_rating():
+    data = request.get_json()
+    #user_id = data['user_id']
+    #adventure_id = data['adventure_id']
+    location_rating = data['location_rating']
+    food_rating = data['food_rating']
+    attractions_rating = data['attractions_rating']
+    accommodation_rating = data['accommodation_rating']
+    overall_rating = data['overall_rating']
+    
+    # add logic to store data in database
+    rating = Ratings(
+        #user_id=user_id,
+        #adventure_id=adventure_id,
+        location_rating=location_rating,
+        food_rating=food_rating,
+        attractions_rating=attractions_rating,
+        accommodation_rating=accommodation_rating,
+        overall_rating=overall_rating
+    )
+    
+    db.session.add(rating)
+    db.session.commit()
+    
+    return jsonify({'message': 'Rating submitted successfully'}),200
 
 @main.route('/other_trips')
 @login_required
