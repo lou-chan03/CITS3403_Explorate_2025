@@ -1,7 +1,9 @@
 from flask import Blueprint, render_template, request, jsonify, url_for, session
 from collections import Counter
+from sqlalchemy.sql import tuple_
+
 #from app import db
-from Explorate.models import db,Adventure, UserSelection, User, Recommendations, Ratings
+from Explorate.models import db,Adventure, UserSelection, User, Recommendations, Ratings, UserFriend
 import random
 from flask_login import current_user, login_required, logout_user
 import uuid
@@ -692,3 +694,99 @@ def get_adventures():
 @login_required
 def MyTrips():
     return render_template('MyTrips.html')
+
+@main.route('/friendView')
+@login_required
+def friendView():
+    return render_template('shareView.html')
+
+@main.route('/friend')
+@login_required
+def friend():
+    return render_template('name.html')
+
+
+@main.route('/add_friend_adventure', methods=['POST'])
+@login_required
+def add_friend_adventure():
+    data = request.get_json()
+    frd_username = data.get('frd_username')
+    adv_name = data.get('adv_name')
+
+    # Check if adventure belongs to the current user
+    adventure = db.session.query(Adventure).filter_by(adventure_name=adv_name, user_id=current_user.id).first()
+    if not adventure:
+        return jsonify({'message': 'Adventure not found for the current user.'}), 400
+
+    # Check if the friend's username exists
+    friend = User.query.filter_by(Username=frd_username).first()
+    if not friend:
+        return jsonify({'message': 'Friend username not found.'}), 404
+
+    # Add new UserFriend entry
+    new_entry = UserFriend(user_id=current_user.id, frd_username=frd_username, adv_name=adv_name)
+    db.session.add(new_entry)
+    db.session.commit()
+
+    return jsonify({'message': f'Friend {frd_username} with adventure {adv_name} added.'})
+
+
+@main.route('/get_friends_adventures', methods=['GET'])
+@login_required
+def get_friends_adventures():
+    user_friends = UserFriend.query.filter_by(user_id=current_user.id).all()
+    data = [{'friend_username': uf.frd_username, 'adventure_name': uf.adv_name} for uf in user_friends]
+    return jsonify({'friends_adventures': data})
+
+
+@main.route('/fetch-adventure-data', methods=['GET'])
+@login_required
+def fetch_adventure_data():
+    try:
+        # Get the current user's ID
+        current_user_id = current_user.id
+        print(f"Current User ID: {current_user_id}")
+
+        # Subquery to fetch user_id and adv_name for the current user
+        subquery = db.session.query(
+            UserFriend.user_id,
+            UserFriend.adv_name
+        ).join(User, UserFriend.frd_username == User.Username) \
+         .filter(User.id == current_user_id).subquery()
+
+        # Main query to fetch data based on the subquery
+        results = db.session.query(
+            User.Username,
+            Adventure.adventure_name,
+            Recommendations.recommendation_1,
+            Recommendations.recommendation_2,
+            Recommendations.recommendation_3,
+            Recommendations.recommendation_4
+        ).join(Adventure, User.id == Adventure.user_id) \
+         .join(UserSelection, Adventure.id == UserSelection.adventure_id) \
+         .join(Recommendations, UserSelection.session_id == Recommendations.session_id) \
+         .filter(
+             tuple_(User.id, Adventure.adventure_name).in_(
+                 db.session.query(subquery.c.user_id, subquery.c.adv_name)
+             )
+         ).all()
+
+        # Transform results into a JSON-friendly format
+        data = [
+            {
+                "username": result.Username,
+                "adventure_name": result.adventure_name,
+                "recommendation_1": result.recommendation_1,
+                "recommendation_2": result.recommendation_2,
+                "recommendation_3": result.recommendation_3,
+                "recommendation_4": result.recommendation_4
+            }
+            for result in results
+        ]
+
+        return jsonify(data)
+
+    except Exception as e:
+        # Print the error to the console for debugging
+        print(f"Error fetching data: {e}")
+        return jsonify({"error": "Internal server error", "details": str(e)}), 500
