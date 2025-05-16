@@ -51,21 +51,6 @@ class UserSelection(db.Model):
         return f'<UserSelection {self.id} - Session: {self.session_id}>'
 
 
-# class Recommendations(db.Model):
-#     id = db.Column(db.Integer, primary_key=True)
-#     session_id = db.Column(db.String(50), db.ForeignKey('user_selection.session_id'), unique=True, nullable=False)
-#     selected_state = db.Column(db.String(50), nullable=False)
-#     recommendation_1 = db.Column(db.String(200))
-#     recommendation_2 = db.Column(db.String(200))
-#     recommendation_3 = db.Column(db.String(200))
-#     recommendation_4 = db.Column(db.String(200))
-
-#     user_selection = db.relationship('UserSelection', backref=db.backref('recommendations', lazy=True))
-
-#     def __repr__(self):
-#         return f'<Recommendations {self.id} - Session: {self.session_id}>'
-
-
 class Recommendations(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     session_id = db.Column(db.String(50), db.ForeignKey('user_selection.session_id'), unique=True, nullable=False)
@@ -97,17 +82,8 @@ class Ratings(db.Model):
         return f'<Ratings {self.id} - Recommendation ID: {self.recommendation_id}>'
 
 
-
-# class Ratings(db.Model):
-#     id = db.Column(db.Integer, primary_key=True)
-#     #user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-#     #adventure_id = db.Column(db.Integer, db.ForeignKey('adventure.id'), nullable=False) 
-    
-#     location_rating = db.Column(db.Integer, nullable=False)
-#     food_rating = db.Column(db.Integer, nullable=False)
-#     attractions_rating = db.Column(db.Integer, nullable=False)
-#     accommodation_rating = db.Column(db.Integer, nullable=False)
-#     overall_rating = db.Column(db.Integer, nullable=False)
-    
-#     #user = db.relationship('User', back_populates='ratings')
-#     #adventures = db.relationship('Adventure', back_populates='ratings')
+class UserFriend(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer,nullable=False)
+    frd_username = db.Column(db.String(150), nullable=False)
+    adv_name = db.Column(db.String(100), nullable=False)
