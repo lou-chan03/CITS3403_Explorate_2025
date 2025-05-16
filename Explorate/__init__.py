@@ -6,8 +6,8 @@ from .routes import main
 from flask_login import LoginManager
 from Explorate.config import Config
 from .blueprints import register_blueprints
+from Explorate.models import db
 
-db = SQLAlchemy()
 login = LoginManager()
 login.login_view = 'main'
 
@@ -15,7 +15,6 @@ def create_app(config):
     # create app from the config
     app = Flask(__name__)
     app.config.from_object(config) 
-    
 
     # Initialize db with app
     db.init_app(app)

@@ -6,7 +6,6 @@ import random
 from flask_login import current_user, login_required, logout_user
 import uuid
 
-
 # Define the Blueprint
 main = Blueprint('main', __name__)
 
