@@ -9,8 +9,6 @@ import uuid
 # Define the Blueprint
 main = Blueprint('main', __name__)
 
-
-
 @main.route('/')
 def home():
     # Render a Jinja template
