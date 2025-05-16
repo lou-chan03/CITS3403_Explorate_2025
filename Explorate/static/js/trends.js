@@ -1,32 +1,41 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // Example: Bar chart for age group distribution
-    fetch("/api/age-distribution")
+    fetch("/api/trends")
         .then(response => response.json())
         .then(data => {
-            const ctx = document.createElement("canvas");
-            ctx.id = "ageChart";
-            document.getElementById("trips-over-time-chart").innerHTML = "";
-            document.getElementById("trips-over-time-chart").appendChild(ctx);
+            document.getElementById("total-trips").textContent = data.total_trips;
+            document.getElementById("trip-duration").textContent = data.trip_duration + " days";
+            document.getElementById("top-state").textContent = data.top_state;
+            document.getElementById("top-category").textContent = data.top_category;
 
+            // ✅ Chart.js Logic goes here
+            const ctx = document.getElementById('trips-over-time-chart').getContext('2d');
             new Chart(ctx, {
-                type: "bar",
+                type: 'line',
                 data: {
-                    labels: Object.keys(data),
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
                     datasets: [{
-                        label: "Users",
-                        data: Object.values(data),
-                        backgroundColor: "#16a34a"
+                        label: 'Trips Taken',
+                        data: [2, 4, 3, 5, 6], // ← replace with real data later
+                        backgroundColor: 'rgba(22, 165, 69, 0.2)',
+                        borderColor: '#16a34a',
+                        borderWidth: 2,
+                        fill: true,
+                        tension: 0.3,
+                        pointBackgroundColor: '#16a34a'
                     }]
                 },
                 options: {
-                    responsive: true,
                     scales: {
                         y: {
-                            beginAtZero: true
+                            beginAtZero: true,
+                            ticks: {
+                                precision: 0
+                            }
                         }
                     }
                 }
             });
         })
-        .catch(err => console.error("Failed to fetch age data:", err));
+        .catch(error => console.error("Error loading trend data:", error));
 });
+

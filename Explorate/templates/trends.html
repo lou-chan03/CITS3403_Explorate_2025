@@ -6,27 +6,20 @@
     <title>TravelMate - Compare & Trends</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/consolidated.css') }}">
 </head>
-<body>
+<body class="trends-page">
+>
     <header>
         <div class="logo-container">
-            <div class="logo">
-    o">
-                TravelMate
-            </div>
+            <div class="logo">TravelMate</div>
             <div class="user-controls">
-                <button class="icon-btn">
-                    <span>Search</span>
-                </button>
-                <button class="icon-btn">
-                    <span>Notifications</span>
-                </button>
+                <button class="icon-btn"><span>Search</span></button>
+                <button class="icon-btn"><span>Notifications</span></button>
                 <div class="user-profile">
                     <div class="avatar">S</div>
-                    <span>{{ user.user_name }}</span>
+                    <span id="username-placeholder"></span>
                 </div>
             </div>
         </div>
-        
         <nav>
             <div class="hamburger-menu">
                 <div class="hamburger-line"></div>
@@ -34,198 +27,78 @@
                 <div class="hamburger-line"></div>
             </div>
             <div class="nav-items">
-                <a href="#" class="nav-item">Dashboard</a>
-                <a href="#" class="nav-item nav-active">Analytics</a>
-                <a href="#" class="nav-item">Trips</a>
-                <a href="#" class="nav-item">Profile</a>
+                <a href="{{ url_for('main.analytics') }}" class="tab">Maps</a>
+                <a href="{{ url_for('main.trends') }}" class="tab tab-active">Compare & Trends</a>
+                <a href="{{ url_for('main.recommendations') }}" class="tab">Recommendations</a>
             </div>
         </nav>
     </header>
-    
+
     <main>
         <div class="page-header">
             <div>
                 <h1 class="page-title">Your Travel Analytics</h1>
                 <p class="page-subtitle">Discover personalised insights about your travel patterns and preferences.</p>
             </div>
-            <button class="customize-btn">
-                <span>Customise Dashboard</span>
-            </button>
-        </div>
-        
-        <div class="tabs">
-            <a href="{{ url_for('main.analytics') }}" class="tab {% if active_tab == 'analytics' %}tab-active{% endif %}">Personalised Insights</a>
-            <a href="{{ url_for('main.trends') }}" class="tab {% if active_tab == 'trends' %}tab-active{% endif %}">Compare & Trends</a>
-            <a href="{{ url_for('main.recommendations') }}" class="tab {% if active_tab == 'recommendations' %}tab-active{% endif %}">Recommendations</a>
-            <a href="{{ url_for('main.dashboard') }}" class="tab {% if active_tab == 'dashboard' %}tab-active{% endif %}">Australia Map</a>
+            <button class="customize-btn"><span>Customise Dashboard</span></button>
         </div>
 
-        
-        <div class="filters-grid">
-            <div class="filter-group">
-                <label class="filter-label" for="comparison-metric">Comparison Metric</label>
-                <select id="comparison-metric" class="dropdown-btn">
-                    <option value="trips">Number of Trips</option>
-                    <option value="spending">Spending</option>
-                    <option value="duration">Trip Duration</option>
-                    <option value="activities">Activities</option>
-                </select>
-            </div>
-            <div class="filter-group">
-                <label class="filter-label" for="time-period">Time Period</label>
-                <select id="time-period" class="dropdown-btn">
-                    <option value="last6months">Last 6 Months</option>
-                    <option value="last12months">Last 12 Months</option>
-                    <option value="last3years">Last 3 Years</option>
-                    <option value="alltime">All Time</option>
-                </select>
-            </div>
-            <div class="filter-group">
-                <label class="filter-label" for="comparison-group">Compare With</label>
-                <select id="comparison-group" class="dropdown-btn">
-                    <option value="agegroup">Same Age Group</option>
-                    <option value="allages">All Travelers</option>
-                    <option value="similar">Similar Travelers</option>
-                </select>
-            </div>
-        </div>
-        
         <div class="stats-grid">
             <div class="stat-card">
                 <div class="stat-card-header">
-                    <div class="stat-icon-sm">
-                        <span>✈️</span>
-                    </div>
+                    <div class="stat-icon-sm">✈️</div>
                     <div class="stat-badge">+27%</div>
                 </div>
                 <div class="stat-card-label">Total Trips (Last 6 Months)</div>
                 <div class="stat-card-value">
-                    <div class="stat-card-main">{{ user.total_trips }}</div>
+                    <div class="stat-card-main" id="total-trips">0</div>
                     <div class="stat-card-sub">vs. community avg</div>
                 </div>
             </div>
             <div class="stat-card">
                 <div class="stat-card-header">
-                    <div class="stat-icon-sm">
-                        <span>📅</span>
-                    </div>
+                    <div class="stat-icon-sm">📅</div>
                     <div class="stat-badge">+12%</div>
                 </div>
                 <div class="stat-card-label">Average Trip Duration</div>
                 <div class="stat-card-value">
-                    <div class="stat-card-main">4.5 days</div>
+                    <div class="stat-card-main" id="trip-duration">0 days</div>
                     <div class="stat-card-sub">vs. community avg</div>
                 </div>
             </div>
             <div class="stat-card">
                 <div class="stat-card-header">
-                    <div class="stat-icon-sm">
-                        <span>📍</span>
-                    </div>
+                    <div class="stat-icon-sm">📍</div>
                     <div class="stat-badge">Top choice</div>
                 </div>
                 <div class="stat-card-label">Favorite Destination</div>
                 <div class="stat-card-value">
-                    <div class="stat-card-main">{{ user.top_state }}</div>
-                    <div class="stat-card-sub">6 out of {{ user.total_trips }} trips</div>
+                    <div class="stat-card-main" id="top-state">N/A</div>
+                    <div class="stat-card-sub">Most visited state</div>
                 </div>
             </div>
             <div class="stat-card">
                 <div class="stat-card-header">
-                    <div class="stat-icon-sm">
-                        <span>🏷️</span>
-                    </div>
+                    <div class="stat-icon-sm">🏷️</div>
                     <div class="stat-badge">+15%</div>
                 </div>
                 <div class="stat-card-label">Top Travel Category</div>
                 <div class="stat-card-value">
-                    <div class="stat-card-main">{{ user.top_category }}</div>
+                    <div class="stat-card-main" id="top-category">N/A</div>
                     <div class="stat-card-sub">vs. 35% community avg</div>
                 </div>
             </div>
         </div>
-        
+
         <div class="chart-card">
             <div class="chart-header">
                 <h2 class="chart-title">Trips Over Time</h2>
-                <div class="chart-legend">
-                    <div class="legend-item">
-                        <div class="legend-color" style="background-color: #16a34a;"></div>
-                        <span>Your Trips</span>
-                    </div>
-                    <div class="legend-item">
-                        <div class="legend-color" style="background-color: #d1d5db;"></div>
-                        <span>Community Average</span>
-                    </div>
-                </div>
-            </div>
-            <div class="chart-container" id="trips-over-time-chart">
-                [Line Chart: Your trips vs. community average by month]
-            </div>
-            <div class="chart-insight">
-                <span class="insight-label">Insight:</span>
-                Your trip frequency is consistently higher than average, with peaks in February and July.
-            </div>
-        </div>
-        
-        <div class="charts-grid">
-            <div class="chart-card">
-                <div class="chart-header">
-                    <h2 class="chart-title">Destination Types</h2>
-                </div>
-                <div class="chart-container" id="destination-types-chart">
-                    [Bar Chart: Comparison of destination types]
-                </div>
-                <div class="chart-insight">
-                    <span>Trend:</span>
-                    You visit adventure destinations 50% more than average travelers in your age group.
-                </div>
-            </div>
-            
-            <div class="chart-card">
-                <div class="chart-header">
-                    <h2 class="chart-title">Seasonal Patterns</h2>
-                </div>
-                <div class="chart-container" id="seasonal-patterns-chart">
-                    [Area Chart: Travel patterns by season]
-                </div>
-                <div class="chart-insight">
-                    <span>Trend:</span>
-                    You travel more in winter months compared to your age group who prefer summer travel.
-                </div>
-            </div>
-            
-            <div class="chart-card">
-                <div class="chart-header">
-                    <h2 class="chart-title">Trip Duration</h2>
-                </div>
-                <div class="chart-container" id="trip-duration-chart">
-                    [Bar Chart: Trip durations comparison]
-                </div>
-                <div class="chart-insight">
-                    <span>Insight:</span>
-                    Your trips are typically longer (avg. 4.5 days) than the community average (3.2 days).
-                </div>
-            </div>
-            
-            <div class="chart-card">
-                <div class="chart-header">
-                    <h2 class="chart-title">Travel Style Evolution</h2>
-                </div>
-                <div class="chart-container" id="travel-style-chart">
-                    [Line Chart: Changes in travel preferences over time]
-                </div>
-                <div class="chart-insight">
-                    <span>Trend:</span>
-                    Your interest in adventure activities has increased by 35% over the past year.
-                </div>
+                <canvas id="trips-over-time-chart" class="chart-container"></canvas>
             </div>
         </div>
     </main>
-    
-    <script src="compare-trends-user.js"></script>
-<script src="{{ url_for('static', filename='js/trends.js') }}"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="{{ url_for('static', filename='js/trends.js') }}"></script>
+
+    <script src="{{ url_for('static', filename='js/trends.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </body>
 </html>

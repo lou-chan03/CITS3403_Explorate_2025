@@ -1,36 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TravelMate Dashboard</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/consolidated.css') }}">
-</head>
-<body>
-    <header>
-        <div class="logo-container">
-            <div class="logo">
-                <img src="explorer.png" alt="Logo">
-            </div>
-            <div class="user-controls">
-                <button class="icon-btn">Search</button>
-                <button class="icon-btn">Notifications</button>
-                <div class="user-profile">
-                    <div class="avatar">S</div>
-                    <span>{{ user.user_name }}</span>
-                </div>
-            </div>
-        </div>
-        <nav>
-            <div class="hamburger-menu">
-                <div class="hamburger-line"></div>
-                <div class="hamburger-line"></div>
-                <div class="hamburger-line"></div>
-            </div>
-        </nav>
-    </header>
 
-    <main>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/consolidated.css') }}">
+{% extends "base.html"%}
+{% block title%}DataEntry{% endblock%}
+{% block content%}
         <div class="page-header">
             <div>
                 <h1 class="page-title">Your Travel Analytics</h1>
@@ -76,12 +48,10 @@
                 </div>
             </div>
         </div>
-
         <div class="tabs">
-            <a href="{{ url_for('main.analytics') }}" class="tab {% if active_tab == 'analytics' %}tab-active{% endif %}">Personalised Insights</a>
+            <a href="{{ url_for('main.analytics') }}" class="tab {% if active_tab == 'analytics' %}tab-active{% endif %}">Maps</a>
             <a href="{{ url_for('main.trends') }}" class="tab {% if active_tab == 'trends' %}tab-active{% endif %}">Compare & Trends</a>
             <a href="{{ url_for('main.recommendations') }}" class="tab {% if active_tab == 'recommendations' %}tab-active{% endif %}">Recommendations</a>
-            <a href="{{ url_for('main.dashboard') }}" class="tab {% if active_tab == 'dashboard' %}tab-active{% endif %}">Australia Map</a>
         </div>
 
         <div class="stats-grid">
@@ -295,7 +265,14 @@
                 </button>
             </div>
         </div>
-    </main>
+{% endblock%}
+{% block scripts %}
+<script>
+    function redirect() {
+        window.location.href = "{{ url_for('main.adventure') }}"; // Replace with the file name of the target HTML
+    }
+</script>
+{% endblock%}
 <script src="{{ url_for('static', filename='js/recommendations.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="{{ url_for('static', filename='js/recommendations.js') }}"></script>

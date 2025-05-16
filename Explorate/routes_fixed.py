@@ -742,6 +742,11 @@ def get_friends_adventures():
 
 # TEMPORARY ROUTES FOR TESTING ONLY
 
+# @main.route('/dashboard')
+# def dashboard():
+#     dummy_user = {'user_name': 'Test User'}
+#     return render_template('dashboard.html', user=dummy_user, active_tab='dashboard')
+
 @main.route('/analytics')
 def analytics():
     dummy_user = {'user_name': 'Test User'}
@@ -757,10 +762,45 @@ def recommendations():
     dummy_user = {'user_name': 'Test User'}
     return render_template('recommendations.html', user=dummy_user, active_tab='recommendations')
 
+@main.route('/dashboard')
+@login_required
+def dashboard():
+    user_id = current_user.id
+
+    total_trips = Adventure.query.filter_by(user_id=user_id).count()
+    categories = db.session.query(Adventure.choice).filter_by(user_id=user_id).all()
+    cat_counter = {}
+    for cat in categories:
+        value = cat[0]
+        if value:
+            cat_counter[value] = cat_counter.get(value, 0) + 1
+    top_category = max(cat_counter, key=cat_counter.get) if cat_counter else "N/A"
+    top_category_percent = round((cat_counter.get(top_category, 0) / total_trips * 100), 1) if total_trips > 0 else 0
+
+    states = db.session.query(Recommendations.selected_state)        .join(UserSelection, Recommendations.session_id == UserSelection.session_id)        .join(Adventure, UserSelection.adventure_id == Adventure.id)        .filter(Adventure.user_id == user_id).all()
+    state_counter = {}
+    for s in states:
+        state = s[0]
+        if state:
+            state_counter[state] = state_counter.get(state, 0) + 1
+    top_state = max(state_counter, key=state_counter.get) if state_counter else "N/A"
+
+    avg_rating = 4.6
+
+    user_stats = {
+        "total_trips": total_trips,
+        "top_category": top_category,
+        "top_category_percent": top_category_percent,
+        "top_state": top_state,
+        "avg_rating": avg_rating
+    }
+
+    return render_template("dashboard.html", user=user_stats, active_tab="dashboard")
 
 # new
 
 @main.route('/api/trends', methods=['GET'])
+@login_required
 def trends_data():
     user_id = current_user.id
     total_trips = Adventure.query.filter_by(user_id=user_id).count()
@@ -793,6 +833,7 @@ def trends_data():
     })
 
 @main.route('/api/dashboard', methods=['GET'])
+@login_required
 def dashboard_data():
     user_id = current_user.id
 
