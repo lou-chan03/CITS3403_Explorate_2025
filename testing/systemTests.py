@@ -140,6 +140,40 @@ class SystemTests(unittest.TestCase):
         body_text = self.driver.find_element(By.TAG_NAME, "body").text
         self.assertIn("Incorrect password, try again.", body_text)
         
+    def test_4_loginWrongUsername(self):
+        # add user
+        user = self.addUser('testUser', 'testPassword')
+        
+        self.test_1_homepage_to_login()
+        
+        try:
+            #print all available element ids
+            elements_with_id = self.driver.find_elements(By.XPATH, "//*[@id]")
+            print(f"found {len(elements_with_id)} with element IDs:")
+            for element in elements_with_id:
+                print(f"Element with ID: {element.get_attribute('id')}")
+        except Exception:
+            pass
+        
+        # find elements
+        user_id_field = self.driver.find_element(By.ID, "Username")
+        password_field = self.driver.find_element(By.ID, "password3")
+        login_btn = self.driver.find_element(By.ID, "login-btn")
+        
+        # send key
+        user_id_field.send_keys("wrongUser")
+        password_field.send_keys("testPassword")
+        
+        login_btn.click()
+        
+        time.sleep(3)
+        # Assert we are still on the login page (failed login)
+        self.assertIn("/login", self.driver.current_url)
+        
+        # Optional: assert that an error message is displayed on the page
+        body_text = self.driver.find_element(By.TAG_NAME, "body").text
+        self.assertIn('Username does not exist.', body_text)
+        
     def tearDown(self):
         self.driver.quit()
         self.server_thread.terminate()
