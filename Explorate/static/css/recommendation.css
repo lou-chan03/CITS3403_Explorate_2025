@@ -1,0 +1,66 @@
+.recommendation-box {
+    /* card background - rec text*/
+    background-color: #DFD8B6 ;
+    padding: 80px;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    font-size: 1.4rem;
+    max-width: 900px;
+    margin: 0 auto;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.recommendation-wrapper h1 {
+    font-size: 3rem; /* Makes the text bigger, adjust as needed */
+    font-weight: 700; /* Optional: make it bold */
+    color: #DFD8B6; /* Optional: adjust color */
+}
+  
+/* heading text on top of card*/
+.recommendation-box h2 {
+    font-size: 1.7rem;
+    color: #1B543E;
+    margin-bottom: 30px;
+}
+
+#results-container h2 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    
+}
+
+#results-container .card {
+    transition: transform 0.2s;
+}
+
+#results-container .card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 12px rgba(97, 46, 46, 0.1);
+}
+
+.adventure-card {
+    background-color: #1B543E; 
+    color: #DFD8B6;
+    transition: transform 0.2s, box-shadow 0.3s;
+    border: none;
+}
+
+.adventure-card:hover {
+    background-color: #73A640;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.custom-category {
+    color: #DFD8B6;
+    font-size: 2.5rem;
+}
+
+#share-button {
+    color: #fff; 
+    font-size: 1.5rem;
+    border-radius: 10px;
+}
+#share-button:hover{
+    background-color: #73A640;
+}

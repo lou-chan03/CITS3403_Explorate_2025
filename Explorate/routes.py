@@ -257,8 +257,8 @@ def save_selections():
     
         location_data = {
         "Tasmania": {
-            "Family-Friendly": [],
-            "Sport": [],
+            "Family-Friendly": ["Bonorong Wildlife Sanctuary", "Tasmanian Museum and Art Gallery", "Launceston City Park", "ZooDoo Wildlife Park"],
+            "Sport": ["Blundstone Arena", "Silverdome Launceston"],
             "Adventure": ["Cradle Mountain-Lake St Clair", "Three Capes Track", "Gordon River Cruises", "Hastings Caves"],
             "Cultural/Arts": ["MONA", "Salamanca Arts Centre", "Theatre Royal", "TMAG"],
             "Beaches": ["Wineglass Bay", "Bay of Fires", "Seven Mile Beach", "Boat Harbour Beach", "Adventure Bay"],
@@ -273,8 +273,8 @@ def save_selections():
             "Heritage/History": ["Cascades Female Factory", "Ross Village", "Coal Mines Historic Site", "Sarah Island"]
         },
         "South Australia": {
-            "Family-Friendly": [],
-            "Sport": [],
+            "Family-Friendly": ["Adelaide Zoo", "Glenelg Foreshore Playground", "Carrick Hill Adventure Playground"],
+            "Sport": ["Adelaide Oval", "Coopers Stadium", "The Bend Motorsport Park"],
             "Adventure": ["Kangaroo Island", "Flinders Ranges", "Naracoorte Caves", "River Murray Adventures", "Mount Gambier’s Sinkholes"],
             "Cultural/Arts": ["Adelaide Festival Centre", "Tandanya Institute", "South Australian Museum", "Art Gallery of South Australia"],
             "Beaches": ["Glenelg Beach", "Vivonne Bay", "Second Valley", "Rapid Bay", "Henley Beach"],
@@ -290,7 +290,7 @@ def save_selections():
         },
         "Northern Territory": {
             "Family-Friendly": ["Palmerston Water Park", "Crocodylus Park", "Aquascene", "Darwin Waterfront"],
-            "Sport": [],
+            "Sport": ["Marrara Sporting Complex", "Hidden Valley Raceway", "TIO Stadium (AFL)"],
             "Adventure": ["Larapinta Trail", "Jatbula Trail", "Tabletop Track"],
             "Cultural/Arts": ["Museum and Art Gallery of the Northern Territory", "Red Centre", "Field of Light"],
             "Beaches": [],
@@ -306,36 +306,37 @@ def save_selections():
         },
         "Queensland": {
             "Family-Friendly": ["Australia Zoo", "Sea World", "Currumbin Wildlife Sanctuary"],
-            "Sport": [],
+            "Sport": ["Suncorp Stadium", "The Gabba", "Metricon Stadium"],
             "Adventure": ["Scuba diving Great Barrier Reef", "Skydiving Mission Beach", "White-water rafting on the Tully River"],
-            "Cultural/Arts": [],
+            "Cultural/Arts": ["Queensland Performing Arts Centre", "Gallery of Modern Art (GOMA)", "Queensland Art Gallery"],
             "Beaches": ["Whitehaven Beach", "Surfers Paradise", "Noosa Main Beach"],
             "Nature": ["Daintree Rainforest", "Lamington National Park", "Springbrook National Park"],
-            "Food and Wine": [],
+            "Food and Wine": ["Granite Belt Wine Region", "Tamborine Mountain Distillery", "Eat Street Northshore"],
             "Coastal/Scenic Drives": ["Captain Cook Highway", "Great Tropical Drive", "Pacific Coast Way"],
-            "Mountain": [],
+            "Mountain": ["Glass House Mountains", "Mount Tamborine", "Mount Barney National Park"],
             "Wildlife": ["Australia Zoo (Sunshine Coast)", "Currumbin Wildlife Sanctuary", "Daintree Rainforest wildlife cruises"],
-            "Outback": [],
+            "Outback": ["Charleville", "Longreach", "Winton"],
             "Winter Sport": [],
             "Landmarks": ["Great Barrier Reef", "Daintree Rainforest", "Story Bridge (Brisbane)"],
-            "Heritage/History": []
+            "Heritage/History": ["Stockman's Hall of Fame (Longreach)", "Parliament House (Brisbane)", "Cooktown Historical Centre"]
         },
         "Western Australia": {
-            "Family-Friendly": [],
-            "Sport": [],
+            "Family-Friendly": ["Scitech Perth", "Perth Zoo", "Adventure World (amusement park)"],
+            "Sport": ["Optus Stadium", "WACA Ground", "HBF Park"],
             "Adventure": ["Snorkeling at Ningaloo Reef", "Rock climbing in Kalbarri", "Sandboarding at Lancelin"],
-            "Cultural/Arts": [],
+            "Cultural/Arts": ["Art Gallery of WA", "WA Museum Boola Bardip", "Perth Cultural Centre"],
             "Beaches": ["Cottesloe Beach", "Cable Beach", "Turquoise Bay"],
             "Nature": ["Karijini National Park", "Nambung National Park (Pinnacles Desert)", "Purnululu National Park"],
             "Food and Wine": ["Margaret River", "Swan Valley", "Great Southern Wine Region"],
-            "Coastal/Scenic Drives": [],
-            "Mountain": [],
+            "Coastal/Scenic Drives": ["Indian Ocean Drive", "South West Edge Drive", "Great Ocean Drive (Esperance)"],
+            "Mountain": ["Bluff Knoll", "Stirling Range National Park", "Mount Trio"],
             "Wildlife": ["Penguin Island (penguins, sea lions)", "Yanchep National Park (koalas, kangaroos)", "Rottnest Island (quokkas)"],
             "Outback": ["Gibb River Road", "Nullarbor Plain", "Karijini National Park"],
             "Winter Sport": [],
             "Landmarks": ["Wave Rock", "Pinnacles Desert (Nambung NP)", "Bungle Bungle Range (Purnululu NP)"],
-            "Heritage/History": []
+            "Heritage/History": ["Fremantle Prison", "Old Gaol Albany", "Broome Historical Museum"]
         },
+
         "New South Wales": {
             "Family-Friendly": ["Taronga Zoo", "Luna Park Sydney", "Featherdale Wildlife Park"],
             "Sport": ["Accor Stadium", "Sydney Cricket Ground", "Allianz Stadium"],
@@ -346,13 +347,13 @@ def save_selections():
             "Food and Wine": ["Hunter Valley", "Orange wine region", "Mudgee"],
             "Coastal/Scenic Drives": [],
             "Mountain": ["Mount Kosciuszko", "Blue Mountains", "Mount Warning (Wollumbin)"],
-            "Wildlife": [],
-            "Outback": [],
-            "Winter Sport": [],
+            "Wildlife": ["Australian Reptile Park", "Koala Park Sanctuary", "Symbio Wildlife Park"],
+            "Outback": ["Broken Hill", "Lightning Ridge", "Mutawintji National Park"],
+            "Winter Sport": ["Thredbo", "Perisher", "Charlotte Pass"],
             "Landmarks": ["Sydney Opera House", "Sydney Harbour Bridge", "Three Sisters (Blue Mountains)"],
             "Heritage/History": []
         }
-        }  
+    }
 
         possible_states = []
         for answer in selections:
@@ -507,8 +508,8 @@ state_mappings = {
 
 location_data = {
     "Tasmania": {
-        "Family-Friendly": [],
-        "Sport": [],
+        "Family-Friendly": ["Bonorong Wildlife Sanctuary", "Tasmanian Museum and Art Gallery", "Launceston City Park", "ZooDoo Wildlife Park"],
+        "Sport": ["Blundstone Arena", "Silverdome Launceston"],
         "Adventure": ["Cradle Mountain-Lake St Clair", "Three Capes Track", "Gordon River Cruises", "Hastings Caves"],
         "Cultural/Arts": ["MONA", "Salamanca Arts Centre", "Theatre Royal", "TMAG"],
         "Beaches": ["Wineglass Bay", "Bay of Fires", "Seven Mile Beach", "Boat Harbour Beach", "Adventure Bay"],
@@ -523,8 +524,8 @@ location_data = {
         "Heritage/History": ["Cascades Female Factory", "Ross Village", "Coal Mines Historic Site", "Sarah Island"]
     },
     "South Australia": {
-        "Family-Friendly": [],
-        "Sport": [],
+        "Family-Friendly": ["Adelaide Zoo", "Glenelg Foreshore Playground", "Carrick Hill Adventure Playground"],
+        "Sport": ["Adelaide Oval", "Coopers Stadium", "The Bend Motorsport Park"],
         "Adventure": ["Kangaroo Island", "Flinders Ranges", "Naracoorte Caves", "River Murray Adventures", "Mount Gambier’s Sinkholes"],
         "Cultural/Arts": ["Adelaide Festival Centre", "Tandanya Institute", "South Australian Museum", "Art Gallery of South Australia"],
         "Beaches": ["Glenelg Beach", "Vivonne Bay", "Second Valley", "Rapid Bay", "Henley Beach"],
@@ -540,7 +541,7 @@ location_data = {
     },
     "Northern Territory": {
         "Family-Friendly": ["Palmerston Water Park", "Crocodylus Park", "Aquascene", "Darwin Waterfront"],
-        "Sport": [],
+        "Sport": ["Marrara Sporting Complex", "Hidden Valley Raceway", "TIO Stadium (AFL)"],
         "Adventure": ["Larapinta Trail", "Jatbula Trail", "Tabletop Track"],
         "Cultural/Arts": ["Museum and Art Gallery of the Northern Territory", "Red Centre", "Field of Light"],
         "Beaches": [],
@@ -556,35 +557,35 @@ location_data = {
     },
     "Queensland": {
         "Family-Friendly": ["Australia Zoo", "Sea World", "Currumbin Wildlife Sanctuary"],
-        "Sport": [],
+        "Sport": ["Suncorp Stadium", "The Gabba", "Metricon Stadium"],
         "Adventure": ["Scuba diving Great Barrier Reef", "Skydiving Mission Beach", "White-water rafting on the Tully River"],
-        "Cultural/Arts": [],
+        "Cultural/Arts": ["Queensland Performing Arts Centre", "Gallery of Modern Art (GOMA)", "Queensland Art Gallery"],
         "Beaches": ["Whitehaven Beach", "Surfers Paradise", "Noosa Main Beach"],
         "Nature": ["Daintree Rainforest", "Lamington National Park", "Springbrook National Park"],
-        "Food and Wine": [],
+        "Food and Wine": ["Granite Belt Wine Region", "Tamborine Mountain Distillery", "Eat Street Northshore"],
         "Coastal/Scenic Drives": ["Captain Cook Highway", "Great Tropical Drive", "Pacific Coast Way"],
-        "Mountain": [],
+        "Mountain": ["Glass House Mountains", "Mount Tamborine", "Mount Barney National Park"],
         "Wildlife": ["Australia Zoo (Sunshine Coast)", "Currumbin Wildlife Sanctuary", "Daintree Rainforest wildlife cruises"],
-        "Outback": [],
+        "Outback": ["Charleville", "Longreach", "Winton"],
         "Winter Sport": [],
         "Landmarks": ["Great Barrier Reef", "Daintree Rainforest", "Story Bridge (Brisbane)"],
-        "Heritage/History": []
+        "Heritage/History": ["Stockman's Hall of Fame (Longreach)", "Parliament House (Brisbane)", "Cooktown Historical Centre"]
     },
     "Western Australia": {
-        "Family-Friendly": [],
-        "Sport": [],
+        "Family-Friendly": ["Scitech Perth", "Perth Zoo", "Adventure World (amusement park)"],
+        "Sport": ["Optus Stadium", "WACA Ground", "HBF Park"],
         "Adventure": ["Snorkeling at Ningaloo Reef", "Rock climbing in Kalbarri", "Sandboarding at Lancelin"],
-        "Cultural/Arts": [],
+        "Cultural/Arts": ["Art Gallery of WA", "WA Museum Boola Bardip", "Perth Cultural Centre"],
         "Beaches": ["Cottesloe Beach", "Cable Beach", "Turquoise Bay"],
         "Nature": ["Karijini National Park", "Nambung National Park (Pinnacles Desert)", "Purnululu National Park"],
         "Food and Wine": ["Margaret River", "Swan Valley", "Great Southern Wine Region"],
-        "Coastal/Scenic Drives": [],
-        "Mountain": [],
+        "Coastal/Scenic Drives": ["Indian Ocean Drive", "South West Edge Drive", "Great Ocean Drive (Esperance)"],
+        "Mountain": ["Bluff Knoll", "Stirling Range National Park", "Mount Trio"],
         "Wildlife": ["Penguin Island (penguins, sea lions)", "Yanchep National Park (koalas, kangaroos)", "Rottnest Island (quokkas)"],
         "Outback": ["Gibb River Road", "Nullarbor Plain", "Karijini National Park"],
         "Winter Sport": [],
         "Landmarks": ["Wave Rock", "Pinnacles Desert (Nambung NP)", "Bungle Bungle Range (Purnululu NP)"],
-        "Heritage/History": []
+        "Heritage/History": ["Fremantle Prison", "Old Gaol Albany", "Broome Historical Museum"]
     },
     "New South Wales": {
         "Family-Friendly": ["Taronga Zoo", "Luna Park Sydney", "Featherdale Wildlife Park"],
@@ -596,9 +597,9 @@ location_data = {
         "Food and Wine": ["Hunter Valley", "Orange wine region", "Mudgee"],
         "Coastal/Scenic Drives": [],
         "Mountain": ["Mount Kosciuszko", "Blue Mountains", "Mount Warning (Wollumbin)"],
-        "Wildlife": [],
-        "Outback": [],
-        "Winter Sport": [],
+        "Wildlife": ["Australian Reptile Park", "Koala Park Sanctuary", "Symbio Wildlife Park"],
+        "Outback": ["Broken Hill", "Lightning Ridge", "Mutawintji National Park"],
+        "Winter Sport": ["Thredbo", "Perisher", "Charlotte Pass"],
         "Landmarks": ["Sydney Opera House", "Sydney Harbour Bridge", "Three Sisters (Blue Mountains)"],
         "Heritage/History": []
     }

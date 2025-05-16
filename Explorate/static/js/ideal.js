@@ -1,10 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     const resultsContainer = document.getElementById("results-container");
 
-    // Retrieve the recommendation data from sessionStorage
     const resultData = JSON.parse(sessionStorage.getItem("recommendationResult"));
-
-    console.log("Retrieved data from sessionStorage:", resultData); // Debugging sessionStorage data
 
     if (!resultData) {
         resultsContainer.innerHTML = "<p>No recommendations found. Please try again.</p>";
@@ -18,18 +15,37 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
     }
 
-    const recommendationsHtml = `
-        <h2>Recommended State: ${selected_state}</h2>
-        <ul>
-            ${Object.entries(recommendations)
-                .map(([category, suggestion]) => 
-                    `<li><strong>${category}:</strong> ${suggestion || "No recommendation available"}</li>`)
-                .join("")}
-        </ul>
-    `;
+    // Create the heading
+    const heading = document.createElement("h2");
+    heading.classList.add("text-center", "mb-4");
+    heading.textContent = `Recommended State: ${selected_state}`;
+    resultsContainer.appendChild(heading);
 
-    resultsContainer.innerHTML = recommendationsHtml;
+    // Create a container for cards or rows
+    const recGrid = document.createElement("div");
+    recGrid.classList.add("row", "g-3");
+
+    // Loop through recommendations and create styled cards
+    Object.entries(recommendations).forEach(([category, suggestion]) => {
+        const col = document.createElement("div");
+        col.classList.add("col-md-6");
+
+        const card = document.createElement("div");
+        card.classList.add("p-3", "rounded", "shadow-sm", "adventure-card");
+
+        const catElem = document.createElement("h5");
+        catElem.textContent = category;
+        catElem.classList.add("fw-bold", "custom-category");
+
+        const suggestionElem = document.createElement("p");
+        suggestionElem.textContent = suggestion || "No recommendation available";
+        suggestionElem.classList.add("mb-0");
+
+        card.appendChild(catElem);
+        card.appendChild(suggestionElem);
+        col.appendChild(card);
+        recGrid.appendChild(col);
+    });
+
+    resultsContainer.appendChild(recGrid);
 });
-
-
-

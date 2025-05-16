@@ -1,0 +1,44 @@
+/* recommendations.css */
+#adventure-table {
+    background-color: #DFD8B6;
+    border-radius: 8px;
+    overflow: hidden;
+    border-color: #DFD8B6 ;
+  }
+  
+  #adventure-table th,
+  #adventure-table td {
+    text-align: center;
+    padding: 12px;
+    vertical-align: middle;
+    background-color: #DFD8B6;
+    border-color: #DFD8B6
+  }
+
+  #adventure-table th {
+    background-color: #1B543E;
+    border-color: #1B543E;
+    color: #DFD8B6
+  }
+  
+  #adventure-table thead {
+    background-color: #DFD8B6;
+    font-weight: bold;
+    border-color: #1B543E;
+    font-size: 1.2rem;
+  }
+  
+  #adventure-table tbody :hover {
+    background-color: #c9c29d;
+    cursor: pointer;
+  }
+  
+  #adventure-heading {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #DFD8B6;
+    margin-top: 70px;
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+}
+
