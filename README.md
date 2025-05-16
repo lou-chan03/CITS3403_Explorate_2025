@@ -38,7 +38,7 @@ pip install -r requirements.txt
 ```bash
 python3 create_db.py
 ```
-#Running
+# Running
 1. Start flask server
 ```bash
 export FLASK_APP=app.py
@@ -48,7 +48,7 @@ flask run
 ```bash
 http://127.0.0.1:5000
 ```
-#Project structure
+# Project structure
 
 Explorate/                       # Root project folder
 |
