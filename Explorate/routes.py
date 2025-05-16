@@ -55,8 +55,10 @@ def questions():
 
         # Use the currently logged-in user's ID
         user_id = current_user.id
+        Username= current_user.Username
         print(f"Current user ID: {user_id}")
         session['user_id'] = user_id
+        session['Username'] = Username
 
         # Save data to the Adventure table
         new_trip = Adventure(
@@ -66,6 +68,7 @@ def questions():
             pets=pets,
             choice=choice,
             user_id=user_id
+            Username=Username
         )
         db.session.add(new_trip)
         db.session.commit()
@@ -87,7 +90,8 @@ def questions():
             pets=pets,
             choice=choice,
             adventure_id=adventure_id,  # Pass the adventure_id to the template for later use
-            user_id=user_id 
+            user_id=user_id ,
+            Username=Username
         )
     
     # Handle GET request
@@ -487,14 +491,6 @@ def save_selections():
 #     return jsonify({'message': 'Data saved successfully'})
 
 
-
-
-
-
-
-
-
-
 state_mappings = {
     "Hot": ["South Australia", "Western Australia", "Northern Territory"],
     "Cold": ["Tasmania", "Victoria"],
@@ -743,3 +739,31 @@ def get_friends_adventures():
     user_friends = UserFriend.query.filter_by(user_id=current_user.id).all()
     data = [{'friend_username': uf.frd_username, 'adventure_name': uf.adv_name} for uf in user_friends]
     return jsonify({'friends_adventures': data})
+
+# TEMPORARY ROUTES FOR TESTING ONLY
+
+# @main.route('/dashboard')
+# def dashboard():
+#     dummy_user = {'user_name': 'Test User'}
+#     return render_template('dashboard.html', user=dummy_user, active_tab='dashboard')
+
+@main.route('/analytics')
+def analytics():
+    dummy_user = {'user_name': 'Test User'}
+    return render_template('analytics.html', user=dummy_user, active_tab='analytics')
+
+@main.route('/trends')
+def trends():
+    dummy_user = {'user_name': 'Test User'}
+    return render_template('trends.html', user=dummy_user, active_tab='trends')
+
+@main.route('/recommendations')
+def recommendations():
+    dummy_user = {'user_name': 'Test User'}
+    return render_template('recommendations.html', user=dummy_user, active_tab='recommendations')
+
+@main.route('/dashboard')
+# @login_required
+def dashboard():
+    dummy_user = {'user_name': 'Test User'}
+    return render_template('dashboard.html', user=dummy_user, active_tab='dashboard')
