@@ -1,5 +1,7 @@
 from flask import Blueprint, render_template, request, jsonify, url_for, session
 from collections import Counter
+from sqlalchemy.sql import tuple_
+
 #from app import db
 from Explorate.models import db,Adventure, UserSelection, User, Recommendations, Ratings, UserFriend
 import random
@@ -704,7 +706,10 @@ def get_adventures():
 def MyTrips():
     return render_template('MyTrips.html')
 
-
+@main.route('/friendView')
+@login_required
+def friendView():
+    return render_template('shareView.html')
 
 @main.route('/friend')
 @login_required
@@ -743,3 +748,56 @@ def get_friends_adventures():
     user_friends = UserFriend.query.filter_by(user_id=current_user.id).all()
     data = [{'friend_username': uf.frd_username, 'adventure_name': uf.adv_name} for uf in user_friends]
     return jsonify({'friends_adventures': data})
+
+
+@main.route('/fetch-adventure-data', methods=['GET'])
+@login_required
+def fetch_adventure_data():
+    try:
+        # Get the current user's ID
+        current_user_id = current_user.id
+        print(f"Current User ID: {current_user_id}")
+
+        # Subquery to fetch user_id and adv_name for the current user
+        subquery = db.session.query(
+            UserFriend.user_id,
+            UserFriend.adv_name
+        ).join(User, UserFriend.frd_username == User.Username) \
+         .filter(User.id == current_user_id).subquery()
+
+        # Main query to fetch data based on the subquery
+        results = db.session.query(
+            User.Username,
+            Adventure.adventure_name,
+            Recommendations.recommendation_1,
+            Recommendations.recommendation_2,
+            Recommendations.recommendation_3,
+            Recommendations.recommendation_4
+        ).join(Adventure, User.id == Adventure.user_id) \
+         .join(UserSelection, Adventure.id == UserSelection.adventure_id) \
+         .join(Recommendations, UserSelection.session_id == Recommendations.session_id) \
+         .filter(
+             tuple_(User.id, Adventure.adventure_name).in_(
+                 db.session.query(subquery.c.user_id, subquery.c.adv_name)
+             )
+         ).all()
+
+        # Transform results into a JSON-friendly format
+        data = [
+            {
+                "username": result.Username,
+                "adventure_name": result.adventure_name,
+                "recommendation_1": result.recommendation_1,
+                "recommendation_2": result.recommendation_2,
+                "recommendation_3": result.recommendation_3,
+                "recommendation_4": result.recommendation_4
+            }
+            for result in results
+        ]
+
+        return jsonify(data)
+
+    except Exception as e:
+        # Print the error to the console for debugging
+        print(f"Error fetching data: {e}")
+        return jsonify({"error": "Internal server error", "details": str(e)}), 500
