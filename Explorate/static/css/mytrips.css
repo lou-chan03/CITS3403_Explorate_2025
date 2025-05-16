@@ -3,6 +3,7 @@
     background-color: #DFD8B6;
     border-radius: 8px;
     overflow: hidden;
+    border-color: #DFD8B6 ;
   }
   
   #adventure-table th,
@@ -11,15 +12,25 @@
     padding: 12px;
     vertical-align: middle;
     background-color: #DFD8B6;
+    border-color: #DFD8B6
+  }
+
+  #adventure-table th {
+    background-color: #1B543E;
+    border-color: #1B543E;
+    color: #DFD8B6
   }
   
   #adventure-table thead {
     background-color: #DFD8B6;
     font-weight: bold;
+    border-color: #1B543E;
+    font-size: 1.2rem;
   }
   
-  #adventure-table tbody tr:hover {
-    background-color: #c0c0c0;
+  #adventure-table tbody :hover {
+    background-color: #c9c29d;
+    cursor: pointer;
   }
   
   #adventure-heading {
@@ -31,7 +42,3 @@
     font-family: 'Inter', sans-serif;
 }
 
-body {
-    background-color: pink;
-  }
-  
