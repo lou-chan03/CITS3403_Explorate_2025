@@ -11,8 +11,6 @@ import uuid
 # Define the Blueprint
 main = Blueprint('main', __name__)
 
-
-
 @main.route('/')
 def home():
     # Render a Jinja template
@@ -487,15 +485,6 @@ def save_selections():
 #     db.session.commit()
 
 #     return jsonify({'message': 'Data saved successfully'})
-
-
-
-
-
-
-
-
-
 
 state_mappings = {
     "Hot": ["South Australia", "Western Australia", "Northern Territory"],
