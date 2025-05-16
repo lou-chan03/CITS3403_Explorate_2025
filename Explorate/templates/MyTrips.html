@@ -1,0 +1,25 @@
+{% extends "base.html"%}
+{% block title%}DataEntry{% endblock%}
+{% block content%}
+<div class="container">
+        <h1 class="text-center">Adventure Recommendations</h1>
+        <table class="table table-bordered mt-4" id="adventure-table" style="display: none;">
+            <thead class="table-light">
+                <tr>
+                    <th>Adventure Name</th>
+                    <th>Recommendation 1</th>
+                    <th>Recommendation 2</th>
+                    <th>Recommendation 3</th>
+                    <th>Recommendation 4</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        <p id="no-data-message" class="text-center text-danger" style="display: none;">No recommendations available.</p>
+    </div>
+{% endblock%}
+{% block scripts %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="{{ url_for('static', filename='js/MyTrip.js') }}"></script>
+
+{% endblock%}

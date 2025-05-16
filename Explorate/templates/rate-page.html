@@ -50,7 +50,12 @@
                     </div>
                     <h3 class="output">Rating is: 0/5</h3>
                 </div>
-                <button onclick="submitRating({{ adventure_id }})" class="btn">Submit Ratings</button>
+                <input type="hidden" id="adventure-id" value="{{ adventure_id }}">
+                <input type="hidden" id="user-id" value="{{ user_id }}">
+                <input type="hidden" id="recommendation-id" value="{{ recommendation_id }}">
+
+
+                <button class="btn" id="submit-rating-btn" data-share-url="{{ url_for('main.share_page') }}">Submit Ratings</button>
                 <h3 id="overall-rating">Overall Rating: 0/5</h3>
             </div>
         </div>

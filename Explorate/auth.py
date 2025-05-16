@@ -50,14 +50,19 @@ def sign_up():
         user = User.query.filter_by(email=email).first()
         if user:
             flash('Email already exists.', category='error')
+            return redirect(url_for('auth.sign_up', form='signup'))
         elif len(email) < 4:
             flash('Email must be greater than 3 characters.', category='error')
+            return redirect(url_for('auth.sign_up', form='signup'))
         elif len(Username) < 2:
             flash('Username must be greater than 1 character.', category='error')
+            return redirect(url_for('auth.sign_up', form='signup'))
         elif password1 != password2:
             flash('Passwords don\'t match.', category='error')
+            return redirect(url_for('auth.sign_up', form='signup'))
         elif len(password1) < 7:
             flash('Password must be at least 7 characters.', category='error')
+            return redirect(url_for('auth.sign_up', form='signup'))
         else:
             new_user = User(Username=Username,email=email,  password=generate_password_hash(password1, method='pbkdf2:sha256'),dateofbirth=birthdate, country=country)
             db.session.add(new_user)
