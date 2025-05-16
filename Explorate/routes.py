@@ -6,6 +6,7 @@ import random
 from flask_login import current_user, login_required, logout_user
 import uuid
 
+
 # Define the Blueprint
 main = Blueprint('main', __name__)
 
@@ -483,15 +484,6 @@ def save_selections():
 #     db.session.commit()
 
 #     return jsonify({'message': 'Data saved successfully'})
-
-
-
-
-
-
-
-
-
 
 state_mappings = {
     "Hot": ["South Australia", "Western Australia", "Northern Territory"],
