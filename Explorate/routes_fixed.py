@@ -1,7 +1,5 @@
 from flask import Blueprint, render_template, request, jsonify, url_for, session
 from collections import Counter
-from sqlalchemy.sql import tuple_
-
 #from app import db
 from Explorate.models import db,Adventure, UserSelection, User, Recommendations, Ratings, UserFriend
 import random
@@ -10,6 +8,8 @@ import uuid
 
 # Define the Blueprint
 main = Blueprint('main', __name__)
+
+
 
 @main.route('/')
 def home():
@@ -261,8 +261,8 @@ def save_selections():
     
         location_data = {
         "Tasmania": {
-            "Family-Friendly": ["Bonorong Wildlife Sanctuary", "Tasmanian Museum and Art Gallery", "Launceston City Park", "ZooDoo Wildlife Park"],
-            "Sport": ["Blundstone Arena", "Silverdome Launceston"],
+            "Family-Friendly": [],
+            "Sport": [],
             "Adventure": ["Cradle Mountain-Lake St Clair", "Three Capes Track", "Gordon River Cruises", "Hastings Caves"],
             "Cultural/Arts": ["MONA", "Salamanca Arts Centre", "Theatre Royal", "TMAG"],
             "Beaches": ["Wineglass Bay", "Bay of Fires", "Seven Mile Beach", "Boat Harbour Beach", "Adventure Bay"],
@@ -277,8 +277,8 @@ def save_selections():
             "Heritage/History": ["Cascades Female Factory", "Ross Village", "Coal Mines Historic Site", "Sarah Island"]
         },
         "South Australia": {
-            "Family-Friendly": ["Adelaide Zoo", "Glenelg Foreshore Playground", "Carrick Hill Adventure Playground"],
-            "Sport": ["Adelaide Oval", "Coopers Stadium", "The Bend Motorsport Park"],
+            "Family-Friendly": [],
+            "Sport": [],
             "Adventure": ["Kangaroo Island", "Flinders Ranges", "Naracoorte Caves", "River Murray Adventures", "Mount Gambier’s Sinkholes"],
             "Cultural/Arts": ["Adelaide Festival Centre", "Tandanya Institute", "South Australian Museum", "Art Gallery of South Australia"],
             "Beaches": ["Glenelg Beach", "Vivonne Bay", "Second Valley", "Rapid Bay", "Henley Beach"],
@@ -294,7 +294,7 @@ def save_selections():
         },
         "Northern Territory": {
             "Family-Friendly": ["Palmerston Water Park", "Crocodylus Park", "Aquascene", "Darwin Waterfront"],
-            "Sport": ["Marrara Sporting Complex", "Hidden Valley Raceway", "TIO Stadium (AFL)"],
+            "Sport": [],
             "Adventure": ["Larapinta Trail", "Jatbula Trail", "Tabletop Track"],
             "Cultural/Arts": ["Museum and Art Gallery of the Northern Territory", "Red Centre", "Field of Light"],
             "Beaches": [],
@@ -310,37 +310,36 @@ def save_selections():
         },
         "Queensland": {
             "Family-Friendly": ["Australia Zoo", "Sea World", "Currumbin Wildlife Sanctuary"],
-            "Sport": ["Suncorp Stadium", "The Gabba", "Metricon Stadium"],
+            "Sport": [],
             "Adventure": ["Scuba diving Great Barrier Reef", "Skydiving Mission Beach", "White-water rafting on the Tully River"],
-            "Cultural/Arts": ["Queensland Performing Arts Centre", "Gallery of Modern Art (GOMA)", "Queensland Art Gallery"],
+            "Cultural/Arts": [],
             "Beaches": ["Whitehaven Beach", "Surfers Paradise", "Noosa Main Beach"],
             "Nature": ["Daintree Rainforest", "Lamington National Park", "Springbrook National Park"],
-            "Food and Wine": ["Granite Belt Wine Region", "Tamborine Mountain Distillery", "Eat Street Northshore"],
+            "Food and Wine": [],
             "Coastal/Scenic Drives": ["Captain Cook Highway", "Great Tropical Drive", "Pacific Coast Way"],
-            "Mountain": ["Glass House Mountains", "Mount Tamborine", "Mount Barney National Park"],
+            "Mountain": [],
             "Wildlife": ["Australia Zoo (Sunshine Coast)", "Currumbin Wildlife Sanctuary", "Daintree Rainforest wildlife cruises"],
-            "Outback": ["Charleville", "Longreach", "Winton"],
+            "Outback": [],
             "Winter Sport": [],
             "Landmarks": ["Great Barrier Reef", "Daintree Rainforest", "Story Bridge (Brisbane)"],
-            "Heritage/History": ["Stockman's Hall of Fame (Longreach)", "Parliament House (Brisbane)", "Cooktown Historical Centre"]
+            "Heritage/History": []
         },
         "Western Australia": {
-            "Family-Friendly": ["Scitech Perth", "Perth Zoo", "Adventure World (amusement park)"],
-            "Sport": ["Optus Stadium", "WACA Ground", "HBF Park"],
+            "Family-Friendly": [],
+            "Sport": [],
             "Adventure": ["Snorkeling at Ningaloo Reef", "Rock climbing in Kalbarri", "Sandboarding at Lancelin"],
-            "Cultural/Arts": ["Art Gallery of WA", "WA Museum Boola Bardip", "Perth Cultural Centre"],
+            "Cultural/Arts": [],
             "Beaches": ["Cottesloe Beach", "Cable Beach", "Turquoise Bay"],
             "Nature": ["Karijini National Park", "Nambung National Park (Pinnacles Desert)", "Purnululu National Park"],
             "Food and Wine": ["Margaret River", "Swan Valley", "Great Southern Wine Region"],
-            "Coastal/Scenic Drives": ["Indian Ocean Drive", "South West Edge Drive", "Great Ocean Drive (Esperance)"],
-            "Mountain": ["Bluff Knoll", "Stirling Range National Park", "Mount Trio"],
+            "Coastal/Scenic Drives": [],
+            "Mountain": [],
             "Wildlife": ["Penguin Island (penguins, sea lions)", "Yanchep National Park (koalas, kangaroos)", "Rottnest Island (quokkas)"],
             "Outback": ["Gibb River Road", "Nullarbor Plain", "Karijini National Park"],
             "Winter Sport": [],
             "Landmarks": ["Wave Rock", "Pinnacles Desert (Nambung NP)", "Bungle Bungle Range (Purnululu NP)"],
-            "Heritage/History": ["Fremantle Prison", "Old Gaol Albany", "Broome Historical Museum"]
+            "Heritage/History": []
         },
-
         "New South Wales": {
             "Family-Friendly": ["Taronga Zoo", "Luna Park Sydney", "Featherdale Wildlife Park"],
             "Sport": ["Accor Stadium", "Sydney Cricket Ground", "Allianz Stadium"],
@@ -351,13 +350,13 @@ def save_selections():
             "Food and Wine": ["Hunter Valley", "Orange wine region", "Mudgee"],
             "Coastal/Scenic Drives": [],
             "Mountain": ["Mount Kosciuszko", "Blue Mountains", "Mount Warning (Wollumbin)"],
-            "Wildlife": ["Australian Reptile Park", "Koala Park Sanctuary", "Symbio Wildlife Park"],
-            "Outback": ["Broken Hill", "Lightning Ridge", "Mutawintji National Park"],
-            "Winter Sport": ["Thredbo", "Perisher", "Charlotte Pass"],
+            "Wildlife": [],
+            "Outback": [],
+            "Winter Sport": [],
             "Landmarks": ["Sydney Opera House", "Sydney Harbour Bridge", "Three Sisters (Blue Mountains)"],
             "Heritage/History": []
         }
-    }
+        }  
 
         possible_states = []
         for answer in selections:
@@ -513,8 +512,8 @@ state_mappings = {
 
 location_data = {
     "Tasmania": {
-        "Family-Friendly": ["Bonorong Wildlife Sanctuary", "Tasmanian Museum and Art Gallery", "Launceston City Park", "ZooDoo Wildlife Park"],
-        "Sport": ["Blundstone Arena", "Silverdome Launceston"],
+        "Family-Friendly": [],
+        "Sport": [],
         "Adventure": ["Cradle Mountain-Lake St Clair", "Three Capes Track", "Gordon River Cruises", "Hastings Caves"],
         "Cultural/Arts": ["MONA", "Salamanca Arts Centre", "Theatre Royal", "TMAG"],
         "Beaches": ["Wineglass Bay", "Bay of Fires", "Seven Mile Beach", "Boat Harbour Beach", "Adventure Bay"],
@@ -529,8 +528,8 @@ location_data = {
         "Heritage/History": ["Cascades Female Factory", "Ross Village", "Coal Mines Historic Site", "Sarah Island"]
     },
     "South Australia": {
-        "Family-Friendly": ["Adelaide Zoo", "Glenelg Foreshore Playground", "Carrick Hill Adventure Playground"],
-        "Sport": ["Adelaide Oval", "Coopers Stadium", "The Bend Motorsport Park"],
+        "Family-Friendly": [],
+        "Sport": [],
         "Adventure": ["Kangaroo Island", "Flinders Ranges", "Naracoorte Caves", "River Murray Adventures", "Mount Gambier’s Sinkholes"],
         "Cultural/Arts": ["Adelaide Festival Centre", "Tandanya Institute", "South Australian Museum", "Art Gallery of South Australia"],
         "Beaches": ["Glenelg Beach", "Vivonne Bay", "Second Valley", "Rapid Bay", "Henley Beach"],
@@ -546,7 +545,7 @@ location_data = {
     },
     "Northern Territory": {
         "Family-Friendly": ["Palmerston Water Park", "Crocodylus Park", "Aquascene", "Darwin Waterfront"],
-        "Sport": ["Marrara Sporting Complex", "Hidden Valley Raceway", "TIO Stadium (AFL)"],
+        "Sport": [],
         "Adventure": ["Larapinta Trail", "Jatbula Trail", "Tabletop Track"],
         "Cultural/Arts": ["Museum and Art Gallery of the Northern Territory", "Red Centre", "Field of Light"],
         "Beaches": [],
@@ -562,35 +561,35 @@ location_data = {
     },
     "Queensland": {
         "Family-Friendly": ["Australia Zoo", "Sea World", "Currumbin Wildlife Sanctuary"],
-        "Sport": ["Suncorp Stadium", "The Gabba", "Metricon Stadium"],
+        "Sport": [],
         "Adventure": ["Scuba diving Great Barrier Reef", "Skydiving Mission Beach", "White-water rafting on the Tully River"],
-        "Cultural/Arts": ["Queensland Performing Arts Centre", "Gallery of Modern Art (GOMA)", "Queensland Art Gallery"],
+        "Cultural/Arts": [],
         "Beaches": ["Whitehaven Beach", "Surfers Paradise", "Noosa Main Beach"],
         "Nature": ["Daintree Rainforest", "Lamington National Park", "Springbrook National Park"],
-        "Food and Wine": ["Granite Belt Wine Region", "Tamborine Mountain Distillery", "Eat Street Northshore"],
+        "Food and Wine": [],
         "Coastal/Scenic Drives": ["Captain Cook Highway", "Great Tropical Drive", "Pacific Coast Way"],
-        "Mountain": ["Glass House Mountains", "Mount Tamborine", "Mount Barney National Park"],
+        "Mountain": [],
         "Wildlife": ["Australia Zoo (Sunshine Coast)", "Currumbin Wildlife Sanctuary", "Daintree Rainforest wildlife cruises"],
-        "Outback": ["Charleville", "Longreach", "Winton"],
+        "Outback": [],
         "Winter Sport": [],
         "Landmarks": ["Great Barrier Reef", "Daintree Rainforest", "Story Bridge (Brisbane)"],
-        "Heritage/History": ["Stockman's Hall of Fame (Longreach)", "Parliament House (Brisbane)", "Cooktown Historical Centre"]
+        "Heritage/History": []
     },
     "Western Australia": {
-        "Family-Friendly": ["Scitech Perth", "Perth Zoo", "Adventure World (amusement park)"],
-        "Sport": ["Optus Stadium", "WACA Ground", "HBF Park"],
+        "Family-Friendly": [],
+        "Sport": [],
         "Adventure": ["Snorkeling at Ningaloo Reef", "Rock climbing in Kalbarri", "Sandboarding at Lancelin"],
-        "Cultural/Arts": ["Art Gallery of WA", "WA Museum Boola Bardip", "Perth Cultural Centre"],
+        "Cultural/Arts": [],
         "Beaches": ["Cottesloe Beach", "Cable Beach", "Turquoise Bay"],
         "Nature": ["Karijini National Park", "Nambung National Park (Pinnacles Desert)", "Purnululu National Park"],
         "Food and Wine": ["Margaret River", "Swan Valley", "Great Southern Wine Region"],
-        "Coastal/Scenic Drives": ["Indian Ocean Drive", "South West Edge Drive", "Great Ocean Drive (Esperance)"],
-        "Mountain": ["Bluff Knoll", "Stirling Range National Park", "Mount Trio"],
+        "Coastal/Scenic Drives": [],
+        "Mountain": [],
         "Wildlife": ["Penguin Island (penguins, sea lions)", "Yanchep National Park (koalas, kangaroos)", "Rottnest Island (quokkas)"],
         "Outback": ["Gibb River Road", "Nullarbor Plain", "Karijini National Park"],
         "Winter Sport": [],
         "Landmarks": ["Wave Rock", "Pinnacles Desert (Nambung NP)", "Bungle Bungle Range (Purnululu NP)"],
-        "Heritage/History": ["Fremantle Prison", "Old Gaol Albany", "Broome Historical Museum"]
+        "Heritage/History": []
     },
     "New South Wales": {
         "Family-Friendly": ["Taronga Zoo", "Luna Park Sydney", "Featherdale Wildlife Park"],
@@ -602,9 +601,9 @@ location_data = {
         "Food and Wine": ["Hunter Valley", "Orange wine region", "Mudgee"],
         "Coastal/Scenic Drives": [],
         "Mountain": ["Mount Kosciuszko", "Blue Mountains", "Mount Warning (Wollumbin)"],
-        "Wildlife": ["Australian Reptile Park", "Koala Park Sanctuary", "Symbio Wildlife Park"],
-        "Outback": ["Broken Hill", "Lightning Ridge", "Mutawintji National Park"],
-        "Winter Sport": ["Thredbo", "Perisher", "Charlotte Pass"],
+        "Wildlife": [],
+        "Outback": [],
+        "Winter Sport": [],
         "Landmarks": ["Sydney Opera House", "Sydney Harbour Bridge", "Three Sisters (Blue Mountains)"],
         "Heritage/History": []
     }
@@ -701,10 +700,7 @@ def get_adventures():
 def MyTrips():
     return render_template('MyTrips.html')
 
-@main.route('/friendView')
-@login_required
-def friendView():
-    return render_template('shareView.html')
+
 
 @main.route('/friend')
 @login_required
@@ -746,6 +742,11 @@ def get_friends_adventures():
 
 # TEMPORARY ROUTES FOR TESTING ONLY
 
+# @main.route('/dashboard')
+# def dashboard():
+#     dummy_user = {'user_name': 'Test User'}
+#     return render_template('dashboard.html', user=dummy_user, active_tab='dashboard')
+
 @main.route('/analytics')
 def analytics():
     dummy_user = {'user_name': 'Test User'}
@@ -761,10 +762,45 @@ def recommendations():
     dummy_user = {'user_name': 'Test User'}
     return render_template('recommendations.html', user=dummy_user, active_tab='recommendations')
 
+@main.route('/dashboard')
+@login_required
+def dashboard():
+    user_id = current_user.id
+
+    total_trips = Adventure.query.filter_by(user_id=user_id).count()
+    categories = db.session.query(Adventure.choice).filter_by(user_id=user_id).all()
+    cat_counter = {}
+    for cat in categories:
+        value = cat[0]
+        if value:
+            cat_counter[value] = cat_counter.get(value, 0) + 1
+    top_category = max(cat_counter, key=cat_counter.get) if cat_counter else "N/A"
+    top_category_percent = round((cat_counter.get(top_category, 0) / total_trips * 100), 1) if total_trips > 0 else 0
+
+    states = db.session.query(Recommendations.selected_state)        .join(UserSelection, Recommendations.session_id == UserSelection.session_id)        .join(Adventure, UserSelection.adventure_id == Adventure.id)        .filter(Adventure.user_id == user_id).all()
+    state_counter = {}
+    for s in states:
+        state = s[0]
+        if state:
+            state_counter[state] = state_counter.get(state, 0) + 1
+    top_state = max(state_counter, key=state_counter.get) if state_counter else "N/A"
+
+    avg_rating = 4.6
+
+    user_stats = {
+        "total_trips": total_trips,
+        "top_category": top_category,
+        "top_category_percent": top_category_percent,
+        "top_state": top_state,
+        "avg_rating": avg_rating
+    }
+
+    return render_template("dashboard.html", user=user_stats, active_tab="dashboard")
 
 # new
 
 @main.route('/api/trends', methods=['GET'])
+@login_required
 def trends_data():
     user_id = current_user.id
     total_trips = Adventure.query.filter_by(user_id=user_id).count()
@@ -797,6 +833,7 @@ def trends_data():
     })
 
 @main.route('/api/dashboard', methods=['GET'])
+@login_required
 def dashboard_data():
     user_id = current_user.id
 

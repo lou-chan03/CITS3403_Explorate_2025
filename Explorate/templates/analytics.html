@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Australia Travel Map</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/consolidated.css') }}">
+</head>
+<body>
+    <div class="map-container">
+        <div class="map-header">
+            <div>
+                <div class="map-title">Australia Travel Map</div>
+                <div class="map-subtitle">Explore your travel history and find new destinations</div>
+            </div>
+        </div>
+
+        <div class="tabs">
+            <a href="{{ url_for('main.analytics') }}" class="tab {% if active_tab == 'analytics' %}tab-active{% endif %}">Maps</a>
+            <a href="{{ url_for('main.trends') }}" class="tab {% if active_tab == 'trends' %}tab-active{% endif %}">Compare & Trends</a>
+            <a href="{{ url_for('main.recommendations') }}" class="tab {% if active_tab == 'recommendations' %}tab-active{% endif %}">Recommendations</a>
+        </div>
+
+        
+        <div class="map-controls">
+            <div class="map-legend">
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: #bbf7d0;"></div>
+                    <span>Visited</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: #bae6fd;"></div>
+                    <span>Recommended</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: #ef4444;"></div>
+                    <span>Capital Cities</span>
+                </div>
+            </div>
+            
+            <div class="map-filters">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="visited">Visited</button>
+                <button class="filter-btn" data-filter="recommended">Recommended</button>
+                <button class="filter-btn" data-filter="adventure">{{ user.top_category }}</button>
+                <button class="filter-btn" data-filter="nature">Nature</button>
+                <button class="filter-btn" data-filter="beach">Beach</button>
+            </div>
+        </div>
+        
+        <div class="australia-map-wrapper">
+            <svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+                <!-- Western Australia - More accurate shape -->
+                <path class="state visited" id="western-australia" data-state="Western Australia" data-visited="true" data-category="adventure" 
+                    d="M150,100 L170,90 L200,100 L220,120 L230,150 L240,200 L230,250 L235,300 L240,350 L235,400 L220,430 L200,450 L180,460 L160,450 L140,430 L{{ user.total_trips }}0,400 L120,350 L110,300 L100,250 L110,200 L120,150 L140,120 Z" />
+                
+                <!-- Northern Territory - More accurate shape -->
+                <path class="state" id="northern-territory" data-state="Northern Territory" data-visited="false" data-category="adventure" 
+                    d="M240,100 L260,90 L300,100 L340,110 L350,150 L345,200 L340,250 L335,300 L320,350 L290,350 L260,350 L240,350 L235,300 L230,250 L240,200 L230,150 L220,120 Z" />
+                
+                <!-- {{ user.top_state }} - More accurate shape -->
+                <path class="state visited" id="queensland" data-state="{{ user.top_state }}" data-visited="true" data-recommended="true" data-category="nature" 
+                    d="M350,150 L390,120 L430,100 L470,90 L510,85 L550,90 L580,110 L600,{{ user.total_trips }}0 L590,160 L580,190 L570,220 L560,250 L550,280 L530,300 L500,320 L470,330 L430,340 L390,350 L350,350 L320,350 L335,300 L340,250 L345,200 Z" />
+                
+                <!-- South Australia - More accurate shape -->
+                <path class="state" id="south-australia" data-state="South Australia" data-visited="false" data-category="nature" 
+                    d="M235,350 L260,350 L290,350 L320,350 L350,350 L390,350 L400,380 L405,410 L410,440 L400,470 L370,475 L340,470 L310,460 L280,450 L250,440 L235,430 L220,430 L235,400 L240,350 Z" />
+                
+                <!-- New South Wales - More accurate shape -->
+                <path class="state recommended" id="new-south-wales" data-state="New South Wales" data-visited="false" data-recommended="true" data-category="beach" 
+                    d="M390,350 L430,340 L470,330 L500,320 L530,300 L540,320 L545,350 L550,380 L545,410 L535,430 L510,445 L480,455 L450,460 L420,465 L400,460 L410,440 L405,410 L400,380 Z" />
+                
+                <!-- Victoria - More accurate shape -->
+                <path class="state" id="victoria" data-state="Victoria" data-visited="false" data-category="culture" 
+                    d="M400,460 L420,465 L450,460 L480,455 L510,445 L535,430 L520,455 L500,465 L480,475 L450,480 L420,480 L400,475 L390,470 Z" />
+                
+                <!-- Tasmania - Separated from mainland -->
+                <path class="state" id="tasmania" data-state="Tasmania" data-visited="false" data-recommended="true" data-category="nature" 
+                    d="M450,510 L460,505 L475,505 L490,510 L495,520 L490,530 L475,535 L460,535 L450,530 L445,520 Z" />
+                
+                <!-- ACT (small!) -->
+                <circle class="state" id="act" data-state="Australian Capital Territory" data-visited="false" data-category="culture" cx="530" cy="430" r="6" />
+                
+                <!-- Capital Cities -->
+                <circle class="capital" id="perth" data-city="Perth" cx="140" cy="390" r="5" />
+                <circle class="capital" id="darwin" data-city="Darwin" cx="290" cy="120" r="5" />
+                <circle class="capital" id="brisbane" data-city="Brisbane" cx="560" cy="280" r="5" />
+                <circle class="capital" id="adelaide" data-city="Adelaide" cx="380" cy="440" r="5" />
+                <circle class="capital" id="sydney" data-city="Sydney" cx="540" cy="400" r="5" />
+                <circle class="capital" id="melbourne" data-city="Melbourne" cx="480" cy="460" r="5" />
+                <circle class="capital" id="hobart" data-city="Hobart" cx="470" cy="520" r="5" />
+                <circle class="capital" id="canberra" data-city="Canberra" cx="530" cy="430" r="5" />
+                
+                <!-- State Labels -->
+                <text class="state-label" x="150" y="250">WESTERN AUSTRALIA</text>
+                <text class="state-label" x="290" y="200">NORTHERN TERRITORY</text>
+                <text class="state-label" x="470" y="200">QUEENSLAND</text>
+                <text class="state-label" x="320" y="410">SOUTH AUSTRALIA</text>
+                <text class="state-label" x="470" y="380">NEW SOUTH WALES</text>
+                <text class="state-label" x="460" y="470">VICTORIA</text>
+                <text class="state-label" x="470" cy="525">TASMANIA</text>
+            </svg>
+            
+            <div class="tooltip" id="tooltip"></div>
+        </div>
+        
+        <div class="stats-container">
+            <div class="stat-card">
+                <div class="stat-header">
+                    <div class="stat-label">States Visited</div>
+                    <div class="stat-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 10c0 7-9 {{ user.total_trips }}-9 {{ user.total_trips }}s-9-6-9-{{ user.total_trips }}a9 9 0 0 1 18 0z"></path>
+                            <circle cx="12" cy="10" r="3"></circle>
+                        </svg>
+                    </div>
+                </div>
+                <div class="stat-value">2/8</div>
+                <div class="stat-extra">25% of Australia explored</div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-header">
+                    <div class="stat-label">Destinations</div>
+                    <div class="stat-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <polyline points="12 6 12 12 16 14"></polyline>
+                        </svg>
+                    </div>
+                </div>
+                <div class="stat-value">{{ user.total_trips }}</div>
+                <div class="stat-extra">6 in {{ user.top_state }}</div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-header">
+                    <div class="stat-label">Top Category</div>
+                    <div class="stat-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M18 8h1a4 4 0 0 1 0 8h-1"></path>
+                            <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path>
+                            <line x1="6" y1="1" x2="6" y2="4"></line>
+                            <line x1="10" y1="1" x2="10" y2="4"></line>
+                            <line x1="14" y1="1" x2="14" y2="4"></line>
+                        </svg>
+                    </div>
+                </div>
+                <div class="stat-value">{{ user.top_category }}</div>
+                <div class="stat-extra">{{ user.top_category_percent }} of your trips</div>
+            </div>
+            
+            <div class="insight-card">
+                <div class="insight-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="12" y1="8" x2="12" y2="12"></line>
+                        <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                    </svg>
+                </div>
+                <div class="insight-content">
+                    Based on your travel patterns, you should explore Tasmania next! It matches your preference for nature and adventure destinations.
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Popup for state details -->
+    <div class="overlay" id="overlay"></div>
+    <div class="popup" id="state-popup">
+        <div class="popup-header">
+            <div class="popup-title" id="popup-state-name">State Name</div>
+            <button class="close-btn" id="close-popup">&times;</button>
+        </div>
+        <div id="popup-content">
+            <div id="state-description"></div>
+            <div class="popup-destinations" id="popup-destinations"></div>
+        </div>
+    </div>
+    
+    <script src="map-user.js"></script>
+<script src="{{ url_for('static', filename='js/analytics.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="{{ url_for('static', filename='js/analytics.js') }}"></script>
+</body>
+</html>
