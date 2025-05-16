@@ -2,6 +2,18 @@
 {% block title%}DataEntry{% endblock%}
 {% block content%}
     
+<!-- Flash messages block -->
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        <ul id="flash-messages">
+            {% for category, message in messages %}
+                <li class="{{ category }} flash-message">{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endwith %}
+<!-- End of flash messages block -->
+
 <section class="main-content">
     <h1>Your latest adventure awaits you.</h1>
     <button onclick="redirect()">Craft a new adventure</button>

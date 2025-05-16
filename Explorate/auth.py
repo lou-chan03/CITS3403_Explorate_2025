@@ -47,6 +47,10 @@ def sign_up():
         birthdate = request.form.get('birthdate')
         country = request.form.get('country')
 
+        if not all([email, Username, password1, password2, birthdate, country]):
+            flash('Please fill out all fields.', category='error')
+            return redirect(url_for('auth.sign_up', form='signup'))
+        
         user = User.query.filter_by(email=email).first()
         if user:
             flash('Email already exists.', category='error')
