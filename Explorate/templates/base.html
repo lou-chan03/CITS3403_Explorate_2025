@@ -13,6 +13,8 @@
         <link rel="stylesheet" href="{{ url_for('static', filename='css/styles-share.css') }}"> 
         <script src="https://cdn.tailwindcss.com"></script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="{{ url_for('static', filename='js/name.js') }}"defer></script>
         <link href="https://fonts.googleapis.com/css2?family=Itim&display=swap" rel="stylesheet">
     
     <!-- Bootstrap Icons -->
@@ -39,8 +41,9 @@
         <a href="{{ url_for('main.FindAdv') }}"><img src="{{ url_for('static', filename='images/Itineray.png') }}" alt="Find_Itinerary" class="sidebar-icon"> Find Itinerary</a>
         <a href="{{ url_for('main.MyTrips') }}"><img src="{{ url_for('static', filename='images/trips.png') }}" alt="My_Trips" class="sidebar-icon"> My Trips</a>
         <a href="#"><img src="{{ url_for('static', filename='images/Insights.png') }}" alt="Insights" class="sidebar-icon"> Insights</a>
+        <a href="{{ url_for('main.friend') }}"><img src = "{{ url_for('static', filename='images/IMG_9605.PNG') }}" alt="share" class="sidebar-icon"> Share</a>
         <a href="{{ url_for('auth.logout') }}"><img src="{{ url_for('static', filename='images/x-22.png') }}" alt="Log_out" class="sidebar-icon"> Log out</a>
-        <a href="#"><i class="bi bi-envelope"></i> Settings</a>
+        
     </div>
 
     {% block content %}

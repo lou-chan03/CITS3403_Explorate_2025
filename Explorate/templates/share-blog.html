@@ -5,7 +5,7 @@
         <div class = "section">
             <h2>Share with the world!</h2>
             <div class = "post-container">
-                <img src="SharePage-icons\explorer.PNG" alt="post image"> <!--will be replaced with actual post image code-->
+                <img src="{{ url_for('static', filename='images/explorer.png') }}"  alt="post image"> <!--will be replaced with actual post image code-->
                     <div class="post-details">
                         <h3>Created by: [username]<br>State:<br>Category:<br>Rating:</h3>
                         <a href="rate-page.html" class="btn">Rate trip!</a>
