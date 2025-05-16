@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}My Website{% endblock %}</title>
+    <title>{% block title %}Explorate{% endblock %}</title>
     <!-- Bootstrap CSS -->
     <link
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
@@ -17,11 +17,14 @@
         <link rel="stylesheet" href="{{ url_for('static', filename='css/consolidated.css') }}">
         <script src="{{ url_for('static', filename='js/name.js') }}"defer></script>
         <link href="https://fonts.googleapis.com/css2?family=Itim&display=swap" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     
     <!-- Bootstrap Icons -->
     <link
         href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-</head>
+        
+        {% block head %}{% endblock %}
+    </head>
 
 <body >
     <!-- Header Bar -->
@@ -42,10 +45,20 @@
         <a href="{{ url_for('main.FindAdv') }}"><img src="{{ url_for('static', filename='images/Itineray.png') }}" alt="Find_Itinerary" class="sidebar-icon"> Find Itinerary</a>
         <a href="{{ url_for('main.MyTrips') }}"><img src="{{ url_for('static', filename='images/trips.png') }}" alt="My_Trips" class="sidebar-icon"> My Trips</a>
         <a href="{{ url_for('main.trends') }}"><img src="{{ url_for('static', filename='images/Insights.png') }}" alt="Insights" class="sidebar-icon"> Insights</a>
-        <a href="{{ url_for('main.friend') }}"><img src = "{{ url_for('static', filename='images/IMG_9605.PNG') }}" alt="share" class="sidebar-icon"> Share</a>
-        <a href="{{ url_for('auth.logout') }}"><img src="{{ url_for('static', filename='images/x-22.png') }}" alt="Log_out" class="sidebar-icon"> Log out</a>
         
+        <!-- Share Section with Dropdown -->
+        <a href="javascript:void(0)" id="share-toggle" class="dropdown-toggle">
+            <img src="{{ url_for('static', filename='images/IMG_9605.PNG') }}" alt="share" class="sidebar-icon"> Share
+        </a>
+        <div id="share-dropdown" class="dropdown-content hidden">
+            <a href="{{ url_for('main.friend') }}">Share with someone</a>
+            <a href="{{ url_for('main.friendView') }}">Shared to you</a>
+        </div>
+        <a href="{{ url_for('auth.logout') }}" id="logout">
+            <img src="{{ url_for('static', filename='images/x-22.png') }}" alt="Log_out" class="sidebar-icon"> Log out
+        </a>
     </div>
+    
 
     {% block content %}
     <!-- Main Content -->
@@ -53,7 +66,7 @@
 
     <section class="main-content">
         <h1>Your Ideal Adventure Awaits You!!!</h1>
-        <button onclick="redirect()">Find Adventure</button>
+        <button onclick="redirect()" id="loginPage">Find Adventure</button>
     </section>
        
         <!-- The bobdy of the pages -->
@@ -77,7 +90,21 @@
         });
         function redirect() {
         window.location.href = "{{ url_for('auth.login') }}"; // Replace with the file name of the target HTML
-    }
+        }
+        document.addEventListener("DOMContentLoaded", () => {
+            const shareToggle = document.getElementById("share-toggle");
+            const shareDropdown = document.getElementById("share-dropdown");
+            const logout = document.getElementById("logout");
+
+            shareToggle.addEventListener("click", () => {
+                const isVisible = shareDropdown.classList.contains("visible");
+                if (isVisible) {
+                    shareDropdown.classList.remove("visible");
+                } else {
+                    shareDropdown.classList.add("visible");
+                }
+            });
+        });
         
     </script>
     {% block scripts %}

@@ -12,6 +12,7 @@ html, body {
     margin: 0;
     padding: 0;
     height: 100%;
+    
 }
   
 body, h1, p ,a {
@@ -43,6 +44,7 @@ body {
     position: sticky;
     top: 0;
     z-index: 1000;
+    width: 100%;
 }
 
 .logo {
@@ -113,7 +115,7 @@ body {
 .main-content button {
     font-family: 'Itim', sans-serif;
     background-color: #0FBDE9;
-    color: #DFD8B6;
+    color: #fff;
     padding: 15px 30px;
     border: none;
     border-radius: 15px;
@@ -469,4 +471,147 @@ background-color: #25abd1; /* Your custom blue color */
 
   #share-button :hover {
     background-color: #45a049;
+}
+
+
+
+
+
+/* Dropdown menu styling */
+.dropdown {
+    position: relative;
+}
+
+.dropdown-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px 15px;
+    color: #1B543E;
+    text-decoration: none;
+    background-color: #DFD8B6;
+    cursor: pointer;
+}
+
+.dropdown-toggle:hover {
+    background-color: #0FBDE9;
+    color: white;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 100%;
+    background-color: #DFD8B6;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    width: 100%;
+    border-radius: 0 0 5px 5px;
+}
+
+.dropdown-menu a {
+    display: block;
+    padding: 10px 15px;
+    color: #1B543E;
+    text-decoration: none;
+    background-color: #DFD8B6;
+}
+
+.dropdown-menu a:hover {
+    background-color: #0FBDE9;
+    color: white;
+}
+
+.dropdown.active .dropdown-menu {
+    display: block;
+}
+/* Dropdown styling */
+#share-dropdown {
+    display: flex;
+    flex-direction: column;
+    background-color: #DFD8B6;
+    
+    /* Remove margin-left or set it to 0 or match sidebar padding */
+    margin-left: 0;  /* or adjust to sidebar padding */
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    opacity: 0;
+    max-height: 0;
+    align-items: center;  /* Center children horizontally */
+}
+
+#share-dropdown a {
+    color: #1B543E;
+    text-decoration: none;
+   
+    
+    transition: background-color 0.3s ease, color 0.3s ease;
+    text-align: center;  /* Center text inside links */
+    width: 100%;         /* Make links fill the dropdown width */
+}
+
+
+#share-dropdown a:hover {
+    background-color: #0FBDE9;
+    color: white;
+}
+
+/* Show dropdown */
+#share-dropdown.visible {
+    opacity: 1;
+    max-height: 100px; /* Adjust based on content */
+}
+
+/* Adjusting spacing for log out */
+
+
+/* Align text to match Share style */
+#share-toggle, #logout, #sidebar a {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Centers the text and icon */
+}
+#sidebar a {
+    display: flex;
+    align-items: center;
+    position: relative; /* For positioning */
+    padding-left: 50px; /* Leave space for the icon */
+    color: #1B543E;
+    text-decoration: none;
+}
+
+/* Sidebar icons stay fixed on the left */
+.sidebar-icon {
+    position: absolute;
+    left: 15px; /* some padding from left edge */
+    width: 24px;
+    height: 24px;
+}
+
+/* Text centered horizontally */
+#sidebar a {
+    justify-content: center;  /* Center text + icon container */
+    font-family: 'Itim', sans-serif;
+    font-size: 1rem;
+}
+
+#sidebar .dropdown a {
+  display: flex;
+  justify-content: center; /* Center the text horizontally */
+  padding-left: 0;         /* Remove left padding so text is truly centered */
+  text-align: center;
+}
+.dropdown-menu {
+  width: 100%; /* fills container width */
+  box-sizing: border-box; /* to include padding in width */
+  text-align: center; /* centers text inside */
+}
+#share-dropdown {
+  width: 100%;         /* Make it fill the width of its container */
+  box-sizing: border-box; /* Include padding/borders in width */
+  text-align: center;  /* Center the text inside */
 }
