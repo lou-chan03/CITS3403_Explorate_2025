@@ -6,6 +6,7 @@ import time
 from Explorate import create_app
 from Explorate.config import TestingConfig
 from Explorate.models import db, User, Adventure, UserSelection, Recommendations, Ratings
+from werkzeug.security import generate_password_hash
 
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -51,7 +52,7 @@ class SystemTests(unittest.TestCase):
         user = User(
             Username=username,
             email=f'{username}@example.com',
-            password=password,
+            password=generate_password_hash(password),
             country='Australia',
             dateofbirth='2000-1-1'
         )
@@ -75,36 +76,35 @@ class SystemTests(unittest.TestCase):
         time.sleep(3)
         self.assertIn("/login", self.driver.current_url)
         
-    # def test_2_loginSuccess(self):
+    def test_2_loginSuccess(self):
         
-    #     # add user
-    #     user = self.addUser('testUser', 'testPassword')
+        # add user
+        user = self.addUser('testUser', 'plswork')
         
-    #     self.test_1_homepage_to_login()
+        self.test_1_homepage_to_login()
         
-    #     try:
-    #         #print all available element ids
-    #         elements_with_id = self.driver.find_elements(By.XPATH, "//*[@id]")
-    #         print(f"found {len(elements_with_id)} with element IDs:")
-    #         for element in elements_with_id:
-    #             print(f"Element with ID: {element.get_attribute('id')}")
-    #     except Exception:
-    #         pass
+        try:
+            #print all available element ids
+            elements_with_id = self.driver.find_elements(By.XPATH, "//*[@id]")
+            print(f"found {len(elements_with_id)} with element IDs:")
+            for element in elements_with_id:
+                print(f"Element with ID: {element.get_attribute('id')}")
+        except Exception:
+            pass
         
-    #     # find elements
-    #     user_id_field = self.driver.find_element(By.ID, "Username")
-    #     password_field = self.driver.find_element(By.ID, "password3")
-    #     login_btn = self.driver.find_element(By.ID, "login-btn")
+        # find elements
+        user_id_field = self.driver.find_element(By.ID, "Username")
+        password_field = self.driver.find_element(By.ID, "password3")
+        login_btn = self.driver.find_element(By.ID, "login-btn")
         
-    #     # send key
-    #     user_id_field.send_keys("testUser")
-    #     password_field.send_keys("testPassword123")
-    #     time.sleep(3)
+        # send key
+        user_id_field.send_keys("testUser")
+        password_field.send_keys("plswork")
         
-    #     login_btn.click()
+        login_btn.click()
         
-    #     time.sleep(3)
-    #     self.assertIn("/FindAdv", self.driver.current_url)
+        time.sleep(3)
+        self.assertIn("/FindAdv", self.driver.current_url)
         
     def tearDown(self):
         self.driver.quit()
