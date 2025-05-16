@@ -83,15 +83,6 @@ class SystemTests(unittest.TestCase):
         
         self.test_1_homepage_to_login()
         
-        try:
-            #print all available element ids
-            elements_with_id = self.driver.find_elements(By.XPATH, "//*[@id]")
-            print(f"found {len(elements_with_id)} with element IDs:")
-            for element in elements_with_id:
-                print(f"Element with ID: {element.get_attribute('id')}")
-        except Exception:
-            pass
-        
         # find elements
         user_id_field = self.driver.find_element(By.ID, "Username")
         password_field = self.driver.find_element(By.ID, "password3")
@@ -111,15 +102,6 @@ class SystemTests(unittest.TestCase):
         user = self.addUser('testUser', 'testPassword')
         
         self.test_1_homepage_to_login()
-        
-        try:
-            #print all available element ids
-            elements_with_id = self.driver.find_elements(By.XPATH, "//*[@id]")
-            print(f"found {len(elements_with_id)} with element IDs:")
-            for element in elements_with_id:
-                print(f"Element with ID: {element.get_attribute('id')}")
-        except Exception:
-            pass
         
         # find elements
         user_id_field = self.driver.find_element(By.ID, "Username")
@@ -146,15 +128,6 @@ class SystemTests(unittest.TestCase):
         
         self.test_1_homepage_to_login()
         
-        try:
-            #print all available element ids
-            elements_with_id = self.driver.find_elements(By.XPATH, "//*[@id]")
-            print(f"found {len(elements_with_id)} with element IDs:")
-            for element in elements_with_id:
-                print(f"Element with ID: {element.get_attribute('id')}")
-        except Exception:
-            pass
-        
         # find elements
         user_id_field = self.driver.find_element(By.ID, "Username")
         password_field = self.driver.find_element(By.ID, "password3")
@@ -174,6 +147,43 @@ class SystemTests(unittest.TestCase):
         body_text = self.driver.find_element(By.TAG_NAME, "body").text
         self.assertIn('Username does not exist.', body_text)
         
+    def test_5_signupSuccess(self):
+        self.driver.get('http://127.0.0.1:5000/login?form=signup')
+        
+        try:
+            #print all available element ids
+            elements_with_id = self.driver.find_elements(By.XPATH, "//*[@id]")
+            print(f"found {len(elements_with_id)} with element IDs:")
+            for element in elements_with_id:
+                print(f"Element with ID: {element.get_attribute('id')}")
+        except Exception:
+            pass
+        
+        # find elements
+        newUser = self.driver.find_element(By.ID, 'createUsername')
+        newEmail = self.driver.find_element(By.ID, 'email')
+        newPassword = self.driver.find_element(By.ID, 'password')
+        confirmPass = self.driver.find_element(By.ID, 'confirmPassword')
+        bday = self.driver.find_element(By.ID, 'birthdate')
+        signupbtn = self.driver.find_element(By.ID, 'signUpSubmit')
+        
+        #send key
+        newUser.send_keys("testUsername")
+        newEmail.send_keys("testemail@example.com")
+        newPassword.send_keys("1234567890")
+        confirmPass.send_keys("1234567890")
+        bday.send_keys("20-01-2000")
+        
+        # Replace with the actual locator of the button
+        self.driver.execute_script("arguments[0].scrollIntoView(true);", signupbtn)
+        time.sleep(0.5)  # allow any animation to complete
+        signupbtn = WebDriverWait(self.driver, 10).until(
+            expected_conditions.element_to_be_clickable((By.ID, "signUpSubmit"))  # or (By.XPATH, "..."), etc.
+        )
+        signupbtn.click()
+        
+        self.assertIn("/login", self.driver.current_url)
+    
     def tearDown(self):
         self.driver.quit()
         self.server_thread.terminate()
