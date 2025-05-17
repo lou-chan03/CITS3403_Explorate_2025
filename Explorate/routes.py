@@ -795,3 +795,80 @@ def dashboard_data():
         'top_state': top_state,
         'avg_rating': avg_rating
     })
+
+@main.route('/api/user-analytics', methods=['GET'])
+@login_required
+def api_user_analytics():
+    user_id = current_user.id
+
+    adventures = Adventure.query.filter_by(user_id=user_id).all()
+    total_trips = len(adventures)
+    adults = sum(a.adults for a in adventures)
+    children = sum(a.children for a in adventures)
+    pets = sum(a.pets for a in adventures)
+
+    category_data = [a.choice for a in adventures if a.choice]
+    category_counts = {}
+    for c in category_data:
+        category_counts[c] = category_counts.get(c, 0) + 1
+
+    recs = db.session.query(Recommendations.selected_state) \
+        .join(UserSelection, Recommendations.session_id == UserSelection.session_id) \
+        .join(Adventure, UserSelection.adventure_id == Adventure.id) \
+        .filter(Adventure.user_id == user_id).all()
+
+    state_counts = {}
+    for rec in recs:
+        state = rec[0]
+        if state:
+            state_counts[state] = state_counts.get(state, 0) + 1
+
+    trip_names = [a.adventure_name for a in adventures if a.adventure_name]
+    trip_counts = {}
+    for name in trip_names:
+        trip_counts[name] = trip_counts.get(name, 0) + 1
+
+    group_sizes = [a.adults + a.children + a.pets for a in adventures if (a.adults + a.children + a.pets) > 0]
+    average_group_size = round(sum(group_sizes) / len(group_sizes), 1) if group_sizes else 0
+
+    group_size_bins = {'Solo/Pair': 0, 'Small Group': 0, 'Medium Group': 0, 'Large Group': 0}
+    for size in group_sizes:
+        if size <= 2:
+            group_size_bins['Solo/Pair'] += 1
+        elif size <= 4:
+            group_size_bins['Small Group'] += 1
+        elif size <= 6:
+            group_size_bins['Medium Group'] += 1
+        else:
+            group_size_bins['Large Group'] += 1
+
+    yes_count = category_counts.get("Yes", 0)
+    exploration_index = round(
+        (total_trips * 5) +
+        (yes_count * 3) +
+        (adults * 1.2 + children * 1.5 + pets * 2),
+        1
+    ) if total_trips > 0 else 0
+
+    planning_intensity = round(((children + pets) / total_trips), 2) if total_trips else 0
+    child_to_adult_ratio = round((children / adults), 2) if adults > 0 else 0
+
+    return jsonify({
+        'total_trips': total_trips,
+        'state_data': state_counts,
+        'category_data': category_counts,
+        'trip_name_data': trip_counts,
+        'adults': adults,
+        'children': children,
+        'pets': pets,
+        'average_group_size': average_group_size,
+        'group_size_bins': group_size_bins,
+        'exploration_index': exploration_index,
+        'planning_intensity': planning_intensity,
+        'child_to_adult_ratio': child_to_adult_ratio
+    })
+
+@main.route('/user-analytics')
+@login_required
+def user_analytics():
+    return render_template('user_analytics.html', user=current_user)
