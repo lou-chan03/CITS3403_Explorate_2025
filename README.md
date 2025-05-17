@@ -3,10 +3,10 @@
 ## Created by
 | UWA ID | Name | Github Username |
 | --- | --- | --- |
-| Ishita Sharma | 23694618 | grumblingremlin |
-| Louise Chan | 23362432 | lou-chan03 |
-| Luvish Ramchurn | 24111049 | It-is-what-it-is1 |
-| Tasveer Mann | 23585984 | TasveerMann |
+| 23694618 | Ishita Sharma | grumblingremlin |
+| 23362432 | Louise Chan | lou-chan03 |
+| 24111049 | Luvish Ramchurn | It-is-what-it-is1 |
+| 23585984 | Tasveer Mann | TasveerMann |
 
 ## Features:
 - User authentication with sign up and login functionality
