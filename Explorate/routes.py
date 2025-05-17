@@ -68,7 +68,6 @@ def questions():
             pets=pets,
             choice=choice,
             user_id=user_id,
-            Username=Username
         )
         db.session.add(new_trip)
         db.session.commit()
@@ -90,8 +89,7 @@ def questions():
             pets=pets,
             choice=choice,
             adventure_id=adventure_id,  # Pass the adventure_id to the template for later use
-            user_id=user_id ,
-            Username=Username
+            user_id=user_id 
         )
     
     # Handle GET request
@@ -747,16 +745,19 @@ def get_friends_adventures():
 # TEMPORARY ROUTES FOR TESTING ONLY
 
 @main.route('/analytics')
+@login_required
 def analytics():
     dummy_user = {'user_name': 'Test User'}
     return render_template('analytics.html', user=dummy_user, active_tab='analytics')
 
 @main.route('/trends')
+@login_required
 def trends():
     dummy_user = {'user_name': 'Test User'}
     return render_template('trends.html', user=dummy_user, active_tab='trends')
 
 @main.route('/recommendations')
+@login_required
 def recommendations():
     dummy_user = {'user_name': 'Test User'}
     return render_template('recommendations.html', user=dummy_user, active_tab='recommendations')
@@ -765,6 +766,7 @@ def recommendations():
 # new
 
 @main.route('/api/trends', methods=['GET'])
+@login_required
 def trends_data():
     user_id = current_user.id
     total_trips = Adventure.query.filter_by(user_id=user_id).count()
@@ -797,6 +799,7 @@ def trends_data():
     })
 
 @main.route('/api/dashboard', methods=['GET'])
+@login_required
 def dashboard_data():
     user_id = current_user.id
 

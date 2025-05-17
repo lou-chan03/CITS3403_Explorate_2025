@@ -1,31 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TravelMate - Compare & Trends</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/consolidated.css') }}">
-</head>
+{% extends "base.html"%}
+{% block title%}Trends{% endblock%}
+{% block content%}
 <body class="trends-page">
 >
     <header>
         <div class="logo-container">
-            <div class="logo">TravelMate</div>
-            <div class="user-controls">
-                <button class="icon-btn"><span>Search</span></button>
-                <button class="icon-btn"><span>Notifications</span></button>
-                <div class="user-profile">
-                    <div class="avatar">S</div>
-                    <span id="username-placeholder"></span>
-                </div>
-            </div>
+            <div class="logo">Explorate</div>
         </div>
         <nav>
-            <div class="hamburger-menu">
-                <div class="hamburger-line"></div>
-                <div class="hamburger-line"></div>
-                <div class="hamburger-line"></div>
-            </div>
             <div class="nav-items">
                 <a href="{{ url_for('main.analytics') }}" class="tab">Maps</a>
                 <a href="{{ url_for('main.trends') }}" class="tab tab-active">Compare & Trends</a>
@@ -98,7 +80,7 @@
         </div>
     </main>
 
-    <script src="{{ url_for('static', filename='js/trends.js') }}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-</body>
-</html>
+{% endblock%}
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/trends.js') }}"></script>
+{% endblock%}
