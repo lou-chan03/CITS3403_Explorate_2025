@@ -49,6 +49,16 @@ flask run
 ```bash
 http://127.0.0.1:5000
 ```
+
+# Run Tests
+1. Run the unit tests
+```
+python -m unittest testing.unitTests
+```
+2. Run the selenium tests
+```
+python -m unittest testing.systemTests
+```
 # Project structure
 
 Explorate/                       # Root project folder
