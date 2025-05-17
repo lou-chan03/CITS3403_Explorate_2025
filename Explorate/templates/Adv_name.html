@@ -3,6 +3,8 @@
 {% block content%}
 <div class="container_yaaa">
     <div class="device-frame">
+      <form id="adventure-form" class="adventure-form">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
         <div class="adventure-form">
             <div class="form-group" action="{{ url_for('main.questions') }}" method="POST">
                 <label for="adventure_name" class="form-label">Adventure Name</label>
@@ -15,6 +17,7 @@
                 
             </div>
         </div>
+      </form>
     </div>
 </div>
 <div id="overlay" class="overlay"></div>

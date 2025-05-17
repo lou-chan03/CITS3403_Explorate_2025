@@ -23,6 +23,7 @@
 
     <div id="login-form" class="form-content">
         <form method="POST" action="{{ url_for('auth.login') }}">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
             <label for="Username"> Enter your username:</label>
             <input type="text" id="Username" name="Username" class="Username" placeholder="Username" required>
 
@@ -35,6 +36,7 @@
 
     <div id="signup-form" class="form-content">
         <form method="POST" action="{{ url_for('auth.sign_up') }}">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
             <label for="createUsername"> Create a username:</label>
             <input type="text" id="createUsername" name = "createUsername" placeholder="Create your username" required>
             

@@ -46,6 +46,11 @@ def index():
 @main.route('/questions', methods=['POST', 'GET'])
 @login_required
 def questions():
+    csrf_token = request.headers.get('X-CSRF-Token')
+    try:
+        validate_csrf(csrf_token)
+    except Exception as e:
+        return jsonify({'error': 'CSRF validation failed'}), 400
     if request.method == 'POST':
         # Parse JSON data from the request
         data = request.get_json()
