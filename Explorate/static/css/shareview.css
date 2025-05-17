@@ -1,0 +1,36 @@
+h1 {
+    font-size: 2.5rem;       /* Bigger text */
+    font-weight: 700;        /* Bold */
+    color: #DFD8B6;          /* Optional: green text */
+    margin-top: 1.1rem ;
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+    padding: 5.1rem;
+  }
+
+.custom-table {
+    width: 80%;              /* Smaller width so it doesn't fill full width */
+    margin-left: auto;       /* Center horizontally */
+    margin-right: auto;
+    border-collapse: collapse;
+    border: 2px solid #1B543E;
+    background-color: #DFD8B6; 
+    color: #2f855a;       
+    margin-bottom: 50.1rem; 
+  }
+  
+  .custom-table thead th {
+    background-color: #1B543E; 
+    color: #DFD8B6;           
+    border: 2px solid #1B543E; 
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .custom-table tbody td {
+    background-color: #DFD8B6;    
+    color: #1B543E;             
+    border: 2px solid #DFD8B6;  
+    padding: 8px;
+  }
+  

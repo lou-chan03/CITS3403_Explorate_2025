@@ -1,12 +1,18 @@
 {% extends "base.html"%}
-{% block title%}DataEntry{% endblock%}
+{% block title%}Shared Trips{% endblock%}
 {% block content%}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/shareview.css') }}">
+{% endblock %}
+
+<h1 class="text-center">User Adventures and Recommendations</h1>
     
 <div class="flex items-center justify-center min-h-screen py-8">
     <div class="max-w-4xl w-full mx-auto px-4 sm:px-6 lg:px-8">
-        <h1 class="text-2xl font-bold text-gray-800 mb-6 text-center">User Adventures and Recommendations</h1>
+        
         <div class="overflow-hidden">
-            <table class="table-auto w-full bg-white border border-gray-300 rounded-lg">
+            <table class="table-auto w-full custom-table">
                 <thead>
                     <tr>
                         <th class="py-2 px-2 border-b text-left text-gray-600 font-semibold">Username</th>
