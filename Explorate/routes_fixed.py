@@ -1,3 +1,4 @@
+from sqlalchemy import func
 from flask import Blueprint, render_template, request, jsonify, url_for, session
 from collections import Counter
 #from app import db
@@ -67,8 +68,7 @@ def questions():
             children=children,
             pets=pets,
             choice=choice,
-            user_id=user_id,
-            Username=Username
+            user_id=user_id
         )
         db.session.add(new_trip)
         db.session.commit()
@@ -90,8 +90,7 @@ def questions():
             pets=pets,
             choice=choice,
             adventure_id=adventure_id,  # Pass the adventure_id to the template for later use
-            user_id=user_id ,
-            Username=Username
+            user_id=user_id
         )
     
     # Handle GET request
@@ -748,16 +747,19 @@ def get_friends_adventures():
 #     return render_template('dashboard.html', user=dummy_user, active_tab='dashboard')
 
 @main.route('/analytics')
+@login_required
 def analytics():
     dummy_user = {'user_name': 'Test User'}
     return render_template('analytics.html', user=dummy_user, active_tab='analytics')
 
 @main.route('/trends')
+@login_required
 def trends():
     dummy_user = {'user_name': 'Test User'}
     return render_template('trends.html', user=dummy_user, active_tab='trends')
 
 @main.route('/recommendations')
+@login_required
 def recommendations():
     dummy_user = {'user_name': 'Test User'}
     return render_template('recommendations.html', user=dummy_user, active_tab='recommendations')
@@ -785,7 +787,7 @@ def dashboard():
             state_counter[state] = state_counter.get(state, 0) + 1
     top_state = max(state_counter, key=state_counter.get) if state_counter else "N/A"
 
-    avg_rating = 4.6
+    avg_rating = db.session.query(func.avg(Ratings.overall_rating)).scalar()
 
     user_stats = {
         "total_trips": total_trips,
