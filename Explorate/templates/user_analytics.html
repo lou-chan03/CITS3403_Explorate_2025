@@ -40,18 +40,13 @@
 
   <div class="grid grid-cols-1 md:grid-cols-2 gap-10 animate-slide-in">
     <div class="bg-white p-6 rounded-xl shadow-lg">
-      <h2 class="text-lg font-semibold text-gray-800 mb-3">Adventures Frequency</h2>
-      <canvas id="tripNamesChart" class="w-full h-72"></canvas>
-    </div>
-    <div class="bg-white p-6 rounded-xl shadow-lg">
       <h2 class="text-lg font-semibold text-gray-800 mb-3">Companion Demographics</h2>
       <canvas id="groupChart" class="w-full h-72"></canvas>
     </div>
-  </div>
-
-  <div class="bg-white p-6 rounded-xl shadow-lg animate-slide-in">
-    <h2 class="text-lg font-semibold text-gray-800 mb-3">Group Composition</h2>
-    <canvas id="groupSizeChart" class="w-full h-72"></canvas>
+    <div class="bg-white p-6 rounded-xl shadow-lg">
+      <h2 class="text-lg font-semibold text-gray-800 mb-3">Group Composition</h2>
+      <canvas id="groupSizeChart" class="w-full h-72"></canvas>
+    </div>
   </div>
 
   <div class="bg-white p-6 rounded-xl shadow-lg animate-slide-in">
@@ -177,7 +172,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
       barChart("stateChart", Object.keys(data.state_data), Object.values(data.state_data), "Top States Visited");
       doughnutChart("categoryChart", Object.keys(data.category_data), Object.values(data.category_data), "Travel Preferences");
-      barChart("tripNamesChart", Object.keys(data.trip_name_data), Object.values(data.trip_name_data), "Adventures Frequency");
       barChart("groupChart", ["Adults", "Children", "Pets"], [data.adults, data.children, data.pets], "Companion Demographics", ['#3B82F6', '#FBBF24', '#A78BFA']);
       doughnutChart("groupSizeChart", Object.keys(data.group_size_bins), Object.values(data.group_size_bins), "Group Composition");
 
