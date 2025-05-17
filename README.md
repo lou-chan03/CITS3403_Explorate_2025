@@ -16,7 +16,7 @@
 - Rating system for itineraries
 
 ## Prerequisites
-- Python
+- Python 3.12 or earlier
 - pip
 - Chrome, Firefox, or Microsoft Edge for selenium tests
 - Other items in requirements.txt
@@ -26,9 +26,10 @@
 ```bash
 git clone <repository-url>
 cd <repository-name>
+```
 2. Create and activate a virtual environment
 ```bash
-python3.11 -m venv venv
+python -m venv venv
 ```
 3. Install dependencies
 ```bash
@@ -41,7 +42,7 @@ python3 create_db.py
 # Running
 1. Start flask server
 ```bash
-export FLASK_APP=app.py
+export FLASK_APP=app.py # in windows set FLASK_APP=app.py
 flask run
 ```
 2. Open browser and navigate
