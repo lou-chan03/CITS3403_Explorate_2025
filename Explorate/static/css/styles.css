@@ -112,8 +112,14 @@ body {
     font-size: 50px;
     margin-bottom: 50px;
 }
+
+.main-content p {
+    font-size: 25px;
+    margin-top: 30px
+}
+
 .main-content button {
-    font-family: 'Itim', sans-serif;
+    font-family: 'Inter', sans-serif;
     background-color: #0FBDE9;
     color: #fff;
     padding: 15px 30px;
@@ -121,13 +127,16 @@ body {
     border-radius: 15px;
     font-size: 25px;
     cursor: pointer;
-    transition: background-color 0.3s;
-    box-shadow: 0px 8px 16px 0 rgba(0, 0, 0, 0.5), 0 6px 20 px 0 rgba(0,0,0,0.5);
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    transform: scale(1);
 }
 
 .main-content button:hover {
-    background-color: #45a049;
+    background-color: #73A640;
+    transform: scale(1.08);
 }
+
 .footer {
     text-align: center;
     color: #DFD8B6;
@@ -223,11 +232,6 @@ body {
     cursor: pointer;
     
 }
-
-
-
-
-
 
 .container_button {
     display: flex;
@@ -444,6 +448,7 @@ background-color: #25abd1; /* Your custom blue color */
 #sidebar a:hover {
     background-color: #0FBDE9;
     color: white;
+    
 }
 
 /* Main content styling */
@@ -615,3 +620,23 @@ background-color: #25abd1; /* Your custom blue color */
   box-sizing: border-box; /* Include padding/borders in width */
   text-align: center;  /* Center the text inside */
 }
+
+.icon-bold {
+    font-size: 3.2rem;        /* Larger and more prominent */
+    font-weight: bold;
+}
+
+.text-bold {
+    font-weight: 600;       /* Bold the text under each icon */
+    font-size: 2.2rem;      /* Slightly larger text */
+}
+
+.icon-text-group {
+    color: #dfd8b6;
+    font-weight: bold;
+    font-size: 1.25rem;
+  }
+
+.icon-text-group i {
+    font-size: 2.5rem;
+  }

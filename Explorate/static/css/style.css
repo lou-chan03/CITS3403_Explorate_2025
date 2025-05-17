@@ -20,6 +20,7 @@
 
 .navbar a:hover {
     background-color: #73A640;
+    transform: scale(1.08);
 }
 
 /* Rectangle Container */
