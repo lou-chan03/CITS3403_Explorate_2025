@@ -59,38 +59,21 @@ python -m unittest testing.systemTests
 ```
 # Project structure
 ```
-Explorate/                       # Root project folder
-|
-├── .vscode/                    # VSCode settings and configs
-│   └── settings.json
-│
-├── assets/                     # Static assets like logos
-│   └── explorer-logo.png
-│
-├── instance/                   # Database files (instance folder for Flask)
-│   ├── adventures.db
-│   ├── explorate.db
-│   └── test.db
-│
-├── migrations/                 # Alembic migrations for database schema versioning
-│   └── versions/
-│       ├── a5629f15c52d\_ratings\_db.py
-│       ├── ac7b4a60d0c6\_add\_recommendation\_id\_to\_ratings\_model.py
-│       └── fbfa263f0bd7\_updating\_w\_overall\_rating\_column.py
-│
-├── static/                     # Static files served to clients (CSS, JS, images)
+Explorate/
+├── static/
 │   ├── css/
 │   │   ├── mytrips.css
 │   │   ├── recommendation.css
+│   │   ├── shareview.css
 │   │   ├── style.css
 │   │   ├── styles-share.css
 │   │   ├── styles.css
-│   │   └── teststyle.css
+│   │   ├── teststyle.css
 │   ├── images/
 │   │   ├── Capture.PNG
-│   │   ├── IMG\_9604.png
-│   │   ├── IMG\_9605.png
-│   │   ├── IMG\_9606.png
+│   │   ├── IMG_9604.png
+│   │   ├── IMG_9605.png
+│   │   ├── IMG_9606.png
 │   │   ├── Insights.png
 │   │   ├── Itineray.png
 │   │   ├── auMap.png
@@ -99,54 +82,48 @@ Explorate/                       # Root project folder
 │   │   ├── pencil-96.png
 │   │   ├── profile.png
 │   │   ├── trips.png
-│   │   └── x-22.png
-│   └── js/
+│   │   ├── x-22.png
+│   ├── js/
 │       ├── MyTrip.js
 │       ├── ideal.js
 │       ├── name.js
 │       ├── script.js
 │       ├── scriptQ.js
-│       ├── script\_DataEnt.js
-│       ├── shareView\.js
-│       └── share\_script.js
-│
-├── templates/                 # HTML templates (Jinja2)
-│   ├── Adv\_name.html
-│   ├── Data\_Ent\_Q1.html
-│   ├── Data\_Entry.html
-│   ├── MyTrips.html
-│   ├── auth.html
-│   ├── base.html
-│   ├── homepage.html
-│   ├── index.html
-│   ├── name.html
-│   ├── other-trips.html
-│   ├── rate-page.html
-│   ├── share-blog.html
-│   ├── share-page.html
-│   ├── shareView\.html
-│   └── testtravel.html
-│
-├── testing/                   # Test modules
-│   ├── **init**.py
+│       ├── script_DataEnt.js
+│       ├── shareView.js
+│       ├── share_script.js
+├── templates/
+├── __init__.py
+├── auth.py
+├── blueprints.py
+├── config.py
+├── csrf.py
+├── models.py
+├── routes.py
+├── instance/
+│   ├── adventures.db
+│   ├── explorate.db
+│   ├── test.db
+├── migrations/
+│   ├── versions/
+│       ├── a5629f15c52d_ratings_db.py
+│       ├── ac7b4a60d0c6_add_recommendation_id_to_ratings_model.py
+│       ├── fbfa263f0bd7_updating_w_overall_rating_column.py
+│   ├── README
+│   ├── alembic.ini
+│   ├── env.py
+│   ├── script.py.mako
+├── testing/
+│   ├── __init__.py
 │   ├── systemTests.py
-│   └── unitTests.py
-│
-├── .DS\_Store                  # macOS metadata file (can be ignored)
-├── .gitignore                 # Git ignore file
-├── README.md                  # Project readme and instructions
-├── README                     # Possibly an older readme
-├── alembic.ini                # Alembic config for migrations
-├── app.py                     # Flask app entry point
-├── auth.py                    # Authentication related routes and logic
-├── blueprints.py              # Registering blueprints for modular Flask app
-├── config.py                  # Configuration variables (DB URI, secret key, etc.)
-├── create\_db.py               # Script to create the initial database
-├── models.py                  # SQLAlchemy ORM models
-├── routes.py                  # Flask routes (views)
-├── script.py.mako             # Alembic template for migrations
-├── script.js                  # (Looks like a duplicate in root? Possibly clean this up)
-├── backup.bundle              # Possibly a backup of something (check if needed)
-├── requirements.txt           # Python dependencies list
+│   ├── unitTests.py
+├── .DS_Store
+├── .gitignore
+├── README.md
+├── app.py
+├── backup.bundle
+├── create_db.py
+├── requirements.txt
+
 
 ```
