@@ -36,10 +36,7 @@ source venv/bin/activate # in windows venv/Scripts/activate
 ```bash
 pip install -r requirements.txt
 ```
-4.Set up database
-```bash
-python3 create_db.py
-```
+
 # Running
 1. Start flask server
 ```bash
