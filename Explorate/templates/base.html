@@ -62,17 +62,37 @@
     
 
     {% block content %}
-    <!-- Main Content -->
-    
 
-    <section class="main-content">
-        <h1>Your ideal adventure awaits you!</h1>
-        <h2> Enter your preferences and find your ideal vacation in the beautiful states of Australia! Share with friends and invite them to trips!</h2>
-        <button onclick="redirect()" id="loginPage">Get Started</button>
-    </section>
-       
-        <!-- The bobdy of the pages -->
+    <section class="main-content container my-5 p-4" style="max-width: 700px; color: #dfd8b6; text-shadow: 1px 1px 3px rgba(0,0,0,0.7);">
+        <h1 class="mb-4 text-center" style="font-family: 'Itim'; font-size: 4.5rem; color: #dfd8b6;">Your ideal adventure awaits you!</h1>
         
+        <p class="lead mb-4 text-center">
+            Explore Australia like never before. Answer a quick questionnaire to generate a personalized itinerary,
+            share your travel plans with friends, and analyze trip data to make smarter travel decisions.
+        </p>
+    
+        <div class="text-center mb-4">
+            <button onclick="redirect()" id="loginPage" class="btn btn-success btn-lg px-5">Get Started</button>
+        </div>
+    
+        <!-- Steps with big icons -->
+        <div class="d-flex justify-content-center gap-5 mt-5 icon-text-group">
+            <div class="text-center">
+                <i class="bi bi-question-circle"></i>
+                <p class="text-bold">Get Recommendations</p>
+            </div>
+            <div>
+                <i class="bi bi-share-fill icon-bold"></i>
+                <p class="text-bold">Share Itinerary</p>
+            </div>
+            <div>
+                <i class="bi bi-bar-chart-line-fill icon-bold"></i>
+                <p class="text-bold">Analyze Trips</p>
+            </div>
+        </div>
+        
+    </section>
+    
     
     {% endblock %}
 
