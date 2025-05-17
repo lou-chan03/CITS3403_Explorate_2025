@@ -14,6 +14,8 @@ main = Blueprint('main', __name__)
 @main.route('/')
 def home():
     # Render a Jinja template
+    if current_user.is_authenticated:
+        return render_template('Data_Entry.html') 
     return render_template('base.html', show_nav=True)
 
 @main.route('/auth')
@@ -156,41 +158,6 @@ def submit_rating():
 @login_required
 def other_trips():
     return render_template('other-trips.html')
-
-
-
-
-# @main.route('/save_selections', methods=['POST'])
-# def save_selections():
-#     data = request.json
-#     selections = data.get('selections', [])
-#     adventure_id = data.get('adventure_id')  # Get adventure_id from the request
-
-#     print(f"Adventure ID: {adventure_id}")
-
-#     # Check if adventure_id is present and valid
-#     if not adventure_id:
-#         return jsonify({'message': 'Adventure ID is required'}), 400
-
-#     adventure = Adventure.query.get(adventure_id)
-#     if not adventure:
-#         return jsonify({'message': 'Adventure not found'}), 404
-
-#     # Create a new UserSelection row
-#     selection = UserSelection(
-#         session_id="user123",  # Replace with a dynamically generated session ID if needed
-#         answer_1=selections[0] if len(selections) > 0 else None,
-#         answer_2=selections[1] if len(selections) > 1 else None,
-#         answer_3=selections[2] if len(selections) > 2 else None,
-#         answer_4=selections[3] if len(selections) > 3 else None,
-#         answer_5=selections[4] if len(selections) > 4 else None,
-#         adventure_id=adventure_id  # Link to the Adventure
-#     )
-#     db.session.add(selection)
-#     db.session.commit()
-
-#     return jsonify({'message': 'Data saved successfully'})
-
 
 
 # Processing logic for recommendations
@@ -416,78 +383,6 @@ def save_selections():
         print("Error during processing:", str(e))
         return jsonify({"error": "An error occurred during processing."}), 500
 
-    
-    
-    # # Collect possible states and calculate frequencies
-    # possible_states = []
-    # for answer in selections:
-    #     possible_states.extend(state_mappings.get(answer.lower(), []))
-
-    # if not possible_states:
-    #     return jsonify({"error": "No suitable states found."}), 400
-
-    # state_counts = Counter(possible_states)
-    # max_count = max(state_counts.values())
-    # top_states = [state for state, count in state_counts.items() if count == max_count]
-    # selected_state = random.choice(top_states)
-    
-    # # Build dynamic recommendations
-    # recommendation_keys = selections[1:]
-    # recommendations = {}
-    # for key in recommendation_keys:
-    #     if key.lower() in location_data and selected_state in location_data[key.lower()]:
-    #         recommendations[key] = random.choice(location_data[key.lower()][selected_state])
-    #     else:
-    #         recommendations[key] = f"No recommendations found for {key} in {selected_state}."
-
-    # # Save recommendations in a new table
-    # recommendation_entry = Recommendations(
-    #     session_id=session_id,
-    #     selected_state=selected_state,
-    #     recommendation_1=recommendations.get(selections[1], None),
-    #     recommendation_2=recommendations.get(selections[2], None),
-    #     recommendation_3=recommendations.get(selections[3], None),
-    #     recommendation_4=recommendations.get(selections[4], None),
-    # )
-    # db.session.add(recommendation_entry)
-    # db.session.commit()
-
-    # return jsonify({
-    #     "message": "Data saved successfully",
-    #     "selected_state": selected_state,
-    #     "recommendations": recommendations
-    # })
-
-
-
-# @main.route('/save_selections', methods=['POST'])
-# def save_selections():
-#     data = request.json
-#     selections = data.get('selections', [])
-#     adventure_id = data.get('adventure_id')  # Get adventure_id from the request
-
-#     # Check if adventure_id exists in the Adventure table
-#     adventure = Adventure.query.get(adventure_id)
-#     if not adventure:
-#         return jsonify({'message': 'Adventure not found'}), 404  # Handle missing adventure
-    
-#     session_id = str(uuid.uuid4())
-
-#     # Create a new UserSelection entry with the provided adventure_id
-#     selection = UserSelection(
-#         session_id=session_id,  # Replace with a dynamically generated session ID if needed
-#         answer_1=selections[0] if len(selections) > 0 else None,
-#         answer_2=selections[1] if len(selections) > 1 else None,
-#         answer_3=selections[2] if len(selections) > 2 else None,
-#         answer_4=selections[3] if len(selections) > 3 else None,
-#         answer_5=selections[4] if len(selections) > 4 else None,
-#         adventure_id=adventure_id  # Link to the Adventure using the adventure_id
-#     )
-    
-#     db.session.add(selection)
-#     db.session.commit()
-
-#     return jsonify({'message': 'Data saved successfully'})
 
 
 state_mappings = {
@@ -742,24 +637,81 @@ def get_friends_adventures():
     data = [{'friend_username': uf.frd_username, 'adventure_name': uf.adv_name} for uf in user_friends]
     return jsonify({'friends_adventures': data})
 
+
+@main.route('/fetch-adventure-data', methods=['GET'])
+@login_required
+def fetch_adventure_data():
+    try:
+        # Get the current user's ID
+        current_user_username = current_user.Username
+        print(f"Current User ID: {current_user_username}")
+
+        # Subquery to fetch user_id and adv_name for the current user
+        subquery = db.session.query(
+            UserFriend.user_id,
+            UserFriend.adv_name
+        ).join(User, UserFriend.user_id == User.id) \
+         .filter(UserFriend.frd_username == current_user_username).subquery()
+
+        # Main query to fetch data based on the subquery
+        results = db.session.query(
+            User.Username,
+            Adventure.adventure_name,
+            Recommendations.recommendation_1,
+            Recommendations.recommendation_2,
+            Recommendations.recommendation_3,
+            Recommendations.recommendation_4
+        ).join(Adventure, User.id == Adventure.user_id) \
+         .join(UserSelection, Adventure.id == UserSelection.adventure_id) \
+         .join(Recommendations, UserSelection.session_id == Recommendations.session_id) \
+         .filter(
+             tuple_(User.id, Adventure.adventure_name).in_(
+                 db.session.query(subquery.c.user_id, subquery.c.adv_name)
+             )
+         ).all()
+
+        # Transform results into a JSON-friendly format
+        data = [
+            {
+                "username": result.Username,
+                "adventure_name": result.adventure_name,
+                "recommendation_1": result.recommendation_1,
+                "recommendation_2": result.recommendation_2,
+                "recommendation_3": result.recommendation_3,
+                "recommendation_4": result.recommendation_4
+            }
+            for result in results
+        ]
+
+        return jsonify(data)
+
+    except Exception as e:
+        # Print the error to the console for debugging
+        print(f"Error fetching data: {e}")
+        return jsonify({"error": "Internal server error", "details": str(e)}), 500
+
+
 # TEMPORARY ROUTES FOR TESTING ONLY
 
 @main.route('/analytics')
 @login_required
 def analytics():
-    dummy_user = {'user_name': 'Test User'}
+    username = current_user.Username
+    dummy_user = {'user_name': username}
     return render_template('analytics.html', user=dummy_user, active_tab='analytics')
 
 @main.route('/trends')
 @login_required
 def trends():
-    dummy_user = {'user_name': 'Test User'}
+    username = current_user.Username
+    dummy_user = {'user_name': username}
     return render_template('trends.html', user=dummy_user, active_tab='trends')
 
 @main.route('/recommendations')
 @login_required
 def recommendations():
-    dummy_user = {'user_name': 'Test User'}
+    username = current_user.Username
+    dummy_user = {'user_name': username}
     return render_template('recommendations.html', user=dummy_user, active_tab='recommendations')
 
 
