@@ -1,6 +1,7 @@
 const ratings = {};
 
 document.addEventListener('DOMContentLoaded', () => {
+    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
     const ratingBlocks = document.querySelectorAll('.rate');
 
     // Validate recommendation ID
@@ -96,11 +97,12 @@ function submitRatings() {
     console.log("hellooooo", recommendationInput, "1", recommendationInput.value);
 
     console.log('Submitting data:', ratingData); // For debugging
-
+    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
     fetch('/submit_rating', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
+            'X-CSRF-Token': csrfToken, // Include CSRF token for security
         },
         body: JSON.stringify(ratingData),
     })

@@ -8,6 +8,8 @@ from Explorate.config import Config
 from .blueprints import register_blueprints
 from Explorate.models import db
 
+from Explorate.csrf import csrf, CSRFError
+
 login = LoginManager()
 login.login_view = 'main'
 
@@ -15,6 +17,8 @@ def create_app(config):
     # create app from the config
     app = Flask(__name__)
     app.config.from_object(config) 
+
+    csrf.init_app(app)
 
     # Initialize db with app
     db.init_app(app)

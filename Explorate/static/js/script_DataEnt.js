@@ -80,10 +80,12 @@ document.addEventListener("DOMContentLoaded", () => {
           const noUrl = nextButton.dataset.noUrl;
          
         
+          const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
           fetch("/questions", {
               method: "POST",
               headers: {
                   "Content-Type": "application/json",
+                  "X-CSRF-Token": csrfToken,
               },
               body: JSON.stringify(tripData),
           })

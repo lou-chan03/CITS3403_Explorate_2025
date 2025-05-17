@@ -33,6 +33,7 @@ def login():
 @login_required
 def logout():
     # session.pop('user_id', None)
+    session.clear()
     logout_user()
     return redirect(url_for('main.home'))
 

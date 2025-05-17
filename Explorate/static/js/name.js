@@ -13,6 +13,10 @@ $(document).ready(function() {
             method: 'POST',
             contentType: 'application/json',
             data: JSON.stringify({ frd_username, adv_name }),
+            beforeSend: function (xhr) {
+                const csrfToken = $('meta[name="csrf-token"]').attr('content');
+                xhr.setRequestHeader('X-CSRF-Token', csrfToken); // Include CSRF token in the request header
+            },
             success: function(response) {
                 alert(response.message);
                 fetchFriendsAdventures();
@@ -28,6 +32,10 @@ $(document).ready(function() {
         $.ajax({
             url: '/get_friends_adventures',
             method: 'GET',
+            beforeSend: function (xhr) {
+                const csrfToken = $('meta[name="csrf-token"]').attr('content');
+                xhr.setRequestHeader('X-CSRF-Token', csrfToken); // Include CSRF token in the request header
+            },
             success: function(response) {
                 const list = $('#friends-adventures-list');
                 list.empty();

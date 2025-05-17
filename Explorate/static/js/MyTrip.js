@@ -4,6 +4,10 @@ $(document).ready(function () {
         type: 'POST',
         contentType: 'application/json',
         data: '{}',  // send empty JSON, or you can omit this line if your Flask can handle no data
+        beforeSend: function (xhr) {
+                const csrfToken = $('meta[name="csrf-token"]').attr('content');
+                xhr.setRequestHeader('X-CSRF-Token', csrfToken); // Include CSRF token in the request header
+            },
         success: function (data) {
             if (data.length > 0) {
                 const table = $('#adventure-table');
@@ -29,7 +33,7 @@ $(document).ready(function () {
             }
         },
         error: function () {
-            alert('Failed to fetch data.');
+            alert('You do not have any data. Please create a trip first.');
         }
     });
 });

@@ -54,7 +54,7 @@
                 <input type="hidden" id="user-id" value="{{ user_id }}">
                 <input type="hidden" id="recommendation-id" value="{{ recommendation_id }}">
 
-
+                <input type="hidden" id="csrf_token" name="csrf_token" value="{{ csrf_token() }}">
                 <button class="btn" id="submit-rating-btn" data-share-url="{{ url_for('main.share_page') }}">Submit Ratings</button>
                 <h3 id="overall-rating">Overall Rating: 0/5</h3>
             </div>

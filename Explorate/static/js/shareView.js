@@ -1,6 +1,13 @@
 async function fetchData() {
     try {
-        const response = await fetch('/fetch-adventure-data'); // Endpoint to fetch the query data
+        const response = await fetch('/fetch-adventure-data', {
+            method: 'GET', // Or 'POST' if required
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRF-Token": document.querySelector('meta[name="csrf-token"]').content, // Include CSRF token
+            },
+        });
+
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }

@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
+    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
     const inputField = document.getElementById("guests");
     const popup = document.getElementById("popup");
     const overlay = document.getElementById("overlay");
@@ -120,6 +121,7 @@ document.addEventListener("DOMContentLoaded", () => {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
+            'X-CSRF-Token': csrfToken // Include CSRF token for security
         },
         body: JSON.stringify({ selections: userSelections, adventure_id: adventure_id ,user_id:user_id}) // Send the adventure_id along
     })

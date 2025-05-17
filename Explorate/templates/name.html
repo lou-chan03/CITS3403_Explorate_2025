@@ -4,7 +4,8 @@
 <div class="flex items-center justify-center min-h-screen" >
   <div class="bg-white p-6 rounded shadow-md w-full max-w-md">
     <h1 class="text-xl font-bold mb-4">Add Friend and Adventure</h1>
-    <form id="friend-adventure-form" class="space-y-4 mb-6">
+    <form methond = "POST" id="friend-adventure-form" class="space-y-4 mb-6">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
       <div>
         <label for="frd_username" class="block font-medium mb-1">Friend's Username</label>
         <input type="text" id="frd_username" name="frd_username" class="w-full border rounded px-3 py-2" required />
