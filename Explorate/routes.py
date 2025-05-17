@@ -8,6 +8,7 @@ import random
 from flask_login import current_user, login_required, logout_user
 import uuid
 
+
 # Define the Blueprint
 main = Blueprint('main', __name__)
 
@@ -47,10 +48,10 @@ def index():
 @login_required
 def questions():
     csrf_token = request.headers.get('X-CSRF-Token')
-    try:
-        validate_csrf(csrf_token)
-    except Exception as e:
-        return jsonify({'error': 'CSRF validation failed'}), 400
+    # try:
+    #     validate_csrf(csrf_token)
+    # except Exception as e:
+    #     return jsonify({'error': 'CSRF validation failed'}), 400
     if request.method == 'POST':
         # Parse JSON data from the request
         data = request.get_json()
@@ -340,6 +341,8 @@ def save_selections():
         max_count = max(state_counts.values())
         top_states = [state for state, count in state_counts.items() if count == max_count]
         selected_state = random.choice(top_states)
+
+        print("Possible states:", possible_states)
 
         print("Selected state:", selected_state)
 
@@ -868,7 +871,7 @@ def api_user_analytics():
         'child_to_adult_ratio': child_to_adult_ratio
     })
 
-@main.route('/user-analytics')
+@main.route('/user_analytics')
 @login_required
 def user_analytics():
     return render_template('user_analytics.html', user=current_user)
