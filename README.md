@@ -60,7 +60,7 @@ python -m unittest testing.unitTests
 python -m unittest testing.systemTests
 ```
 # Project structure
-
+```
 Explorate/                       # Root project folder
 |
 ├── .vscode/                    # VSCode settings and configs
@@ -151,4 +151,4 @@ Explorate/                       # Root project folder
 ├── backup.bundle              # Possibly a backup of something (check if needed)
 ├── requirements.txt           # Python dependencies list
 
-
+```
